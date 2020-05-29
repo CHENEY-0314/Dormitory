@@ -6,6 +6,9 @@
     android:fitsSystemWindows="true"
     android:orientation="horizontal"
     tools:context=".Tabbar">
+
+
+
     <com.hjm.bottomtabbar.BottomTabBar
         android:id="@+id/bottom_tab_bar"
         android:layout_width="match_parent"
