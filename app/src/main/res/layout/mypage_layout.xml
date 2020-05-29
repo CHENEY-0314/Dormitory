@@ -8,12 +8,223 @@
     tools:context="com.example.dormitory.MyPage">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="我的"></TextView>
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:layout_marginHorizontal="10dp"
+            android:backgroundTint="@color/green"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/MyPage_userimg"
+                    android:layout_width="57dp"
+                    android:layout_height="57dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="26dp"
+                    app:civ_border_width="2dp"
+                    app:civ_border_overlay="true"
+                    app:civ_border_color="#FFFFFF"
+                    app:civ_fill_color="#E6E5E5"
+                    android:src="@drawable/userimage" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/MyPage_txt_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="您的名称"
+                        android:textStyle="normal"
+                        android:textColor="#fff"
+                        android:textSize="21sp" />
+                    <TextView
+                        android:id="@+id/MyPage_txt_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5dp"
+                        android:text="您的宿舍"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:paddingHorizontal="10dp"
+            android:layout_weight="0.75">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="12dp"
+                    app:cardElevation="0dp"
+                    android:background="#fff"
+                    app:cardCornerRadius="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/MyPage_btn_ChangeD"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.25"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                android:layout_marginStart="23dp"
+                                android:background="@drawable/changed"
+                                android:textAlignment="center" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="18dp"
+                                android:textColor="#5A5A5A"
+                                android:text="换宿申请"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_marginHorizontal="23dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.1dp"
+                            android:background="@color/green" />
+
+                        <LinearLayout
+                            android:id="@+id/MyPage_btn_FixD"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.25"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                android:layout_marginStart="23dp"
+                                android:background="@drawable/imagefixd"
+                                android:textAlignment="center" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="18dp"
+                                android:text="维修申请"
+                                android:textColor="#5A5A5A"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="12dp"
+                    app:cardElevation="0dp"
+                    android:background="#fff"
+                    app:cardCornerRadius="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/MyPage_btn_setup"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                android:layout_marginStart="23dp"
+                                android:background="@drawable/setup"
+                                android:textAlignment="center" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="18dp"
+                                android:textColor="#5A5A5A"
+                                android:text="设置"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_marginHorizontal="23dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.1dp"
+                            android:background="@color/green" />
+
+                        <LinearLayout
+                            android:id="@+id/MyPage_btn_advice"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                android:layout_marginStart="23dp"
+                                android:background="@drawable/advice"
+                                android:textAlignment="center" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="18dp"
+                                android:text="意见反馈"
+                                android:textColor="#5A5A5A"
+                                android:textSize="16sp" />
+
+                           </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </ScrollView>
+
 
     </LinearLayout>
 

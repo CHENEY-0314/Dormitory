@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/colorPrimary"
+    tools:context=".MyPagesActivity.ChangeUserImgActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="10dp"
+        android:layout_weight="0.08">
+        <ImageView
+            android:id="@+id/ACU_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/back" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:layout_marginStart="10dp"
+            android:text="更换头像"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.92">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:focusableInTouchMode="true">
+
+            <ImageView
+                android:id="@+id/ACU_userimg"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/userimage"/>
+
+            <Button
+                android:id="@+id/ACU_ChangeByAlbum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginHorizontal="70dp"
+                android:background="@drawable/changeimgbtn"
+                android:textColor="#fff"
+                android:bufferType="normal"
+                android:stateListAnimator="@null"
+                android:textSize="15sp"
+                android:text="从相册上传"/>
+
+            <Button
+                android:id="@+id/ACU_ChangeByCamera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="70dp"
+                android:background="@drawable/changeimgbtn"
+                android:textColor="#fff"
+                android:bufferType="normal"
+                android:stateListAnimator="@null"
+                android:textSize="15sp"
+                android:text="拍照上传"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

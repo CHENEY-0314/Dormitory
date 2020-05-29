@@ -32,4 +32,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     implementation 'com.hjm:BottomTabBar:1.2.2'
 
+    implementation 'androidx.cardview:cardview:1.0.0'
+    //圆形图片
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+
 }
