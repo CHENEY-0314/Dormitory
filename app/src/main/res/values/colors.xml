@@ -5,5 +5,5 @@
     <color name="colorAccent">#04BF17</color>
     <color name="tabbar">#E7FFFFFF</color>
     <color name="green">#60C664</color>
-    <color name="normal">#BE000000</color>
+    <color name="normal">#000000</color>
 </resources>

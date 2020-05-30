@@ -1,89 +1,103 @@
 package com.example.dormitory;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import com.hjm.bottomtabbar.BottomTabBar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 
-public class Tabbar extends AppCompatActivity {
 
+import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 
-    int overPosition;
-    private BottomTabBar bottom_tab_bar;
-    private float mPosX, mPosY, mCurPosX, mCurPosY;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Tabbar extends AppCompatActivity{
+    private ViewPager viewPager;
+    private List<Fragment> fragmentList;
+    private BottomNavigationBar bottomNavigationBar;
+
+    private final String ONE = "one";
+    private final String TWO = "two";
+    private final String THREE = "three";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottomtabbar_layout);
-        initView();
-        initData();
-    }
 
-    private void initData() {
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        bottomNavigationBar = findViewById(R.id.bottom_navigation_bar);
 
-        //设置状态栏文字颜色及图标为深色，当状态栏为白色时候，改变其颜色为深色，简单粗暴直接完事
+        viewPager = findViewById(R.id.viewPager);
+        //将所有的fragment放入一个ArrayList中
+        fragmentList = new ArrayList<Fragment>();
+        Fragment f1 = new MainPage();
+        Fragment f2 = new HomePage();
+        Fragment f3 = new MyPage();
+        fragmentList.add(f1);
+        fragmentList.add(f2);
+        fragmentList.add(f3);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        SectionsPagerAdapter myPagerAdapter = new SectionsPagerAdapter(fragmentManager, fragmentList);
 
-        setContentView(R.layout.bottomtabbar_layout);
-        bottom_tab_bar = findViewById(R.id.bottom_tab_bar);
-        bottom_tab_bar.init(getSupportFragmentManager())
-                .setImgSize(25, 25)
-                .setFontSize(10)
-                .setTabPadding(5, 5, 5)
-                .setChangeColor(getResources().getColor(R.color.green), getResources().getColor(R.color.normal))
-                .addTabItem("主页", R.drawable.icon_tab_home_normal, MainPage.class)
-                .addTabItem("首页", R.drawable.icon_tab_home_normal, HomePage.class)
-                .addTabItem("我的", R.drawable.icon_tab_home_normal, MyPage.class)
-                .setTabBarBackgroundColor(getResources().getColor(R.color.tabbar))
-                .isShowDivider(true)
-                .setOnTabChangeListener(new BottomTabBar.OnTabChangeListener() {
-                    @Override
-                    public void onTabChange(int position, String name, View view) {
-                        Log.i("TGA", "位置：" + position + "      选项卡的文字内容：" + name);
-                        //mViewPager.setCurrentItem(position);
+        //将viewPager设置Adapter
+        viewPager.setAdapter(myPagerAdapter);
+        //设置初始化的位置（即第0个位置，开始的位置）
+        viewPager.setCurrentItem(0);
+        //当做出动作时，通过此监听
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                        overPosition = position;
-                    }//添加选项卡切换监听
-                })
-                .setCurrentTab(0)//设置当前选中的tab,从0开始
-                .setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        switch (event.getAction()) {
-                            case MotionEvent.ACTION_DOWN:
-                                mPosX = event.getX();
-                                mPosY = event.getY();
-                                break;
-                            case MotionEvent.ACTION_MOVE:
-                                mCurPosX = event.getX();
-                                mCurPosY = event.getY();
-                                break;
-                            case MotionEvent.ACTION_UP:
-                                if (mCurPosX - mPosX > 20 &&  (Math.abs(mCurPosX-mPosX) > 25)) {
-                                    //向左滑動
-                                    overPosition-=1;
-                                    bottom_tab_bar.setCurrentTab(overPosition );
-                                    System.out.println(overPosition);
+            }
 
-                                } else if (mCurPosX - mPosX < 0 && (Math.abs(mCurPosX-mPosX) > 25)) {
-                                    //向右滑动
-                                    overPosition+=1;
-                                    bottom_tab_bar.setCurrentTab(overPosition);
-                                }
-                                if (mCurPosX - mPosX > 0 && overPosition==2)
-                                    bottom_tab_bar.setCurrentTab(1);
-                                break;
-                        }
-                        return true;
-                    }
-                });
-    }
-    private void initView() {
-        bottom_tab_bar = (BottomTabBar) findViewById(R.id.bottom_tab_bar);
+            @Override
+            public void onPageSelected(int position) {
+                //滑动页面之后做的事，这里与BottomNavigationBar连接，设置BottomNavigationBar。这是我们可以通过滑动改变BottomNavigationBar
+                bottomNavigationBar.selectTab(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        bottomNavigationBar
+                .setInActiveColor(R.color.colorPrimary) //未选中状态颜色
+                .setActiveColor(R.color.colorAccent)  //选中状态颜色
+                .setMode(BottomNavigationBar.MODE_FIXED) //导航栏模式
+                .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC) //导航栏背景模式（图标的动画样式和这个有关系 变大了）
+                .addItem(new BottomNavigationItem(R.drawable.mainpage_active_icon, "主页").setActiveColorResource(R.color.green)
+                        .setInactiveIconResource(R.drawable.mainpage_nactive_icon).setInActiveColorResource(R.color.normal))
+                .addItem(new BottomNavigationItem(R.drawable.homepage_active_icon, "通知").setActiveColorResource(R.color.green)
+                        .setInactiveIconResource(R.drawable.homepage_nactive_icon).setInActiveColorResource(R.color.normal))
+                .addItem(new BottomNavigationItem(R.drawable.mypage_active_icon, "我的").setActiveColorResource(R.color.green)
+                        .setInactiveIconResource(R.drawable.mypage_nactive_icon).setInActiveColorResource(R.color.normal))
+                .setFirstSelectedPosition(0)//初始化之后第一个选中的位置
+                .initialise();
+
+        //当对BottomNavigationBar进行操作时，通过下列函数监听。
+        bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int position) {
+                //被选中时，改变viewPager中的位置进而得到fragment的数据，即改变fragment。
+                viewPager.setCurrentItem(position);
+            }
+
+            @Override
+            public void onTabUnselected(int position) {
+
+            }
+
+            @Override
+            public void onTabReselected(int position) {
+
+            }
+        });
     }
 }
 
