@@ -11,5 +11,5 @@
         />
     <!-- android:radius 圆角的半径 -->
     <corners
-        android:radius="8dp" />
+        android:radius="20dp" />
 </shape>

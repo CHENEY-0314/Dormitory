@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dormitory">
-
     <!-- 获取读取SD卡\相机的权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyPagesActivity.ChangeUserImgActivity"></activity>
+        <activity android:name=".Login.AdmLogActivity"></activity>
+        <activity android:name=".Login.StuLogActivity" />
+        <activity android:name=".MyPagesActivity.ChangeUserImgActivity" />
         <activity android:name=".MyPagesActivity.AdviceActivity" />
         <activity android:name=".MyPagesActivity.SetupActivity" />
         <activity android:name=".MainActivity" />
@@ -39,7 +41,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
     </application>
 
 </manifest>
