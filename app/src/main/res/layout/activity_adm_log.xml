@@ -17,7 +17,7 @@
             android:text="管理员登录"
             android:textSize="30sp"
             android:gravity="center"
-            android:layout_marginBottom="100dp">
+            android:layout_marginBottom="150dp">
         </TextView>
         <LinearLayout
             android:layout_width="wrap_content"
