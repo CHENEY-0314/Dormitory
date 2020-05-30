@@ -19,7 +19,7 @@ public class MainPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.mainpage_layout, container, false);
-        //声明两个控件
+        //绑定两个控件
         toChange=view.findViewById(R.id.change);
         toRepair=view.findViewById(R.id.repair);
 

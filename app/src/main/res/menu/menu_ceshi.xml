@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item01"
+        android:orderInCategory="100"
+        android:title="南京"/>
+    <item
+        android:id="@+id/item02"
+        android:orderInCategory="101"
+        android:title="马鞍山"/>
+    <item
+        android:id="@+id/item03"
+        android:orderInCategory="102"
+        android:title="芜湖"/>
+    <item
+        android:id="@+id/item04"
+        android:orderInCategory="103"
+        android:title="铜陵"/>
+</menu>
