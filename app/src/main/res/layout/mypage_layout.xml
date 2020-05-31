@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/background3"
     tools:context="com.example.dormitory.MyPage">
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,9 +16,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.25"
+            android:layout_weight="0.23"
             android:layout_marginHorizontal="10dp"
-            android:backgroundTint="@color/green"
+            android:backgroundTint="#D0FFFFFF"
             android:layout_marginTop="20dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="1dp">
@@ -36,7 +36,7 @@
                     android:layout_marginStart="26dp"
                     app:civ_border_width="2dp"
                     app:civ_border_overlay="true"
-                    app:civ_border_color="#FFFFFF"
+                    app:civ_border_color="#D5D5D5"
                     app:civ_fill_color="#E6E5E5"
                     android:src="@drawable/userimage" />
 
@@ -52,7 +52,7 @@
                         android:layout_height="wrap_content"
                         android:text="您的名称"
                         android:textStyle="normal"
-                        android:textColor="#fff"
+                        android:textColor="#000"
                         android:textSize="21sp" />
                     <TextView
                         android:id="@+id/MyPage_txt_home"
@@ -60,7 +60,6 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="5dp"
                         android:text="您的宿舍"
-                        android:textColor="#FFFFFF"
                         android:textSize="15sp" />
 
                 </LinearLayout>
@@ -71,7 +70,6 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/colorPrimary"
             android:paddingHorizontal="10dp"
             android:layout_weight="0.75">
 
@@ -85,7 +83,7 @@
                     android:layout_height="120dp"
                     android:layout_marginTop="12dp"
                     app:cardElevation="0dp"
-                    android:background="#fff"
+                    android:backgroundTint="#D0FFFFFF"
                     app:cardCornerRadius="20dp">
 
                     <LinearLayout
@@ -112,7 +110,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="18dp"
-                                android:textColor="#5A5A5A"
+                                android:textColor="#000000"
                                 android:text="换宿申请"
                                 android:textSize="16sp" />
 
@@ -122,7 +120,7 @@
                             android:layout_marginHorizontal="23dp"
                             android:layout_width="match_parent"
                             android:layout_height="0.1dp"
-                            android:background="@color/green" />
+                            android:background="#C3C3C3" />
 
                         <LinearLayout
                             android:id="@+id/MyPage_btn_FixD"
@@ -144,7 +142,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="18dp"
                                 android:text="维修申请"
-                                android:textColor="#5A5A5A"
+                                android:textColor="#000000"
                                 android:textSize="16sp" />
 
                         </LinearLayout>
@@ -156,7 +154,7 @@
                     android:layout_height="120dp"
                     android:layout_marginTop="12dp"
                     app:cardElevation="0dp"
-                    android:background="#fff"
+                    android:backgroundTint="#D0FFFFFF"
                     app:cardCornerRadius="20dp">
 
                     <LinearLayout
@@ -183,7 +181,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="18dp"
-                                android:textColor="#5A5A5A"
+                                android:textColor="#000000"
                                 android:text="设置"
                                 android:textSize="16sp" />
 
@@ -193,7 +191,7 @@
                             android:layout_marginHorizontal="23dp"
                             android:layout_width="match_parent"
                             android:layout_height="0.1dp"
-                            android:background="@color/green" />
+                            android:background="#C3C3C3" />
 
                         <LinearLayout
                             android:id="@+id/MyPage_btn_advice"
@@ -215,7 +213,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="18dp"
                                 android:text="意见反馈"
-                                android:textColor="#5A5A5A"
+                                android:textColor="#000000"
                                 android:textSize="16sp" />
 
                            </LinearLayout>
