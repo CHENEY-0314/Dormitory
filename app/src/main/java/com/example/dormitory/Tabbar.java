@@ -1,6 +1,7 @@
 package com.example.dormitory;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,9 @@ public class Tabbar extends AppCompatActivity{
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        //设置状态栏文字颜色及图标为深色，当状态栏为白色时候，改变其颜色为深色，简单粗暴直接完事
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottomtabbar_layout);
 
@@ -35,7 +39,7 @@ public class Tabbar extends AppCompatActivity{
         //将所有的fragment放入一个ArrayList中
         fragmentList = new ArrayList<Fragment>();
         Fragment f1 = new MainPage();
-        Fragment f2 = new HomePage();
+        Fragment f2 = new NotePage();
         Fragment f3 = new MyPage();
         fragmentList.add(f1);
         fragmentList.add(f2);

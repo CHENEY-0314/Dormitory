@@ -20,7 +20,7 @@ public class WelcomeActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-                Intent mainIntent = new Intent(WelcomeActivity.this,LoginActivity.class);
+                Intent mainIntent = new Intent(WelcomeActivity.this,Tabbar.class);
                 WelcomeActivity.this.startActivity(mainIntent);
                 WelcomeActivity.this.finish();
             }

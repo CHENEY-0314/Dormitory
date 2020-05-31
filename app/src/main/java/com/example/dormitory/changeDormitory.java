@@ -52,7 +52,6 @@ public class changeDormitory extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //弹窗点击事件
-                Toast.makeText(changeDormitory.this,parent.getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -63,7 +62,6 @@ public class changeDormitory extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //弹窗点击事件
-                Toast.makeText(changeDormitory.this,parent.getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -74,7 +72,6 @@ public class changeDormitory extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //弹窗点击事件
-                Toast.makeText(changeDormitory.this,parent.getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {

@@ -26,14 +26,16 @@
         <activity android:name=".MyPagesActivity.SetupActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Tabbar" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".WelcomeActivity">
+
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".WelcomeActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
