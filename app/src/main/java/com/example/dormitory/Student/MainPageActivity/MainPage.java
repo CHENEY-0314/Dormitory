@@ -1,15 +1,16 @@
-package com.example.dormitory;
+package com.example.dormitory.Student.MainPageActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+
+import com.example.dormitory.R;
 
 public class MainPage extends Fragment {
     private CardView toChange;

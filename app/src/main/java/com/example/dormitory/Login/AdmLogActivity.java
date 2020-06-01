@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.dormitory.R;
-import com.example.dormitory.Tabbar;
 import com.example.dormitory.WelcomeActivity;
 
 public class AdmLogActivity extends AppCompatActivity {

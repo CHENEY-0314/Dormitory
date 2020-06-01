@@ -19,15 +19,15 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Login.AdmLogActivity"></activity>
         <activity android:name=".Login.StuLogActivity" />
-        <activity android:name=".MyPagesActivity.ChangeUserImgActivity" />
-        <activity android:name=".repairDormitory"></activity>
-        <activity android:name=".changeDormitory" />
-        <activity android:name=".MyPagesActivity.AdviceActivity" />
-        <activity android:name=".MyPagesActivity.SetupActivity" />
+        <activity android:name=".Student.MyPagesActivity.ChangeUserImgActivity" />
+        <activity android:name=".Student.MainPageActivity.repairDormitory"></activity>
+        <activity android:name=".Student.MainPageActivity.changeDormitory" />
+        <activity android:name=".Student.MyPagesActivity.AdviceActivity" />
+        <activity android:name=".Student.MyPagesActivity.SetupActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Tabbar" />
+        <activity android:name=".Student.Tabbar" />
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

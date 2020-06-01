@@ -1,4 +1,4 @@
-package com.example.dormitory;
+package com.example.dormitory.Student.MyPagesActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,11 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.dormitory.MyPagesActivity.AdviceActivity;
-import com.example.dormitory.MyPagesActivity.ChangeUserImgActivity;
-import com.example.dormitory.MyPagesActivity.SetupActivity;
-
-import java.util.Objects;
+import com.example.dormitory.R;
+import com.example.dormitory.Student.MyPagesActivity.AdviceActivity;
+import com.example.dormitory.Student.MyPagesActivity.ChangeUserImgActivity;
+import com.example.dormitory.Student.MyPagesActivity.SetupActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

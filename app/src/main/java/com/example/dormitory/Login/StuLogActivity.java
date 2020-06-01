@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.dormitory.R;
-import com.example.dormitory.Tabbar;
 import com.example.dormitory.WelcomeActivity;
 
 public class StuLogActivity extends AppCompatActivity {
@@ -28,7 +27,7 @@ public class StuLogActivity extends AppCompatActivity {
         mBtnSLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent = new Intent(StuLogActivity.this, WelcomeActivity.class);
+                Intent intent = new Intent(StuLogActivity.this, WelcomeActivity.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(),"登录成功",Toast.LENGTH_SHORT).show();
             }

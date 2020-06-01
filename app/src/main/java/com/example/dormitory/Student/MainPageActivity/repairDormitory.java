@@ -1,4 +1,4 @@
-package com.example.dormitory;
+package com.example.dormitory.Student.MainPageActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.dormitory.R;
 
 public class repairDormitory extends AppCompatActivity {
     //声明返回按钮的组件

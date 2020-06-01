@@ -1,4 +1,4 @@
-package com.example.dormitory;
+package com.example.dormitory.Student.MainPageActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,7 +7,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
+
+import com.example.dormitory.R;
 
 public class changeDormitory extends AppCompatActivity {
     //声明四个下拉框组件和图片组件

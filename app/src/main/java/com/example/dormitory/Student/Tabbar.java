@@ -1,7 +1,6 @@
-package com.example.dormitory;
+package com.example.dormitory.Student;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +11,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.example.dormitory.R;
+import com.example.dormitory.Student.Adapters.SectionsPagerAdapter;
+import com.example.dormitory.Student.MainPageActivity.MainPage;
+import com.example.dormitory.Student.MyPagesActivity.MyPage;
+import com.example.dormitory.Student.NotePageActivity.NotePage;
 
 import java.util.ArrayList;
 import java.util.List;

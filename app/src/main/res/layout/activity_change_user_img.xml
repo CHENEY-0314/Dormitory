@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true"
     android:background="@color/colorPrimary"
-    tools:context=".MyPagesActivity.ChangeUserImgActivity">
+    tools:context=".Student.MyPagesActivity.ChangeUserImgActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

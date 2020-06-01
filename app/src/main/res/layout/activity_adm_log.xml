@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.dormitory.MainPage">
+    tools:context="com.example.dormitory.Student.MainPageActivity.MainPage">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -19,34 +21,41 @@
             android:gravity="center"
             android:layout_marginBottom="150dp">
         </TextView>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/user_icon"
                 android:layout_width="30dp"
                 android:layout_height="32dp"
                 android:background="@drawable/user"
                 android:layout_marginRight="10dp"/>
+
             <EditText
                 android:id="@+id/adm_account"
                 android:layout_width="280dp"
                 android:layout_height="40dp"
                 android:hint="用户名">
             </EditText>
+
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="10dp">
+
             <ImageView
                 android:id="@+id/password_icon"
                 android:layout_width="30dp"
                 android:layout_height="32dp"
                 android:background="@drawable/password"
                 android:layout_marginRight="10dp"/>
+
             <EditText
                 android:id="@+id/adm_password"
                 android:layout_width="280dp"
@@ -54,7 +63,9 @@
                 android:inputType="textPassword"
                 android:hint="密码">
             </EditText>
+
         </LinearLayout>
+
         <Button
             android:layout_marginHorizontal="15dp"
             android:layout_marginTop="120dp"
@@ -63,8 +74,8 @@
             android:layout_height="wrap_content"
             android:text="登录"
             android:background="@drawable/rounded_corner">
-
         </Button>
+
     </LinearLayout>
 
 </FrameLayout>

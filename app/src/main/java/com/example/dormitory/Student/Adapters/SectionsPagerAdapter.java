@@ -1,4 +1,4 @@
-package com.example.dormitory;
+package com.example.dormitory.Student.Adapters;
 
 import android.view.View;
 import android.view.ViewGroup;

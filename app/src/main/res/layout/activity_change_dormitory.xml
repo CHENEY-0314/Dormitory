@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".changeDormitory">
+    tools:context=".Student.MainPageActivity.changeDormitory">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

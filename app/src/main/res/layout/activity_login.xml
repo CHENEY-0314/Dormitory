@@ -30,4 +30,5 @@
         android:background="@drawable/rounded_corner"
         android:text="@string/sAdmLogin"
         android:textColor="@color/white"/>
+
 </LinearLayout>

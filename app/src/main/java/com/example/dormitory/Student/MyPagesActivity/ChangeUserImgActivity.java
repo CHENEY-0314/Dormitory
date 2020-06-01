@@ -1,4 +1,4 @@
-package com.example.dormitory.MyPagesActivity;
+package com.example.dormitory.Student.MyPagesActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

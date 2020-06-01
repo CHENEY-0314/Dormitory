@@ -1,4 +1,4 @@
-package com.example.dormitory;
+package com.example.dormitory.Student.NotePageActivity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.dormitory.R;
 
 public class NotePage extends Fragment
 {
