@@ -13,12 +13,12 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingTop="10dp"
-        android:layout_weight="0.10">
+        android:layout_weight="0.08">
         <ImageView
             android:id="@+id/changeDor_back"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="20dp"
             android:background="@drawable/back" />
         <TextView
             android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.90">
+        android:layout_weight="0.92">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
