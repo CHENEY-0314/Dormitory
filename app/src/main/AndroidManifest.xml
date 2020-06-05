@@ -35,6 +35,7 @@
         </activity>
 
         <activity android:name=".WelcomeActivity"/>
+        <activity android:name=".Administrator.admTabbar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

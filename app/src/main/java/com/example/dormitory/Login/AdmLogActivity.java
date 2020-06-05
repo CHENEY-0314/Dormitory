@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.dormitory.Administrator.admTabbar;
 import com.example.dormitory.R;
 import com.example.dormitory.WelcomeActivity;
 
@@ -26,7 +27,7 @@ public class AdmLogActivity extends AppCompatActivity {
         mBtnALogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdmLogActivity.this, WelcomeActivity.class);
+                Intent intent = new Intent(AdmLogActivity.this, admTabbar.class);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(),"登录成功",Toast.LENGTH_SHORT).show();
             }
