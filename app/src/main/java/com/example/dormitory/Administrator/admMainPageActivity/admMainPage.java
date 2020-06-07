@@ -14,6 +14,7 @@ import com.example.dormitory.R;
 
 
 public class admMainPage extends Fragment {
+    // 查询 申请管理
     private CardView toQuery;
     private  CardView toApply;
     @Nullable
@@ -22,8 +23,8 @@ public class admMainPage extends Fragment {
 
         final View view = inflater.inflate(R.layout.adm_mainpage_layout, container, false);
         //绑定两个控件
-        toQuery=view.findViewById(R.id.query);
-        toApply=view.findViewById(R.id.apply);
+        toQuery=view.findViewById(R.id.adm_query);
+        toApply=view.findViewById(R.id.adm_apply);
 
         //声明点击事件
         toQuery.setOnClickListener(new admMainPage.ButtonListener());
@@ -31,14 +32,17 @@ public class admMainPage extends Fragment {
         return view;
     }
 
+    // 点击事件
     private class ButtonListener implements View.OnClickListener{
         public void onClick(View v){
             switch (v.getId()){
-                case R.id.change:{
-
+                case R.id.adm_query:{
+                    Intent intent = new Intent(getActivity(), admQueryActivity.class);
+                    startActivity(intent);
                 }
-                case R.id.repair:{
-
+                case R.id.adm_apply:{
+                    Intent intent = new Intent(getActivity(), admApplyActivity.class);
+                    startActivity(intent);
                 }
                 default:break;
             }

@@ -14,7 +14,7 @@
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/query"
+            android:id="@+id/adm_query"
             android:layout_width="280dp"
             android:layout_height="130dp"
             android:layout_marginTop="160dp"
@@ -29,7 +29,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/apply"
+            android:id="@+id/adm_apply"
             android:layout_width="280dp"
             android:layout_height="130dp"
             android:layout_marginTop="50dp"
