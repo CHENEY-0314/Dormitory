@@ -39,5 +39,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     //圆形图片
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    //RecyclerView
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
 }
