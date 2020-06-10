@@ -33,4 +33,10 @@
     <string name="building_label">选择楼栋</string>
     <string name="floor_label">选择楼层</string>
     <string name="bed_label">选择床号</string>
+
+    <string-array name="adm_note_kind">
+        <item>校级通知</item>
+        <item>学院通知</item>
+        <item>宿舍通知</item>
+    </string-array>
 </resources>
