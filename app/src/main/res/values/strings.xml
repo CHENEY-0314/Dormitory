@@ -37,4 +37,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="adm_note_kind">
+        <item>校级通知</item>
+        <item>学院通知</item>
+        <item>宿舍通知</item>
+    </string-array>
 </resources>

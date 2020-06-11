@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true"
+    tools:context=".Student.MyPagesActivity.AdviceActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="10dp"
+        android:layout_weight="0.08">
+        <ImageView
+            android:id="@+id/ReleaseNote_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/back" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:layout_marginStart="10dp"
+            android:text="发布通知"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.92">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:focusableInTouchMode="true"
+            android:paddingHorizontal="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="标题："
+                    android:textSize="20sp"/>
+                <EditText
+                    android:id="@+id/admNoteHeadEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:hint="请输入标题"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:background="@drawable/advice_card"
+                android:focusableInTouchMode="true"
+                android:padding="20dp"
+                android:orientation="vertical">
+                <EditText
+                    android:id="@+id/admNoteEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="380dp"
+                    android:layout_marginBottom="10dp"
+                    android:autofillHints=""
+                    android:background="@null"
+                    android:gravity="start"
+                    android:inputType="textMultiLine"
+                    android:lineSpacingExtra="3dp"
+                    android:maxLength="600"
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    android:hint="请输入通知内容"/>
+                <TextView
+                    android:id="@+id/Note_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="0/2000"
+                    android:paddingEnd="8dp"
+                    android:textColor="#CBCBCB"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="#C3C0C0"
+                android:textSize="13sp"
+                android:text="注意：通知不得多于2000字"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="通知类型："
+                    android:textSize="20sp" />
+
+                <Spinner
+                    android:id="@+id/adm_note_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/adm_note_kind" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/Advice_btn"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="30dp"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:background="@drawable/advice_btn"
+                android:bufferType="normal"
+                android:stateListAnimator="@null"
+                android:text="发布"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>
