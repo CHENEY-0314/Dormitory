@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
 
         <ImageView
             android:layout_width="40dp"
@@ -26,6 +27,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:layout_marginTop="10dp"
                 android:id="@+id/tv_typename"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,6 +43,7 @@
                 android:layout_marginLeft="12dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
+                android:layout_marginTop="10dp"
                 android:text="删除"
                 android:textColor="@color/colorAccent"
                 android:textSize="14sp"/>
@@ -53,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="56dp"
         android:orientation="vertical"
-        android:paddingBottom="5dp">
+        android:paddingBottom="8dp">
 
         <TextView
             android:id="@+id/tv_content"
@@ -81,25 +84,30 @@
             android:id="@+id/time_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="30分钟前"
-            android:layout_weight="5"
+            android:layout_weight="6"
+            android:textSize="10sp"
             android:textColor="@color/normal"
             android:gravity="left"/>
 
-        <Button
+        <ImageButton
             android:layout_width="0dp"
-            android:layout_height="25dp"
-            android:layout_alignBottom="@+id/time_text"
-            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dp"
+            android:layout_height="30dp"
+            android:id ="@+id/read_note_btn"
+            android:layout_gravity="center"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="@drawable/unread_note_icon"/></LinearLayout>
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:src="@drawable/unread_note_icon" />
+        </LinearLayout>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1sp"
-        android:background="#97FFFFFF"/>
+        android:background="#E5A5A5A5"/>
 </LinearLayout>
 

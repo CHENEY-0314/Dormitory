@@ -5,6 +5,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,8 +31,8 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
 
     private SparseArray<Integer> mTextStateList;//保存文本状态集合
 
+    private  boolean readstate=false;
     List<Note> mList;
-
     public ExpandFoldTextAdapter(List<Note> list, Activity context) {
         mContent = context;
         this.mList = list;
@@ -118,7 +119,15 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
 
         holder.image.setImageResource(mList.get(position).getImage());
         holder.typename.setText(mList.get(position).getType());
-
+        holder.read.setOnClickListener(new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View v) {
+                                               if(!readstate)
+                                               {holder.read.setImageResource(R.drawable.read_note_icon);readstate=!readstate;}
+                                               else
+                                               {holder.read.setImageResource(R.drawable.unread_note_icon);readstate=!readstate;}
+                                           }
+                                       });
     }
 
     @Override
@@ -134,7 +143,7 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
         public TextView expandOrFold;
         public TextView time;
         public ImageView image;
-
+        public ImageButton read;
         public MyViewHolder(View itemView) {
             super(itemView);
             typename = (TextView) itemView.findViewById(R.id.tv_typename);
@@ -143,7 +152,9 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
             expandOrFold = (TextView) itemView.findViewById(R.id.tv_expand_or_fold);
             time=(TextView)itemView.findViewById(R.id.time_text);
             image=(ImageView)itemView.findViewById(R.id.note_type_image);
+            read=(ImageButton) itemView.findViewById(R.id.read_note_btn);
         }
     }
+
 }
 
