@@ -330,14 +330,42 @@
                                 android:button="@null"
                                 android:gravity="center"
                                 android:textColor="#fff"/>
+<!--                            <CheckBox-->
+<!--                                android:id="@+id/changeDor_floor_cb_7"-->
+<!--                                android:layout_below="@+id/changeDor_floor_cb_6"-->
+<!--                                android:layout_width="175dp"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:paddingVertical="5dp"-->
+<!--                                android:layout_marginBottom="7dp"-->
+<!--                                android:text="7"-->
+<!--                                android:textSize="14sp"-->
+<!--                                android:background="@drawable/checkbox"-->
+<!--                                android:button="@null"-->
+<!--                                android:gravity="center"-->
+<!--                                android:textColor="#fff"/>-->
                             <CheckBox
                                 android:id="@+id/changeDor_floor_cb_7"
-                                android:layout_below="@+id/changeDor_floor_cb_6"
-                                android:layout_width="175dp"
+                                android:layout_below="@+id/changeDor_floor_cb_5"
+                                android:layout_width="80dp"
                                 android:layout_height="wrap_content"
                                 android:paddingVertical="5dp"
                                 android:layout_marginBottom="7dp"
                                 android:text="7"
+                                android:textSize="14sp"
+                                android:background="@drawable/checkbox"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:textColor="#fff"/>
+                            <CheckBox
+                                android:id="@+id/changeDor_floor_cb_8"
+                                android:layout_toRightOf="@+id/changeDor_floor_cb_7"
+                                android:layout_below="@+id/changeDor_floor_cb_6"
+                                android:layout_marginLeft="15dp"
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="5dp"
+                                android:layout_marginBottom="7dp"
+                                android:text="随意"
                                 android:textSize="14sp"
                                 android:background="@drawable/checkbox"
                                 android:button="@null"
@@ -439,6 +467,19 @@
                                 android:paddingVertical="5dp"
                                 android:layout_marginBottom="7dp"
                                 android:text="4"
+                                android:textSize="14sp"
+                                android:background="@drawable/checkbox"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:textColor="#fff"/>
+                            <CheckBox
+                                android:id="@+id/changeDor_bed_cb_5"
+                                android:layout_below="@+id/changeDor_bed_cb_3"
+                                android:layout_width="175dp"
+                                android:layout_height="wrap_content"
+                                android:paddingVertical="5dp"
+                                android:layout_marginBottom="7dp"
+                                android:text="随意"
                                 android:textSize="14sp"
                                 android:background="@drawable/checkbox"
                                 android:button="@null"

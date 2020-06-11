@@ -1,7 +1,9 @@
 package com.example.dormitory.Student.MainPageActivity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dormitory.R;
@@ -20,11 +23,11 @@ public class changeDormitory extends AppCompatActivity {
     private ImageView mBack;
     private Spinner department;
     private Spinner building;
-    private CheckBox CheBox_floor_1,CheBox_floor_2,CheBox_floor_3,CheBox_floor_4,CheBox_floor_5,CheBox_floor_6,CheBox_floor_7;
-    private CheckBox CheBox_bed_1,CheBox_bed_2,CheBox_bed_3,CheBox_bed_4;
+    private CheckBox CheBox_floor_1,CheBox_floor_2,CheBox_floor_3,CheBox_floor_4,CheBox_floor_5,CheBox_floor_6,CheBox_floor_7,CheBox_floor_8;
+    private CheckBox CheBox_bed_1,CheBox_bed_2,CheBox_bed_3,CheBox_bed_4,CheBox_bed_5;
     private Button BtnSubmit;
     //定义二维字符串数组，用于选择楼栋随学院的动态变化
-    private String[][] buildData=new String[][]{{"C10","C12"},{"C8","C9"},{"C5","C6"},{"C11","C9"},{"C11"},{"C7"},{"C13"},{"C3","C4"},{"C2","C3"}};
+    private String[][] buildData=new String[][]{{"C10","C12"},{"C8","C9"},{"C5","C6"},{"C11","C9"},{"C11"},{"C7"},{"C13"},{"C3","C4"},{"C2","C3"},{"随意","C1","C2","C3","C4","C5","C6","C7","C8","C9","C10","C11","C12","C13","C14","C15"}};
     //声明适配器，用于动态配置楼栋内容
     private ArrayAdapter<CharSequence> adapterBuilding;
 
@@ -65,10 +68,12 @@ public class changeDormitory extends AppCompatActivity {
         CheBox_floor_5=findViewById(R.id.changeDor_floor_cb_5);
         CheBox_floor_6=findViewById(R.id.changeDor_floor_cb_6);
         CheBox_floor_7=findViewById(R.id.changeDor_floor_cb_7);
+        CheBox_floor_8=findViewById(R.id.changeDor_floor_cb_8);
         CheBox_bed_1=findViewById(R.id.changeDor_bed_cb_1);
         CheBox_bed_2=findViewById(R.id.changeDor_bed_cb_2);
         CheBox_bed_3=findViewById(R.id.changeDor_bed_cb_3);
         CheBox_bed_4=findViewById(R.id.changeDor_bed_cb_4);
+        CheBox_bed_5=findViewById(R.id.changeDor_bed_cb_5);
         BtnSubmit=findViewById(R.id.changeDor_submit);
         //设置组件监听事件
         mBack.setOnClickListener(new ButtonListener());
@@ -79,15 +84,17 @@ public class changeDormitory extends AppCompatActivity {
         CheBox_floor_5.setOnClickListener(new ButtonListener());
         CheBox_floor_6.setOnClickListener(new ButtonListener());
         CheBox_floor_7.setOnClickListener(new ButtonListener());
+        CheBox_floor_8.setOnClickListener(new ButtonListener());
         CheBox_bed_1.setOnClickListener(new ButtonListener());
         CheBox_bed_2.setOnClickListener(new ButtonListener());
         CheBox_bed_3.setOnClickListener(new ButtonListener());
         CheBox_bed_4.setOnClickListener(new ButtonListener());
+        CheBox_bed_5.setOnClickListener(new ButtonListener());
         BtnSubmit.setOnClickListener(new ButtonListener());
 
 
     }
-    //监听7+4共11个CheckBox、提交按钮和返回按钮的点击事件
+    //监听8+5共13个CheckBox、提交按钮和返回按钮的点击事件
     private class ButtonListener implements View.OnClickListener{
         @Override
         public void onClick(View v){
@@ -98,15 +105,67 @@ public class changeDormitory extends AppCompatActivity {
                 case R.id.changeDor_floor_cb_4:
                 case R.id.changeDor_floor_cb_5:
                 case R.id.changeDor_floor_cb_6:
-                case R.id.changeDor_floor_cb_7:
+                case R.id.changeDor_floor_cb_7:{
+                    CheBox_floor_8.setChecked(false);
+                    //楼层和床位号每个至少选一个才可提交
+                    if((CheBox_floor_1.isChecked()||CheBox_floor_2.isChecked()||CheBox_floor_3.isChecked()||CheBox_floor_4.isChecked()
+                            ||CheBox_floor_5.isChecked()||CheBox_floor_6.isChecked()||CheBox_floor_7.isChecked()||CheBox_floor_8.isChecked())
+                            &&(CheBox_bed_1.isChecked()|| CheBox_bed_2.isChecked()||CheBox_bed_3.isChecked()||CheBox_bed_4.isChecked()
+                            ||CheBox_bed_5.isChecked())){
+                        BtnSubmit.setEnabled(true);
+                    }
+                    else{
+                        BtnSubmit.setEnabled(false);
+                    }
+                    break;
+                }
+                case R.id.changeDor_floor_cb_8:{
+                    CheBox_floor_1.setChecked(false);
+                    CheBox_floor_2.setChecked(false);
+                    CheBox_floor_3.setChecked(false);
+                    CheBox_floor_4.setChecked(false);
+                    CheBox_floor_5.setChecked(false);
+                    CheBox_floor_6.setChecked(false);
+                    CheBox_floor_7.setChecked(false);
+                    //楼层和床位号每个至少选一个才可提交
+                    if((CheBox_floor_1.isChecked()||CheBox_floor_2.isChecked()||CheBox_floor_3.isChecked()||CheBox_floor_4.isChecked()
+                            ||CheBox_floor_5.isChecked()||CheBox_floor_6.isChecked()||CheBox_floor_7.isChecked()||CheBox_floor_8.isChecked())
+                            &&(CheBox_bed_1.isChecked()|| CheBox_bed_2.isChecked()||CheBox_bed_3.isChecked()||CheBox_bed_4.isChecked()
+                            ||CheBox_bed_5.isChecked())){
+                        BtnSubmit.setEnabled(true);
+                    }
+                    else{
+                        BtnSubmit.setEnabled(false);
+                    }
+                    break;
+                }
                 case R.id.changeDor_bed_cb_1:
                 case R.id.changeDor_bed_cb_2:
                 case R.id.changeDor_bed_cb_3:
                 case R.id.changeDor_bed_cb_4:{
+                    CheBox_bed_5.setChecked(false);
                     //楼层和床位号每个至少选一个才可提交
                     if((CheBox_floor_1.isChecked()||CheBox_floor_2.isChecked()||CheBox_floor_3.isChecked()||CheBox_floor_4.isChecked()
-                    ||CheBox_floor_5.isChecked()||CheBox_floor_6.isChecked()||CheBox_floor_7.isChecked())&&(CheBox_bed_1.isChecked()||
-                            CheBox_bed_2.isChecked()||CheBox_bed_3.isChecked()||CheBox_bed_4.isChecked())){
+                    ||CheBox_floor_5.isChecked()||CheBox_floor_6.isChecked()||CheBox_floor_7.isChecked()||CheBox_floor_8.isChecked())
+                            &&(CheBox_bed_1.isChecked()|| CheBox_bed_2.isChecked()||CheBox_bed_3.isChecked()||CheBox_bed_4.isChecked()
+                            ||CheBox_bed_5.isChecked())){
+                        BtnSubmit.setEnabled(true);
+                    }
+                    else{
+                        BtnSubmit.setEnabled(false);
+                    }
+                    break;
+                }
+                case R.id.changeDor_bed_cb_5:{
+                    CheBox_bed_1.setChecked(false);
+                    CheBox_bed_2.setChecked(false);
+                    CheBox_bed_3.setChecked(false);
+                    CheBox_bed_4.setChecked(false);
+                    //楼层和床位号每个至少选一个才可提交
+                    if((CheBox_floor_1.isChecked()||CheBox_floor_2.isChecked()||CheBox_floor_3.isChecked()||CheBox_floor_4.isChecked()
+                            ||CheBox_floor_5.isChecked()||CheBox_floor_6.isChecked()||CheBox_floor_7.isChecked()||CheBox_floor_8.isChecked())
+                            &&(CheBox_bed_1.isChecked()|| CheBox_bed_2.isChecked()||CheBox_bed_3.isChecked()||CheBox_bed_4.isChecked()
+                            ||CheBox_bed_5.isChecked())){
                         BtnSubmit.setEnabled(true);
                     }
                     else{
@@ -115,9 +174,7 @@ public class changeDormitory extends AppCompatActivity {
                     break;
                 }
                 case R.id.changeDor_submit:{
-                    //提交后直接退出页面
-//                    Toast.makeText(changeDormitory.this,"提交申请成功",Toast.LENGTH_SHORT).show();
-//                    changeDormitory.this.finish();
+                    //跳转到筛选结果页面
                     Intent intent=new Intent(changeDormitory.this,selectResult.class);
                     startActivity(intent);
                     break;
