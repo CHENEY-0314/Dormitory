@@ -4,6 +4,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+
     defaultConfig {
         applicationId "com.example.dormitory"
         minSdkVersion 21
@@ -11,7 +12,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -36,7 +36,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.1.0'
-
     implementation 'androidx.cardview:cardview:1.0.0'
     //圆形图片
     implementation 'de.hdodenhof:circleimageview:2.2.0'
