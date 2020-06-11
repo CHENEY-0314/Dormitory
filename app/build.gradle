@@ -1,8 +1,10 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
+
 
     defaultConfig {
         applicationId "com.example.dormitory"
@@ -11,7 +13,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -34,8 +35,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 
-    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.1.0'
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
+    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     //圆形图片
     implementation 'de.hdodenhof:circleimageview:2.2.0'
