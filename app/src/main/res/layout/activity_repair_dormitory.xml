@@ -139,32 +139,6 @@
 
             </LinearLayout>
 
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_marginTop="15dp"-->
-<!--                android:paddingLeft="20dp"-->
-<!--                android:paddingRight="20dp"-->
-<!--                android:background="#FFFFFF">-->
-<!--                <TextView-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_weight="0.3"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:text="报修类别："-->
-<!--                    android:gravity="center_vertical"-->
-<!--                    android:textSize="20sp"-->
-<!--                    android:textStyle="bold"></TextView>-->
-<!--                <EditText-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_weight="0.6"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:hint="选择"-->
-<!--                    android:editable="false"-->
-<!--                    android:textSize="15sp"-->
-<!--                    android:singleLine="true"></EditText>-->
-<!--            </LinearLayout>-->
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -350,7 +324,7 @@
                     android:id="@+id/repairDor_edt_Other"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
-                    android:hint="请详细描述问题，方便维修人员上门维修。"
+                    android:hint="请详细描述问题，方便维修人员上门维修(5个字以上)"
                     android:autofillHints=""
                     android:background="@null"
                     android:textSize="15sp"
@@ -376,6 +350,7 @@
                 android:layout_marginTop="30dp"
                 android:gravity="center_horizontal">
                 <Button
+                    android:id="@+id/repairDor_submit"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:text="提交"

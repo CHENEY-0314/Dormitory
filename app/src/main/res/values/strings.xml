@@ -13,6 +13,7 @@
         <item>建筑学院</item>
         <item>数学学院</item>
         <item>医学院</item>
+        <item>随意</item>
     </string-array>
     <string-array name="floor_num">
         <item>1</item>
