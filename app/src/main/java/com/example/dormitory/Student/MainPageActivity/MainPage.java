@@ -16,7 +16,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.example.dormitory.MainActivity;
 import com.example.dormitory.R;
 
 public class MainPage extends Fragment {

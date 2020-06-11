@@ -34,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.92">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,7 +65,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/repair_select_bg"
-                android:padding="5dp"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="10dp"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -119,7 +121,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/repair_select_bg"
-                android:padding="5dp"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="15dp"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -143,7 +146,7 @@
                             android:layout_marginStart="5dp"
                             android:textColor="#E9252525"
                             android:gravity="center_vertical"
-                            android:textSize="16sp"
+                            android:textSize="15sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
                     <LinearLayout
@@ -163,10 +166,9 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#F1F1F1"></LinearLayout>
+                    android:layout_height="1.5dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@color/colorPrimary" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -189,7 +191,7 @@
                             android:layout_marginStart="5dp"
                             android:textColor="#E9252525"
                             android:gravity="center_vertical"
-                            android:textSize="16sp"
+                            android:textSize="15sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
                     <LinearLayout
@@ -208,10 +210,9 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#F1F1F1"></LinearLayout>
+                    android:layout_height="1.5dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@color/colorPrimary" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -234,7 +235,7 @@
                             android:layout_marginStart="5dp"
                             android:textColor="#E9252525"
                             android:gravity="center_vertical"
-                            android:textSize="16sp"
+                            android:textSize="15sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
                     <LinearLayout
@@ -378,10 +379,9 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#F1F1F1"></LinearLayout>
+                    android:layout_height="1.5dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@color/colorPrimary" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -404,7 +404,7 @@
                             android:layout_marginStart="5dp"
                             android:textColor="#E9252525"
                             android:gravity="center_vertical"
-                            android:textSize="16sp"
+                            android:textSize="15sp"
                             android:textStyle="bold"/>
                     </LinearLayout>
                     <LinearLayout
@@ -492,8 +492,6 @@
 
             </LinearLayout>
 
-            </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -504,14 +502,14 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:text="查看筛选结果"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="#FFFFFF"
                     android:enabled="true"
                     android:layout_marginBottom="40dp"
                     android:background="@drawable/repair_submit_bg"/>
             </LinearLayout>
 
-
-        </LinearLayout>
+            </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
