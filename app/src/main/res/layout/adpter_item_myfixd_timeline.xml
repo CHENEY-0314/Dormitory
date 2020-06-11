@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <!--左边 时间-->
+        <TextView
+            android:id="@+id/MyCDF_time"
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="14dp"
+            android:gravity="center"
+            android:lines="2"
+            android:text="2020-06-06 08:02:18"
+            android:textColor="#000"
+            android:textSize="16sp" />
+        <!--中间 时间轴-->
+        <RelativeLayout
+            android:id="@+id/MyCDF_rl_left"
+            android:layout_width="35dp"
+            android:layout_height="86dp">
+            <ImageView
+                android:id="@+id/MyCDF_topline"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_above="@id/MyCDF_iv_status"
+                android:layout_centerInParent="true"
+                android:src="#dddddd" />
+            <ImageView
+                android:id="@+id/MyCDF_iv_status"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/shape_circle_logistics_gray"
+                android:layout_centerInParent="true" />
+            <ImageView
+                android:id="@+id/MyCDF_bottomline"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_below="@id/MyCDF_iv_status"
+                android:layout_centerInParent="true"
+                android:src="#dddddd" />
+        </RelativeLayout>
+
+        <!--右边 信息-->
+        <TextView
+            android:id="@+id/MyCDF_status"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"
+            android:autoLink="email|phone|web"
+            android:text="您的申请已发送，等待管理员审核"
+            android:textColor="#000" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:background="#9b9b9b"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>
