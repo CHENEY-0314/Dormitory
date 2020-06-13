@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:paddingHorizontal="20dp"
+    tools:context=".Student.MyPagesActivity.MyChangeDormitory.RecelveCDFragment">
+
+    <!--    接受到申请时显示-->
+    <ListView
+        android:id="@+id/RCDF_Listview"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:divider="@null"
+        android:listSelector="@android:color/transparent"
+        android:dividerHeight="0dp"
+        android:layout_height="wrap_content" />
+
+    <!--    没有接收到申请时显示-->
+    <LinearLayout
+        android:id="@+id/RCDF_NoApply"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:visibility="gone"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            android:src="@drawable/grey_bed"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:textSize="15sp"
+            android:text="暂时没有接受到申请哦 !"/>
+    </LinearLayout>
+
+</FrameLayout>

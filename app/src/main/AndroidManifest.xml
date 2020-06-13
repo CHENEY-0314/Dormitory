@@ -16,8 +16,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Administrator.ReleaseNote.ReleaseNoteActivity"></activity>
+        <activity android:name=".Administrator.AdmActivity" />
+        <activity android:name=".Student.MainPageActivity.selectResult" />
+        <activity android:name=".Login.AdmLogActivity" />
         <activity android:name=".Student.MainPageActivity.selectResult"></activity>
         <activity android:name=".Login.AdmLogActivity" />
+        <activity android:name=".Student.MyPagesActivity.MyFixDormitoryActivity"></activity>
+        <activity android:name=".Student.MyPagesActivity.MyChangeDormitory.MyChangeDormitoryActivity" />
         <activity android:name=".Login.StuLogActivity" />
         <activity android:name=".Student.MyPagesActivity.ChangeUserImgActivity" />
         <activity
@@ -26,7 +32,6 @@
         <activity android:name=".Student.MainPageActivity.changeDormitory" />
         <activity android:name=".Student.MyPagesActivity.AdviceActivity" />
         <activity android:name=".Student.MyPagesActivity.SetupActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".Student.Tabbar" />
         <activity android:name=".Login.LoginActivity">
             <intent-filter>
