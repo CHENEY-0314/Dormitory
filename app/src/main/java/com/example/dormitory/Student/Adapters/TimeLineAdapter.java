@@ -1,4 +1,4 @@
-package com.example.dormitory.Student.MyPagesActivity.MyChangeDormitory;
+package com.example.dormitory.Student.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dormitory.R;
+import com.example.dormitory.Student.MyPagesActivity.Trace;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.dormitory.Student.MyPagesActivity.MyChangeDormitory;
+package com.example.dormitory.Student.MyPagesActivity;
 
 //这是一个用于描述时间线内容的类，包括时间、描述两个特征，以及操作这两个特征的函数
 public class Trace {

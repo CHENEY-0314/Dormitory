@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.dormitory.R;
 import com.example.dormitory.Student.MyPagesActivity.MyChangeDormitory.MyChangeDormitoryActivity;
+import com.example.dormitory.Student.MyPagesActivity.MyFixDormitory.MyFixDormitoryActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

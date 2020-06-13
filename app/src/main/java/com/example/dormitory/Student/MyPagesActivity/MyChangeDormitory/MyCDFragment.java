@@ -1,5 +1,6 @@
 package com.example.dormitory.Student.MyPagesActivity.MyChangeDormitory;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.dormitory.R;
+import com.example.dormitory.Student.Adapters.TimeLineAdapter;
+import com.example.dormitory.Student.MyPagesActivity.Trace;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +78,9 @@ public class MyCDFragment extends Fragment {
         txt_ChangeApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //跳转到修改换宿申请页面
+                Intent intent = new Intent(getActivity(), ChangeChangeApplyActivity.class);
+                MyCDFragment.this.startActivity(intent);
             }
         });
         txt_DeleteApply=view.findViewById(R.id.MyCDF_deleteApply);  //点击撤销申请
