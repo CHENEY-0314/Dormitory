@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="@drawable/background2"
     tools:context="com.example.dormitory.Student.NotePageActivity.NotePage">
     <LinearLayout
@@ -18,29 +19,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-                <com.zxl.library.DropDownMenu
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:id="@+id/dropDownMenu"
-                    android:layout_height="match_parent"
-                    >
-
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="20dp"
+                    android:background="#83FFFFFF">
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_below="@+id/dropDownMenu_underLine"
-                        android:clickable="true"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="4"
+                        android:text="通知类型"
                         android:gravity="center"
-                        android:text="demo"
-                        android:textSize="40sp"/>
-                </com.zxl.library.DropDownMenu>
+                        android:paddingStart="70dp"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:id="@+id/type_text"
+                        android:textColor="#000" />
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/drop_down_unselected_icon"
+                        android:id="@+id/type_icon"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
-                </androidx.recyclerview.widget.RecyclerView>
+                    android:layout_height="match_parent"/>
 
             </LinearLayout>
         </ScrollView>

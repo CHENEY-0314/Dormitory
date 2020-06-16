@@ -12,9 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.dormitory.R;
-import com.example.dormitory.Student.MyPagesActivity.AdviceActivity;
-import com.example.dormitory.Student.MyPagesActivity.ChangeUserImgActivity;
-import com.example.dormitory.Student.MyPagesActivity.SetupActivity;
+import com.example.dormitory.Student.MyPagesActivity.MyChangeDormitory.MyChangeDormitoryActivity;
+import com.example.dormitory.Student.MyPagesActivity.MyFixDormitory.MyFixDormitoryActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -64,14 +63,14 @@ public class MyPage extends Fragment {
                     break;
                 case R.id.MyPage_btn_ChangeD: //跳转到我的更换宿舍申请页面
                     mChangeDormitory.setClickable(false);
-                    //Intent intent2 = new Intent(getActivity(), ChangeDormitoryActivity.class);
-                    //startActivity(intent2);
+                    Intent intent2 = new Intent(getActivity(), MyChangeDormitoryActivity.class);
+                    startActivity(intent2);
                     mChangeDormitory.setClickable(true);
                     break;
                 case R.id.MyPage_btn_FixD:  //跳转到我的维修申请页面
                     mFixDormitory.setClickable(false);
-                    //Intent intent3 = new Intent(getActivity(), FixDormitoryActivity.class);
-                    //startActivity(intent3);
+                    Intent intent3 = new Intent(getActivity(), MyFixDormitoryActivity.class);
+                    startActivity(intent3);
                     mFixDormitory.setClickable(true);
                     break;
                 case R.id.MyPage_btn_setup:  //跳转到设置页面
