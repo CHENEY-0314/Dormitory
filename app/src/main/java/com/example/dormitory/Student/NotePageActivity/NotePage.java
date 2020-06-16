@@ -12,20 +12,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dormitory.R;
 import com.example.dormitory.Student.Adapters.ExpandFoldTextAdapter;
+import com.example.dormitory.Student.Adapters.GirdDropDownAdapter;
+import com.zxl.library.DropDownMenu;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class NotePage extends Fragment {
     private RecyclerView mRecyclerView;
     List<Note> mList = new ArrayList<>();
     private String types[] = {"学校通知", "换宿申请", "申请结果", "维修受理"};
+    DropDownMenu mDropDownMenu;
+    private String headers[] = {"类型"};
+    public List<HashMap<String,Object>> popupViews = new ArrayList<>();
 
+    private GirdDropDownAdapter typeAdapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.notepage_nomessage_layout, container, false);
-
+        //mDropDownMenu=(DropDownMenu)view.findViewById(R.id.dropDownMenu);
+        //init dropdownview
+        //mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, view);
+       // initView(view);
         initData();
         ExpandFoldTextAdapter adapter = new ExpandFoldTextAdapter(mList, this.getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
@@ -73,4 +83,29 @@ public class NotePage extends Fragment {
             mList.add(note);
         }
     }
+/*
+    private void initView(View view) {
+        //init type menu
+        HashMap<String,Object> type=new HashMap<>();
+        final ListView typeView = new ListView(getActivity());
+        typeAdapter = new GirdDropDownAdapter(getActivity(), Arrays.asList(types));
+        typeView.setDividerHeight(0);
+        typeView.setAdapter(typeAdapter);
+        //init popupViews
+        type.put("类型",typeView);
+        popupViews.add(type);
+        mDropDownMenu.setDropDownMenu(Arrays.asList(headers),popupViews,view);
+        //add item click event
+        typeView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                typeAdapter.setCheckItem(position);
+                if(position==0)
+                    mDropDownMenu.setTabText(0,headers[0]);
+                else
+                    mDropDownMenu.setTabText(0,types[position]);
+                mDropDownMenu.closeMenu();
+            }
+        });
+    }*/
 }

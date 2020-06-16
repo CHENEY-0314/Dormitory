@@ -34,6 +34,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 
+    implementation 'com.github.fg2q1q3q:DropDownMenu:1.1.1'
+
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     //圆形图片
