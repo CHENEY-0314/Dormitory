@@ -66,12 +66,12 @@ public class GirdDropDownAdapter extends BaseAdapter {
         if (checkItemPosition != -1) {
             if (checkItemPosition == position) {
                 viewHolder.mText.setTextColor(context.getResources().getColor(R.color.drop_down_selected));
-                viewHolder.mText.setTextSize(17);
-                viewHolder.mText.setCompoundDrawablesWithIntrinsicBounds(null, null, context.getResources().getDrawable(R.drawable.drop_down_checked), null);
+                //viewHolder.mText.setTextSize(17);
+                viewHolder.mText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
             } else {
                 viewHolder.mText.setTextColor(context.getResources().getColor(R.color.drop_down_unselected));
                 viewHolder.mText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-                viewHolder.mText.setTextSize(15);
+                //viewHolder.mText.setTextSize(15);
             }
         }
     }
