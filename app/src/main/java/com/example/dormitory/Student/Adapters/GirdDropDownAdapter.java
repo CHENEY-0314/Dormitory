@@ -1,6 +1,6 @@
 package com.example.dormitory.Student.Adapters;
 
-import android.content.Context;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +14,20 @@ import com.example.dormitory.R;
 import java.util.List;
 public class GirdDropDownAdapter extends BaseAdapter {
 
-    private Context context;
+    private Activity context;
     private List<String> list;
-    private int checkItemPosition = 0;
+    private int checkItemPosition = 4;
 
     public void setCheckItem(int position) {
         checkItemPosition = position;
         notifyDataSetChanged();
     }
 
-    public GirdDropDownAdapter(Context context, List<String> list) {
+    public int getCheckItemPosition(){
+        return checkItemPosition;
+    }
+
+    public GirdDropDownAdapter(List<String> list,Activity context) {
         this.context = context;
         this.list = list;
     }
@@ -62,10 +66,12 @@ public class GirdDropDownAdapter extends BaseAdapter {
         if (checkItemPosition != -1) {
             if (checkItemPosition == position) {
                 viewHolder.mText.setTextColor(context.getResources().getColor(R.color.drop_down_selected));
+                viewHolder.mText.setTextSize(17);
                 viewHolder.mText.setCompoundDrawablesWithIntrinsicBounds(null, null, context.getResources().getDrawable(R.drawable.drop_down_checked), null);
             } else {
                 viewHolder.mText.setTextColor(context.getResources().getColor(R.color.drop_down_unselected));
                 viewHolder.mText.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+                viewHolder.mText.setTextSize(15);
             }
         }
     }

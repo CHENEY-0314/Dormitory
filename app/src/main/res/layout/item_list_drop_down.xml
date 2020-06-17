@@ -3,12 +3,15 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/white"
-              android:orientation="vertical">
+              android:orientation="vertical"
+              android:alpha="0.9">
 
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textSize="15dp"
         android:paddingBottom="10dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"

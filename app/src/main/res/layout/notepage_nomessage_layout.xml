@@ -24,7 +24,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingTop="20dp"
-                    android:background="#83FFFFFF">
+                    android:background="#83FFFFFF"
+                    android:id="@+id/drop_down_menu"
+
+                    >
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="50dp"
@@ -35,14 +38,16 @@
                         android:textSize="17sp"
                         android:textStyle="bold"
                         android:id="@+id/type_text"
-                        android:textColor="#000" />
+                        android:textColor="#000"
+                        />
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="30dp"
                         android:layout_weight="1"
                         android:src="@drawable/drop_down_unselected_icon"
                         android:id="@+id/type_icon"
-                        android:layout_gravity="center"/>
+                        android:layout_gravity="center"
+                        />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
