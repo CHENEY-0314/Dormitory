@@ -21,7 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Student.MyPagesActivity.MyChangeDormitory.ChangeChangeApplyActivity"></activity>
+        <activity android:name=".Administrator.ManageApply.admManageApply"></activity>
+        <activity android:name=".Student.MyPagesActivity.MyChangeDormitory.ChangeChangeApplyActivity" />
         <activity android:name=".Student.MyPagesActivity.MyFixDormitory.ChangeFixApplyActivity" />
         <activity android:name=".Administrator.ReleaseNote.ReleaseNoteActivity" />
         <activity android:name=".Administrator.AdmActivity" />

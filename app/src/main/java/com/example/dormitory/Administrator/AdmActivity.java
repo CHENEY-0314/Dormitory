@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import com.example.dormitory.Administrator.ReleaseNote.ReleaseNoteActivity;
 import com.example.dormitory.R;
+import com.example.dormitory.Administrator.ManageApply.admManageApply;
 
 public class AdmActivity extends AppCompatActivity {
 
@@ -43,7 +44,8 @@ public class AdmActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.admApplyMan:// 申请管理点击事件
-
+                    Intent intent2=new Intent(AdmActivity.this,admManageApply.class);
+                    startActivity(intent2);
                     break;
                 case R.id.admQuery:// 查询点击事件
 
