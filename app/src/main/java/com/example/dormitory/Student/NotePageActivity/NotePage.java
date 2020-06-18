@@ -5,18 +5,17 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dormitory.R;
 import com.example.dormitory.Student.Adapters.ExpandFoldTextAdapter;
 import com.example.dormitory.Student.Adapters.GirdDropDownAdapter;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,7 +36,7 @@ public class NotePage extends Fragment {
     List<Note> mList = new ArrayList<>();
     List<Note> classifyList=new ArrayList<>();
     private String types[] = {"学校通知", "换宿申请", "申请结果", "维修受理"};
-    LinearLayout dropdownmenu;
+    Toolbar dropdownmenu;
     ImageView typeicon;
     boolean menustate=false;
     ListView typeView;
@@ -42,14 +44,17 @@ public class NotePage extends Fragment {
     TextView tabtext;
     Classify classify;
     ExpandFoldTextAdapter adapter;
+    RefreshLayout mRefreshLayout;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.notepage_nomessage_layout, container, false);
-        dropdownmenu=(LinearLayout)view.findViewById(R.id.drop_down_menu);
+        dropdownmenu=(Toolbar) view.findViewById(R.id.drop_down_menu);
+        dropdownmenu.setClickable(true);
         typeicon=(ImageView) view.findViewById(R.id.type_icon);
         initData();
         initView();
+        initRefreshLayout(view);
         adapter=new ExpandFoldTextAdapter(mList, getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -121,9 +126,9 @@ public class NotePage extends Fragment {
                 closeMenu(popupWindow);
             }
         });
-        dropdownmenu.setOnTouchListener(new View.OnTouchListener() {
+        dropdownmenu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 popupWindow.setTouchable(true);
                 popupWindow.setBackgroundDrawable(new ColorDrawable(Color.argb(51, 255, 255, 255)));
                 popupWindow.setAnimationStyle(R.style.AnimTop);
@@ -139,7 +144,6 @@ public class NotePage extends Fragment {
                 } else {
                     closeMenu(popupWindow);
                 }
-                return false;
             }
         });
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -155,4 +159,22 @@ public class NotePage extends Fragment {
         tabtext.setTextColor(getResources().getColor(R.color.drop_down_unselected));
         menustate=false;
     }
+    private void initRefreshLayout(View view){
+        mRefreshLayout = view.findViewById(R.id.refreshLayout);
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() { //下拉刷新
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+            }
+        });
+
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() { //上拉加载更多
+            @Override
+            public void onLoadMore(RefreshLayout refreshlayout) {
+                refreshlayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
+            }
+        });
+    }
+
+
 }

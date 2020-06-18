@@ -107,7 +107,6 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
                 }
             }
         });
-
         //删除点击事件
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
