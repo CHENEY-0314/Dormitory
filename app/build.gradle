@@ -36,6 +36,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     implementation 'com.mcxiaoke.volley:library:1.0.19'
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.1.0'
+    implementation'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
+
     implementation 'androidx.cardview:cardview:1.0.0'
     //圆形图片
     implementation 'de.hdodenhof:circleimageview:2.2.0'
