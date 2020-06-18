@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,7 +36,7 @@ public class NotePage extends Fragment {
     List<Note> mList = new ArrayList<>();
     List<Note> classifyList=new ArrayList<>();
     private String types[] = {"学校通知", "换宿申请", "申请结果", "维修受理"};
-    Toolbar dropdownmenu;
+    LinearLayout dropdownmenu;
     ImageView typeicon;
     boolean menustate=false;
     ListView typeView;
@@ -45,11 +45,12 @@ public class NotePage extends Fragment {
     Classify classify;
     ExpandFoldTextAdapter adapter;
     RefreshLayout mRefreshLayout;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.notepage_nomessage_layout, container, false);
-        dropdownmenu=(Toolbar) view.findViewById(R.id.drop_down_menu);
+        dropdownmenu=(LinearLayout) view.findViewById(R.id.drop_down_menu);
         dropdownmenu.setClickable(true);
         typeicon=(ImageView) view.findViewById(R.id.type_icon);
         initData();
