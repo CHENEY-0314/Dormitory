@@ -20,34 +20,58 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <CheckBox
-                    android:id="@+id/main_cb_state"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:paddingVertical="5dp"
-                    android:layout_marginTop="7dp"
-                    android:text="换宿意向"
-                    android:textSize="14sp"
-                    android:background="@drawable/checkbox"
-                    android:button="@null"
-                    android:checked="true"
-                    android:gravity="center"
-                    android:textColor="#fff"/>
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="20dp">
+                <Switch
+                    android:id="@+id/switch_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
                 <TextView
-                    android:id="@+id/main_tv_detail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="查看详情"
-                    android:textSize="11sp"
-                    android:gravity="center"
-                    android:textColor="#fff"
-                    android:textStyle="italic"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="换宿意向"
+                    android:textSize="12sp"
+                    android:textColor="#fff"/>
             </LinearLayout>
 
         </LinearLayout>
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="50dp"-->
+<!--            android:gravity="start">-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical">-->
+<!--                <CheckBox-->
+<!--                    android:id="@+id/main_cb_state"-->
+<!--                    android:layout_width="80dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:paddingVertical="5dp"-->
+<!--                    android:layout_marginTop="7dp"-->
+<!--                    android:text="换宿意向"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:background="@drawable/checkbox"-->
+<!--                    android:button="@null"-->
+<!--                    android:checked="true"-->
+<!--                    android:gravity="center"-->
+<!--                    android:textColor="#fff"/>-->
+<!--                <TextView-->
+<!--                    android:id="@+id/main_tv_detail"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:text="查看详情"-->
+<!--                    android:textSize="11sp"-->
+<!--                    android:gravity="center"-->
+<!--                    android:textColor="#fff"-->
+<!--                    android:textStyle="italic"/>-->
+<!--            </LinearLayout>-->
+
+<!--        </LinearLayout>-->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/change"
@@ -78,6 +102,7 @@
                 android:src="@drawable/repair">
             </androidx.appcompat.widget.AppCompatImageView>
         </androidx.cardview.widget.CardView>
+
 
     </LinearLayout>
 
