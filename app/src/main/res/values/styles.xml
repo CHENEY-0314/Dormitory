@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
+    <style name="AnimTop" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_top_in</item>
+        <item name="android:windowExitAnimation">@anim/push_top_out</item>
+    </style>
 
     <style name="DialogTheme" parent="@android:style/Theme.Dialog">
         <!-- 边框 -->
@@ -29,8 +33,10 @@
 
     <!-- dialog的动画 -->
     <style name="main_menu_animStyle">
-        <item name="android:windowEnterAnimation">@anim/dialog_in_anim</item>
-        <item name="android:windowExitAnimation">@anim/dialog_out_anim</item>
+        <item name="android:windowEnterAnimation">@anim/push_top_in</item>
+        <item name="android:windowExitAnimation">@anim/push_top_out</item>
     </style>
+
+
 
 </resources>

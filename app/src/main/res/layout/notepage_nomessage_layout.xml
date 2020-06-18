@@ -19,37 +19,66 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-                <LinearLayout
+                <com.google.android.material.appbar.AppBarLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="20dp"
-                    android:background="#83FFFFFF">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="4"
-                        android:text="通知类型"
-                        android:gravity="center"
-                        android:paddingStart="70dp"
-                        android:textSize="17sp"
-                        android:textStyle="bold"
-                        android:id="@+id/type_text"
-                        android:textColor="#000" />
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/drop_down_unselected_icon"
-                        android:id="@+id/type_icon"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview"
+                    android:background="@android:color/transparent">
+                <androidx.appcompat.widget.Toolbar
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-
+                    android:layout_height="wrap_content"
+                    android:paddingTop="20dp"
+                    android:background="#83FFFFFF"
+                    app:layout_scrollFlags="scroll"
+                    android:id="@+id/drop_down_menu"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="5"
+                            android:text="通知类型"
+                            android:gravity="center"
+                            android:paddingStart="70dp"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:id="@+id/type_text"
+                            android:textColor="#000"
+                            />
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="2"
+                            android:src="@drawable/drop_down_unselected_icon"
+                            android:id="@+id/type_icon"
+                            android:layout_gravity="center"
+                            />
+                    </LinearLayout>
+                </androidx.appcompat.widget.Toolbar>
+                </com.google.android.material.appbar.AppBarLayout>
+                <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/refreshLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <com.scwang.smartrefresh.layout.header.ClassicsHeader
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:srlPrimaryColor="@android:color/transparent"
+                        app:srlAccentColor="@color/white"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+                    <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:srlAccentColor="@color/white"/>
+                </com.scwang.smartrefresh.layout.SmartRefreshLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
