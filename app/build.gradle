@@ -34,12 +34,14 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-
+    implementation 'com.mcxiaoke.volley:library:1.0.19'
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     //圆形图片
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     //RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    //联网
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
 
 }
