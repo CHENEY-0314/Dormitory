@@ -31,8 +31,6 @@ public class TimeDifCalculater {
             timedif=String.valueOf(currentyear-pushyear)+"年前";
         }else if(pushmonth!=currentmonth){
             timedif=String.valueOf(currentmonth-pushmonth)+"月前";
-        }else if(pushyear!=currentyear){
-            timedif=String.valueOf(currentyear-pushyear)+"年前";
         }else if(pushday!=currentday){
             timedif=String.valueOf(currentday-pushday)+"天前";
         }else if(pushhour!=currenthour){

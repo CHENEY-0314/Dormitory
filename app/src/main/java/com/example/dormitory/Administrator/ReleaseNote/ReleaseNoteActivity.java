@@ -62,7 +62,8 @@ public class ReleaseNoteActivity extends AppCompatActivity {
                 //点击提交通知按钮
                 String headtext=head.getText().toString();
                 String content=note.getText().toString();
-                sendReleaseNoteData=new SendReleaseNoteData(headtext,content);
+                sendReleaseNoteData=new SendReleaseNoteData(headtext,content,ReleaseNoteActivity.this);
+                sendReleaseNoteData.sendData();
             }
         });
 
