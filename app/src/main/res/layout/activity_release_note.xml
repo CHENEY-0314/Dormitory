@@ -102,26 +102,6 @@
                 android:textSize="14sp"
                 android:text="注意：通知不少于30字"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="通知类型："
-                    android:textSize="15sp" />
-
-                <Spinner
-                    android:id="@+id/adm_note_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/adm_note_kind" />
-
-
-            </LinearLayout>
 
             <Button
                 android:id="@+id/admNoteSubmit_btn"
@@ -130,7 +110,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:background="@drawable/advice_btn"
+                android:background="@drawable/release_btn"
                 android:bufferType="normal"
                 android:stateListAnimator="@null"
                 android:text="发布"

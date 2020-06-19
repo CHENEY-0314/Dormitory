@@ -9,6 +9,10 @@ public class Note {
 
     private int id;//该条数据的id
 
+    private String pushtime;
+
+    private String topic;
+
     public int getImage(){
         return image;
     }
@@ -39,6 +43,22 @@ public class Note {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setPushtime(String pushtime) {
+        this.pushtime = pushtime;
+    }
+
+    public String getPushtime() {
+        return pushtime;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 }
 

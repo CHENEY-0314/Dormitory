@@ -35,7 +35,7 @@ public class NotePage extends Fragment {
     private RecyclerView mRecyclerView;
     List<Note> mList = new ArrayList<>();
     List<Note> classifyList=new ArrayList<>();
-    private String types[] = {"学校通知", "换宿申请", "申请结果", "维修受理"};
+    private String types[] = {"学校通知", "换宿申请", "维修受理"};
     LinearLayout dropdownmenu;
     ImageView typeicon;
     boolean menustate=false;
@@ -45,6 +45,7 @@ public class NotePage extends Fragment {
     Classify classify;
     ExpandFoldTextAdapter adapter;
     RefreshLayout mRefreshLayout;
+    NoteData noteData;
 
     @Nullable
     @Override
@@ -66,36 +67,33 @@ public class NotePage extends Fragment {
      * 初始化数据
      */
     private void initData() {
-        String schoolnoteContent = "学校通知学校通知学校通知学校通知学校通知学校通知学校通知学校通知学校通知学校通知学校通知学校通知学校通知学校通知学校通知学校通知学校通知学校通知学校通知学校通知学校通知";
-        String changdornoteContent = "换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请换宿申请";
-        String applyreslutoteContent = "申请结果申请结果申请结果申请结果";
-        String repairnoteContent = "维修受理维修受理维修受理维修受理";
         for (int i = 0; i <= 20; i++) {
+            noteData=new NoteData(getActivity());
             Note note = new Note();
-            switch (i%4){
+            switch (Integer.parseInt(noteData.getcode())){
                 case 0:
                     note.setImage(R.drawable.school_note_image);
                     note.setType(types[0]);
-                    note.setContent(schoolnoteContent);
+                    note.setContent(noteData.getcontent());
                     note.setId(i);
+                    note.setPushtime(noteData.gettime());
+                    note.setTopic(noteData.gethead());
                     break;
                 case 1:
                     note.setImage(R.drawable.dorm_note_image);
                     note.setType(types[1]);
-                    note.setContent(changdornoteContent);
+                    note.setContent(noteData.getcontent());
                     note.setId(i);
+                    note.setPushtime(noteData.gettime());
+                    note.setTopic(noteData.gethead());
                     break;
                 case 2:
-                    note.setImage(R.drawable.apply_note_image);
-                    note.setType(types[2]);
-                    note.setContent(applyreslutoteContent);
-                    note.setId(i);
-                    break;
-                case 3:
                     note.setImage(R.drawable.rep_note_image);
                     note.setType(types[3]);
-                    note.setContent(repairnoteContent);
+                    note.setContent(noteData.getcontent());
                     note.setId(i);
+                    note.setPushtime(noteData.gettime());
+                    note.setTopic(noteData.gethead());
                     break;
             }
             mList.add(note);

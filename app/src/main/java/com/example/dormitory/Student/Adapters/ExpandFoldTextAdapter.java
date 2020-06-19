@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dormitory.R;
 import com.example.dormitory.Student.NotePageActivity.Note;
+import com.example.dormitory.Student.NotePageActivity.TimeDifCalculater;
 
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
     private final int STATE_EXPANDED = 3;//展开状态
 
     private SparseArray<Integer> mTextStateList;//保存文本状态集合
+
+    TimeDifCalculater timeDifCalculater;
 
     private  boolean readstate=false;
     List<Note> mList;
@@ -70,7 +73,10 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
             });
 
             holder.content.setMaxLines(Integer.MAX_VALUE);//设置文本的最大行数，为整数的最大数值
-            holder.content.setText(mList.get(position).getContent());
+            if(mList.get(position).getTopic()!=null)
+                holder.content.setText(mList.get(position).getTopic()+"\n"+mList.get(position).getContent());
+            else
+                holder.content.setText(mList.get(position).getContent());
         } else {
             //如果之前已经初始化过了，则使用保存的状态。
             switch (state) {
@@ -127,6 +133,8 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
                                                {holder.read.setImageResource(R.drawable.unread_note_icon);readstate=!readstate;}
                                            }
                                        });
+        timeDifCalculater=new TimeDifCalculater(mList.get(position).getPushtime());
+        holder.time.setText(timeDifCalculater.getTimeDif());
     }
 
     @Override
