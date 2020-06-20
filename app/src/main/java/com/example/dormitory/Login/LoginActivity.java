@@ -1,17 +1,21 @@
 package com.example.dormitory.Login;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.dormitory.Administrator.AdmActivity;
 import com.example.dormitory.R;
+import com.example.dormitory.WelcomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
+    private SharedPreferences mData1,mData2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        autoLogin();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -34,5 +38,25 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void autoLogin(){
+        //获得本地学生的轻量数据库
+        mData1=getSharedPreferences("userdata",0);
+        //获得本地管理员的轻量数据库
+        mData2=getSharedPreferences("admdata",0);
+        if(!mData1.getString("s_id","").equals("")){
+            Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+//            startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
+        }
+        else if(!mData2.getString("a_id","").equals("")){
+            Intent intent = new Intent(LoginActivity.this, AdmActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+//            startActivity(new Intent(LoginActivity.this, AdmActivity.class));
+        }
+        else{
+
+        }
     }
 }

@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dormitory.R;
+import com.example.dormitory.Student.MainPageActivity.MainPage;
 import com.example.dormitory.WelcomeActivity;
 
 import org.json.JSONException;
@@ -29,7 +30,8 @@ import java.util.Map;
 
 
 public class StuLogActivity extends AppCompatActivity {
-
+    //用户名和密码控件
+    private EditText textAccount,textPassword;
     //以下用于手机存用户信息
     private SharedPreferences mUser;
     private SharedPreferences.Editor mUserEditor;
@@ -39,28 +41,94 @@ public class StuLogActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stu_log);
+        //绑定账户和密码控件
+        textAccount=findViewById(R.id.stu_account);
+        textPassword=findViewById(R.id.stu_password);
 
         mUser=getSharedPreferences("userdata",MODE_PRIVATE);
         mUserEditor=mUser.edit();
 
-        final EditText sAccount = findViewById(R.id.stu_account);
-        final EditText sPassword = findViewById(R.id.stu_password);
 
         Button mBtnSLogin = findViewById(R.id.btn_sLogin);
         mBtnSLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loginVerify();
                 //UpdateUserdate(sAccount.getText().toString(),sPassword.getText().toString());
-                Intent intent = new Intent(StuLogActivity.this, WelcomeActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(StuLogActivity.this, WelcomeActivity.class);
+//                startActivity(intent);
             }
         });
+    }
+    //登录验证
+    public void loginVerify(){
+        //获得输入的账号、密码
+        final String s_id=textAccount.getText().toString();
+        final String password=textPassword.getText().toString();
+        //请求地址
+        String url="http://39.97.114.188/Dormitory/servlet/StuLoginServlet?s_id="+s_id+"&password="+password;
+        String tag= "login";
+        //取得请求队列
+        RequestQueue login = Volley.newRequestQueue(this);
+        //防止重复请求，所以先取消tag标识的请求队列
+        login.cancelAll(tag);
+        //创建StringRequest，定义字符串请求的请求方式为POST(省略第一个参数会默认为GET方式)
+        final StringRequest loginrequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");
+                            String tempResult=jsonObject.getString("Result").toString();
+                            System.out.println(jsonObject.getString("Result").toString());
+                            System.out.println("tempResult"+tempResult);
+                            if(tempResult.equals("success")){
+//                                Intent intent = new Intent(StuLogActivity.this, WelcomeActivity.class);
+//                                startActivity(intent);
+                                UpdateUserdate(s_id,password);
+                            }
+                            else{
+                                Toast.makeText(StuLogActivity.this,"账号或密码错误",Toast.LENGTH_SHORT);
+                            }
+//                            if(jsonObject.getString("Result").toString().equals("success")){
+//                                System.out.println(jsonObject.getString("Result").toString());
+//                                UpdateUserdate(s_id,password);
+//                            }
+//                            else{
+//                                Toast.makeText(StuLogActivity.this,"账号或密码错误",Toast.LENGTH_SHORT);
+//                            }
+                        } catch (JSONException e) {
+                            System.out.print(e);
+                            //做自己的请求异常操作，如Toast提示（“无网络连接”等）
+                            Toast.makeText(StuLogActivity.this,"无网络连接！",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+                //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
+                Toast.makeText(StuLogActivity.this,"请稍后重试！",Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams()  {
+                Map<String, String> params = new HashMap<>();
+                params.put("s_id", s_id);
+                params.put("password", password);
+                return params;
+            }
+        };
+        //设置Tag标签
+        loginrequest.setTag(tag);
+        //将请求添加到队列中
+        login.add(loginrequest);
     }
 
     //登陆时更新当前登录的用户信息
     public void UpdateUserdate(final String s_id, final String password){
         //请求地址
-        String url = "http://39.97.114.188:8080/Dormitory/servlet/GetUserdata?s_id="+s_id+"&password="+password;
+        String url = "http://39.97.114.188/Dormitory/servlet/GetStudentData?s_id="+s_id+"&password="+password;
         String tag = "Updata";
         //取得请求队列
         RequestQueue Updata = Volley.newRequestQueue(this);
@@ -80,6 +148,9 @@ public class StuLogActivity extends AppCompatActivity {
                             mUserEditor.putString("building",jsonObject.getString("building"));
                             mUserEditor.putString("room_num",jsonObject.getString("room_num"));
                             mUserEditor.putString("bed_num",jsonObject.getString("bed_num"));
+                            mUserEditor.putString("phone_num",jsonObject.getString("contact"));
+                            mUserEditor.putString("department",jsonObject.getString("college"));
+                            mUserEditor.putString("password",password);
                             mUserEditor.apply();
                             //显示“欢迎你：XXX”的toast弹窗
                             Toast toast=Toast.makeText(StuLogActivity.this,null,Toast.LENGTH_SHORT);
