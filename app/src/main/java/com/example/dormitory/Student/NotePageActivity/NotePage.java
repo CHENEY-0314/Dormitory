@@ -67,33 +67,34 @@ public class NotePage extends Fragment {
      * 初始化数据
      */
     private void initData() {
-        for (int i = 0; i <= 20; i++) {
-            noteData=new NoteData(getActivity());
+        noteData=new NoteData(getActivity());
+        mList=noteData.getList();
+        for (int i = 0; i <= mList.size(); i++) {
             Note note = new Note();
-            switch (Integer.parseInt(noteData.getcode())){
-                case 0:
+            switch (mList.get(i).getType().substring(0,1)){
+                case "0":
                     note.setImage(R.drawable.school_note_image);
                     note.setType(types[0]);
-                    note.setContent(noteData.getcontent());
+                    note.setContent(mList.get(i).getContent());
                     note.setId(i);
-                    note.setPushtime(noteData.gettime());
-                    note.setTopic(noteData.gethead());
+                    note.setPushtime(mList.get(i).getPushtime());
+                    note.setTopic(mList.get(i).getTopic());
                     break;
-                case 1:
+                case "1":
                     note.setImage(R.drawable.dorm_note_image);
                     note.setType(types[1]);
-                    note.setContent(noteData.getcontent());
+                    note.setContent(mList.get(i).getContent());
                     note.setId(i);
-                    note.setPushtime(noteData.gettime());
-                    note.setTopic(noteData.gethead());
+                    note.setPushtime(mList.get(i).getPushtime());
+                    note.setTopic(mList.get(i).getTopic());
                     break;
-                case 2:
+                case "2":
                     note.setImage(R.drawable.rep_note_image);
                     note.setType(types[3]);
-                    note.setContent(noteData.getcontent());
+                    note.setContent(mList.get(i).getContent());
                     note.setId(i);
-                    note.setPushtime(noteData.gettime());
-                    note.setTopic(noteData.gethead());
+                    note.setPushtime(mList.get(i).getPushtime());
+                    note.setTopic(mList.get(i).getTopic());
                     break;
             }
             mList.add(note);

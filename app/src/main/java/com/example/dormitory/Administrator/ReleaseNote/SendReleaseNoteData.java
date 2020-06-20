@@ -37,8 +37,8 @@ public class SendReleaseNoteData {
     }
     public void sendData(){
         //请求地址
-        //String url = "http://39.97.114.188:8080/Dormitory/servlet/ReleaseNoteServlet?code="+code+"&head="+head+"&content="+content+"&time="+time;
-        String url="http://39.97.114.188/Dormitory/servlet/ReleaseNoteServlet?code=0001&head=测试&content=text&time=06:19:09:15";
+        String url = "http://39.97.114.188:8080/Dormitory/servlet/ReleaseNoteServlet?code="+code+"&head="+head+"&content="+content+"&time="+time;
+        //String url="http://39.97.114.188/Dormitory/servlet/ReleaseNoteServlet?code=0001&head=测试&content=text&time=06:19:09:15";
         String tag = "ReleaseData";
         //取得请求队列
         RequestQueue ReleaseData = Volley.newRequestQueue(mContext);
