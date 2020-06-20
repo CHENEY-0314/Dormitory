@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,6 +28,9 @@ public class changeDormitory extends AppCompatActivity {
     private CheckBox CheBox_floor_1,CheBox_floor_2,CheBox_floor_3,CheBox_floor_4,CheBox_floor_5,CheBox_floor_6,CheBox_floor_7,CheBox_floor_8;
     private CheckBox CheBox_bed_1,CheBox_bed_2,CheBox_bed_3,CheBox_bed_4,CheBox_bed_5;
     private Button BtnSubmit;
+    private EditText editBuilding,editRoom;
+    //本地数据库
+    private SharedPreferences mUser;
     //定义二维字符串数组，用于选择楼栋随学院的动态变化
     private String[][] buildData=new String[][]{{"C10","C12"},{"C8","C9"},{"C5","C6"},{"C11","C9"},{"C11"},{"C7"},{"C13"},{"C3","C4"},{"C2","C3"},{"随意","C1","C2","C3","C4","C5","C6","C7","C8","C9","C10","C11","C12","C13","C14","C15"}};
     //声明适配器，用于动态配置楼栋内容
@@ -75,6 +80,8 @@ public class changeDormitory extends AppCompatActivity {
         CheBox_bed_4=findViewById(R.id.changeDor_bed_cb_4);
         CheBox_bed_5=findViewById(R.id.changeDor_bed_cb_5);
         BtnSubmit=findViewById(R.id.changeDor_submit);
+        editBuilding=findViewById(R.id.changeDor_txt_building);
+        editRoom=findViewById(R.id.changeDor_txt_room);
         //设置组件监听事件
         mBack.setOnClickListener(new ButtonListener());
         CheBox_floor_1.setOnClickListener(new ButtonListener());
@@ -93,6 +100,10 @@ public class changeDormitory extends AppCompatActivity {
         BtnSubmit.setOnClickListener(new ButtonListener());
 
 
+        //给现住信息里面的楼号、宿舍号赋默认值
+        mUser=getSharedPreferences("userdata",MODE_PRIVATE);
+        editBuilding.setHint(mUser.getString("building","未获取"));
+        editRoom.setHint(mUser.getString("room_num","未获取"));
     }
     //监听8+5共13个CheckBox、提交按钮和返回按钮的点击事件
     private class ButtonListener implements View.OnClickListener{

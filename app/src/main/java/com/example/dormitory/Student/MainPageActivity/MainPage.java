@@ -24,6 +24,10 @@ import java.util.TimeZone;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 public class MainPage extends Fragment {
     private CardView toChange;//申请换宿舍
     private  CardView toRepair;//宿舍报修
@@ -49,6 +53,7 @@ public class MainPage extends Fragment {
         toChange.setOnClickListener(new ButtonListener());
         toRepair.setOnClickListener(new ButtonListener());
         switch_state.setOnClickListener(new ButtonListener());
+
         switch_state.setChecked(mUser.getBoolean("switch_state",false));
         return view;
     }

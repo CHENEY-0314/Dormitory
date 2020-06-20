@@ -1,19 +1,28 @@
 package com.example.dormitory.Student.MyPagesActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.dormitory.R;
 import com.example.dormitory.Student.MyPagesActivity.MyChangeDormitory.MyChangeDormitoryActivity;
 import com.example.dormitory.Student.MyPagesActivity.MyFixDormitory.MyFixDormitoryActivity;
+
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -23,13 +32,25 @@ public class MyPage extends Fragment {
     private TextView musername,mdormitory;
     private LinearLayout mChangeDormitory,mFixDormitory,mSetUp,mAdvice;
 
+    //以下用于手机存用户信息
+    private SharedPreferences mUser;
+
     private View mView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView=inflater.inflate(R.layout.mypage_layout, container, false);
         init(); //声明控件，初始化控件
+        updateInformation();
+
         return mView;
+    }
+
+    private void updateInformation(){
+        mUser=getActivity().getSharedPreferences("userdata",0);
+        musername.setText(mUser.getString("s_name","未获取"));
+        mdormitory.setText(mUser.getString("building","XX")+"-"+mUser.getString("room_num","XX")+"  "+mUser.getString("bed_num","X")+"号");
+
     }
 
     //声明控件，初始化控件
@@ -89,5 +110,6 @@ public class MyPage extends Fragment {
             }
         }
     }
+
 
     }

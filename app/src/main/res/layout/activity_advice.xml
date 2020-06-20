@@ -80,7 +80,7 @@
                 android:layout_marginTop="20dp"
                 android:textColor="#C3C0C0"
                 android:textSize="13sp"
-                android:text="为防止恶意提交，每次提交不少于30字"/>
+                android:text="为防止恶意提交，每次提交不少于10字"/>
 
             <Button
                 android:id="@+id/Advice_btn"
