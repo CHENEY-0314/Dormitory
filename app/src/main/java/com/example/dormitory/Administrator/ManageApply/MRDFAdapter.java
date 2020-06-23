@@ -191,14 +191,6 @@ public class MRDFAdapter extends BaseAdapter {
             public void onClick(View v) {
                 ApplyList.get(position).setState("2");
                 changeState(position);
-                holder.btn_Agree.setText("完成维修");
-                holder.btn_Agree.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                });
-                holder.btn_Refuse.setVisibility(View.INVISIBLE);
                 dlg.dismiss();
             }
         });
@@ -222,8 +214,8 @@ public class MRDFAdapter extends BaseAdapter {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject=(JSONObject) new JSONObject(response);
-                            String Result=jsonObject.getString("result");
-                            if(Result=="success")
+                            String Result=jsonObject.getString("result").toString();
+                            if(Result.equals("success"))
                             {ApplyList.remove(position);
                                 notifyDataSetChanged();
                             if(ApplyList.isEmpty())
@@ -232,7 +224,7 @@ public class MRDFAdapter extends BaseAdapter {
                                 Noapply.setVisibility(View.VISIBLE);
                             }
                             }
-                                Toast.makeText(context,"发送成功",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,Result,Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             Toast.makeText(context,"发送失败",Toast.LENGTH_SHORT).show();
                         }
@@ -264,9 +256,9 @@ public class MRDFAdapter extends BaseAdapter {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject=(JSONObject) new JSONObject(response);
-                            String Result=jsonObject.getString("result");
+                            String Result=jsonObject.getString("result").toString();
                             System.out.println(Result);
-                            if(Result=="success")
+                            if(Result.equals("success"))
                             {holder.btn_Agree.setText("维修完成");
                                 holder.btn_Refuse.setVisibility(View.INVISIBLE);
                             holder.btn_Agree.setOnClickListener(new View.OnClickListener() {
@@ -282,7 +274,7 @@ public class MRDFAdapter extends BaseAdapter {
                                     }
                                 }
                             });}
-                            else Toast.makeText(context,"受理失败",Toast.LENGTH_SHORT).show();
+                            else Toast.makeText(context,Result,Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             Toast.makeText(context,"受理失败",Toast.LENGTH_SHORT).show();
                         }
