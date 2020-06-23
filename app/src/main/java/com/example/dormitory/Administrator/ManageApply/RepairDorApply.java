@@ -12,6 +12,14 @@ public class RepairDorApply {
     private String repairTypes;
     //报修备注
     private String moreMessage;
+
+    private String fixcode;
+
+    private String sid;
+
+    private String state;
+
+    private String time;
     public RepairDorApply(){}
     public RepairDorApply(String buildingNum,String roomNum, String phoneNum, String repairTypes, String moreMessage){
         this.buildingNum=buildingNum;
@@ -41,4 +49,41 @@ public class RepairDorApply {
     public String getMoreMessage(){return moreMessage;}
 
     public void setMoreMessage(String moreMessage){this.moreMessage=moreMessage;}
+
+    public void setTime(String time) {
+        String year = time.substring(0, 4);
+        String month = time.substring(5, 7);
+        String day = time.substring(8, 10);
+        String hour = time.substring(11, 13);
+        String minute= time.substring(14,16);
+        this.time = year+"-"+month+"-"+day+" "+hour+":"+minute;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setFixcode(String fixcode) {
+        this.fixcode = fixcode;
+    }
+
+    public String getFixcode() {
+        return fixcode;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getState() {
+        return state;
+    }
 }

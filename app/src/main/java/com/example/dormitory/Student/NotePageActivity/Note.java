@@ -7,7 +7,7 @@ public class Note {
 
     private String content;//内容
 
-    private int id;//该条数据的id
+    private String id;//该条数据的id
 
     private String pushtime;
 
@@ -37,11 +37,11 @@ public class Note {
         this.content = content;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

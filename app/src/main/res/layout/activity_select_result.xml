@@ -27,9 +27,25 @@
             android:layout_marginStart="10dp"
             android:text="筛选结果"/>
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srlPrimaryColor="@android:color/transparent"
+            app:srlAccentColor="@color/black"/>
+        <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/select_recyclerview">
     </androidx.recyclerview.widget.RecyclerView>
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srlAccentColor="@color/black"/>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 </LinearLayout>

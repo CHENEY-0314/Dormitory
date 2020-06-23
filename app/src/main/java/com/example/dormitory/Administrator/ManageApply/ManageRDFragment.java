@@ -6,13 +6,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.dormitory.R;
+import com.example.dormitory.Student.Adapters.ExpandFoldTextAdapter;
+import com.example.dormitory.Student.NotePageActivity.Note;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,32 +81,75 @@ public class ManageRDFragment extends Fragment {
     private List<RepairDorApply> applyList = new ArrayList<>(10);
     private MRDFAdapter adapter;
     private LinearLayout Noapply;
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_manage_r_d, container, false);
+        view = inflater.inflate(R.layout.fragment_manage_r_d, container, false);
 
         lvTrace = (ListView) view.findViewById(R.id.MRDF_Listview);  //有申请时显示
         Noapply=view.findViewById(R.id.MRDF_NoApply);   //无申请时显示
 
         //判断当前是否有申请
         //-----------------------------若有则进行以下操作---------------------------------------------
-
-        //向list中添加两条数据，包括楼号、房间号、联系方式、报修类型、备注
-        applyList.add(new RepairDorApply("C10","142","18088789989","电器 桌椅 中央空调 建筑 水设施 其他","风扇不转，天花板脱落，洗手台漏水"));
-        applyList.add(new RepairDorApply("C12","520","13923336666","桌椅等家具",
-                "这里会有好多好多好多的废话，我也不知道写啥，反正会有很多字就对了，如果字体太多会怎样呢，我也不知道，不如就让他显示两行然后省略吧！"));
-
-        adapter = new MRDFAdapter(view.getContext(), applyList);
-        lvTrace.setAdapter(adapter);
-
-
-        //--------------------------------若无申请，进行以下操作--------------------------------------
-//        lvTrace.setVisibility(View.GONE);
-//        Noapply.setVisibility(View.VISIBLE);
+        initRepairApply("00001","123456");
 
         return view;
     }
-
+    void initRepairApply(final String a_id, final String password){
+        String url="http://39.97.114.188/Dormitory/servlet/AdmGetFixApplyServlet?a_id=000001&password=123456";
+        String tag= "getrepaiapply";
+        //取得请求队列
+        RequestQueue getrepaiapply = Volley.newRequestQueue(getActivity());
+        //防止重复请求，所以先取消tag标识的请求队列
+        getrepaiapply.cancelAll(tag);
+        //创建StringRequest，定义字符串请求的请求方式为POST(省略第一个参数会默认为GET方式)
+        final StringRequest getrepaiapplyrequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject=new JSONObject(response);
+                            if(jsonObject.length()==0){
+                                lvTrace.setVisibility(View.GONE);
+                                Noapply.setVisibility(View.VISIBLE);
+                            }else{
+                            JSONObject jsonObject2;
+                            for(int j=1;j<=jsonObject.length();j++) {
+                                RepairDorApply rapply = new RepairDorApply();
+                                jsonObject2 = (JSONObject) new JSONObject(response).get(String.valueOf(j));
+                                rapply.setBuildingNum(jsonObject2.getString("building"));
+                                rapply.setTime(jsonObject2.getString("time"));
+                                rapply.setPhoneNum(jsonObject2.getString("contact"));
+                                rapply.setRepairTypes(jsonObject2.getString("maintenance"));
+                                System.out.println(response);
+                                rapply.setRoomNum(jsonObject2.getString("room_num"));
+                                rapply.setMoreMessage(jsonObject2.getString("remark"));
+                                rapply.setFixcode(jsonObject2.getString("fix_code"));
+                                rapply.setSid(jsonObject2.getString("s_id"));
+                                rapply.setState(jsonObject2.getString("state"));
+                                applyList.add(rapply);
+                                adapter = new MRDFAdapter(getActivity(), applyList);
+                                lvTrace.setAdapter(adapter);
+                                Toast.makeText(getActivity(), "已加载完成！", Toast.LENGTH_SHORT).show();
+                               }
+                            }
+                        } catch (JSONException e) {
+                            Toast.makeText(getActivity(),"无网络连接！",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
+                Toast.makeText(getActivity(),"请稍后重试！",Toast.LENGTH_SHORT).show();
+            }
+        }) {
+        };
+        //设置Tag标签
+        getrepaiapplyrequest.setTag(tag);
+        //将请求添加到队列中
+        getrepaiapply.add(getrepaiapplyrequest);
+    }
 }

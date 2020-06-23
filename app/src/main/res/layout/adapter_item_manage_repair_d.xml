@@ -3,10 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    android:paddingBottom="20dp">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
+
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
@@ -125,28 +126,38 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="end"
                 android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:gravity="end">
+
+                <TextView
+                    android:id="@+id/time_apply_repair"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="60dp"
+                    android:text="2020-6-18 11:11"
+                    android:textColor="@color/cardview_shadow_start_color" />
+
                 <Button
                     android:id="@+id/item_manage_btn_refuse"
                     android:layout_width="60dp"
                     android:layout_height="35dp"
+                    android:background="@drawable/grey_btn"
                     android:text="拒受理"
                     android:textColor="#fff"
-                    android:textStyle="bold"
                     android:textSize="13sp"
-                    android:background="@drawable/grey_btn"/>
+                    android:textStyle="bold" />
+
                 <Button
                     android:id="@+id/item_manage_btn_agree"
                     android:layout_width="60dp"
                     android:layout_height="35dp"
-                    android:text="受理"
                     android:layout_marginStart="10dp"
+                    android:background="@drawable/blue_btn"
+                    android:text="受理"
                     android:textColor="#fff"
-                    android:textStyle="bold"
                     android:textSize="13sp"
-                    android:background="@drawable/blue_btn"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

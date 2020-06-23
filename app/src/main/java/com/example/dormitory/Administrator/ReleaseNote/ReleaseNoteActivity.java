@@ -12,7 +12,20 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.dormitory.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class ReleaseNoteActivity extends AppCompatActivity {
     private EditText head;
@@ -20,7 +33,6 @@ public class ReleaseNoteActivity extends AppCompatActivity {
     private TextView notenum;
     private Button mbtnsubmit;
     private ImageView back;
-    SendReleaseNoteData sendReleaseNoteData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //设置状态栏文字颜色及图标为深色，当状态栏为白色时候，改变其颜色为深色，简单粗暴直接完事
@@ -62,8 +74,8 @@ public class ReleaseNoteActivity extends AppCompatActivity {
                 //点击提交通知按钮
                 String headtext=head.getText().toString();
                 String content=note.getText().toString();
-                sendReleaseNoteData=new SendReleaseNoteData(headtext,content,ReleaseNoteActivity.this);
-                sendReleaseNoteData.sendData();
+                sendData(headtext,content);
+                mbtnsubmit.setText("发布中…");
             }
         });
 
@@ -74,5 +86,59 @@ public class ReleaseNoteActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void sendData(String head,String content){
+        String time=setTime();
+        //请求地址
+        String url = "http://39.97.114.188/Dormitory/servlet/ReleaseNoteServlet?head="+head+"&content="+content+"&time="+time;
+        String tag = "ReleaseData";
+        //取得请求队列
+        RequestQueue ReleaseData = Volley.newRequestQueue(this);
+        //防止重复请求，所以先取消tag标识的请求队列
+        ReleaseData.cancelAll(tag);
+        //创建StringRequest，定义字符串请求的请求方式为POST(省略第一个参数会默认为GET方式)
+        final StringRequest ReleaseDatarequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");
+                            String Result=jsonObject.getString("Result").toString();
+                            System.out.println(Result);
+                            if(Result.equals("Success")){
+                                System.out.println(Result);
+                                mbtnsubmit.setText("发布");
+                                //mbtnsubmit.setEnabled(false);
+                                //finish();
+                                Toast toast=Toast.makeText(ReleaseNoteActivity.this,null,Toast.LENGTH_SHORT);
+                                toast.setText("发布成功");
+                                toast.show();
+                            }
+                        } catch (JSONException e) {
+
+                            Toast.makeText(ReleaseNoteActivity.this,"发布失败",Toast.LENGTH_SHORT).show();
+                            mbtnsubmit.setText("发布");
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
+                Toast.makeText(ReleaseNoteActivity.this,"未发布",Toast.LENGTH_SHORT).show();
+                mbtnsubmit.setText("发布");
+            }
+        }) {
+
+        };
+        //设置Tag标签
+        ReleaseDatarequest.setTag(tag);
+        //将请求添加到队列中
+        ReleaseData.add(ReleaseDatarequest);
+    }
+    public String setTime() {
+        SimpleDateFormat dff = new SimpleDateFormat("yyyy:MM:dd:HH:mm");
+        dff.setTimeZone(TimeZone.getTimeZone("GMT+08"));
+        String time = dff.format(new Date());
+        return time;
     }
 }

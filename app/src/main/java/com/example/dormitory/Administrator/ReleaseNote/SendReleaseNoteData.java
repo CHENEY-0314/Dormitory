@@ -1,6 +1,7 @@
 package com.example.dormitory.Administrator.ReleaseNote;
 
 import android.app.Activity;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -9,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.dormitory.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,12 +24,14 @@ import java.util.TimeZone;
 public class SendReleaseNoteData {
     Activity mContext;
     String code,head,content,time;
+    Button btnsub;
 
-    public SendReleaseNoteData(String head, String content,Activity mContext){
-        code=String.valueOf(1);
+    public SendReleaseNoteData(String head, String content,Activity mContext,Button btnsub){
+        code=String.valueOf(1000);
         this.head=head;
         this.content=content;
         this.mContext=mContext;
+        this.btnsub=btnsub;
         setTime();
     }
     public void setTime() {
@@ -50,36 +54,29 @@ public class SendReleaseNoteData {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            //将从数据库获取到的消息保存在本地
                             JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");
-                            jsonObject.put("code",code);
-                            jsonObject.put("head",head);
-                            jsonObject.put("content",content);
-                            jsonObject.put("time",time);
-                            Toast toast=Toast.makeText(mContext,null,Toast.LENGTH_SHORT);
-                            toast.setText("发布成功");
-                            toast.show();
+                            String Result=jsonObject.getString("Result").toString();
+                            System.out.println(Result);
+                            if(Result.equals("success")){
+                                Toast toast=Toast.makeText(mContext,null,Toast.LENGTH_SHORT);
+                                toast.setText("发布成功");
+                                toast.show();
+                            }
                         } catch (JSONException e) {
-                            //做自己的请求异常操作，如Toast提示（“无网络连接”等）
-                            Toast.makeText(mContext,"无网络连接！",Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(mContext,"发布失败",Toast.LENGTH_SHORT).show();
+                            btnsub.setText("发布");
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
-                Toast.makeText(mContext,"请稍后重试！",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,"未发布",Toast.LENGTH_SHORT).show();
+                btnsub.setText("发布");
             }
         }) {
-            @Override
-            protected Map<String, String> getParams()  {
-                Map<String, String> params = new HashMap<>();
-                params.put("code", code);
-                params.put("head", head);
-                params.put("content",content);
-                params.put("time",time);
-                return params;
-            }
+
         };
         //设置Tag标签
         ReleaseDatarequest.setTag(tag);

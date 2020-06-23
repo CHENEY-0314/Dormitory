@@ -71,7 +71,8 @@ public class MainPage extends Fragment {
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                timeDifCalculater=new TimeDifCalculater(mUser.getString("firstopentime",null));
+                System.out.println(mUser.getString("firstopentime",firstopentime)+"!!!!!!!!!!!!!!!!!");
+                timeDifCalculater=new TimeDifCalculater(mUser.getString("firstopentime",firstopentime));
                 String dw=timeDifCalculater.getTimeDif().substring(timeDifCalculater.getTimeDif().length()-1);
                 if(dw.equals("年")||dw.equals("月")||dw.equals("天"))
                 {setFirstopentimechangable(true);
@@ -151,7 +152,6 @@ public class MainPage extends Fragment {
           {mUserEditor.putString("firstopentime",firstopentime);
           setFirstopentimechangable(true);
           setSwitch_state_enable(true);
-          mUserEditor.putBoolean("switch_state",false);
           mUserEditor.apply();}
         if(mUser.getBoolean("firstopentimechangable",false))
         {SimpleDateFormat dff = new SimpleDateFormat("yyyy:MM:dd:HH:mm");

@@ -14,6 +14,7 @@ public class TimeDifCalculater {
         pushday = Integer.parseInt(pushtime.substring(8, 10));
         pushhour = Integer.parseInt(pushtime.substring(11, 13));
         pushminute=Integer.parseInt(pushtime.substring(14,16));
+        getCurrentTime();
     }
     private void getCurrentTime(){
         SimpleDateFormat dff = new SimpleDateFormat("yyyy:MM:dd:HH:mm");

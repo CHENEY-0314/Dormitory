@@ -59,11 +59,32 @@
                         android:layout_height="match_parent"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior"
                         />
+
                     <com.scwang.smartrefresh.layout.footer.ClassicsFooter
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:srlAccentColor="@color/white"/>
                 </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        <LinearLayout
+            android:id="@+id/NoNote"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:visibility="gone"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="130dp"
+                android:src="@drawable/empty_box"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:textSize="15sp"
+                android:textColor="#fff"
+                android:text="暂时没有新消息!"/>
+        </LinearLayout>
             </LinearLayout>
 
 </FrameLayout>

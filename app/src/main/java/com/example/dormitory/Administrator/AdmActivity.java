@@ -20,7 +20,7 @@ public class AdmActivity extends AppCompatActivity {
 
     // 声明所有控件
     private LinearLayout admApplyMan, admQuery, admNoteRe;
-    private TextView admLogout;
+    private TextView admLogout,name,id;
     private SharedPreferences admData;
     private SharedPreferences.Editor admDataEditor;
 
@@ -37,6 +37,8 @@ public class AdmActivity extends AppCompatActivity {
     // 初始化所有控件，并绑定点击事件
     void init(){
         // 初始化控件
+        id=findViewById(R.id.MyPage_txt_home);
+        name=findViewById(R.id.MyPage_txt_username);
         admApplyMan = findViewById(R.id.admApplyMan);
         admQuery = findViewById(R.id.admQuery);
         admNoteRe = findViewById(R.id.admNoteRe);
@@ -46,6 +48,9 @@ public class AdmActivity extends AppCompatActivity {
         admQuery.setOnClickListener(new clickListener());
         admNoteRe.setOnClickListener(new clickListener());
         admLogout.setOnClickListener(new clickListener());
+
+       //id.setText(admData.getString("a_id","工号"));
+       //name.setText(admData.getString("name","管理员"));
     }
 
     // 点击事件
