@@ -24,6 +24,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 Intent mainIntent = new Intent(WelcomeActivity.this, Tabbar.class);
                 WelcomeActivity.this.startActivity(mainIntent);
                 WelcomeActivity.this.finish();
+                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
             }
 
         }, SPLASH_DISPLAY_LENGHT);
