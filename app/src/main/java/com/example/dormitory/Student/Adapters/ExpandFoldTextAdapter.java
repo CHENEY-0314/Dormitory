@@ -1,7 +1,6 @@
 package com.example.dormitory.Student.Adapters;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dormitory.R;
 import com.example.dormitory.Student.NotePageActivity.Note;
-import com.example.dormitory.Student.NotePageActivity.NotePage;
 import com.example.dormitory.Student.NotePageActivity.TimeDifCalculater;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
@@ -30,10 +28,11 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-import static android.content.Context.MODE_PRIVATE;
-
 public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAdapter.MyViewHolder> {
     private Activity mContent;
+
+    public static final int TYPE_NOTEMPTY = 0;
+    public static final int TYPE_EMPTY = 1;
 
     private final int MAX_LINE_COUNT = 3;//最大显示行数
 
@@ -59,7 +58,10 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        //if(viewType==TYPE_NOTEMPTY)
         return new MyViewHolder(mContent.getLayoutInflater().inflate(R.layout.item_note, parent, false));
+        //else if(viewType==TYPE_EMPTY)
+           // return new EmptyViewHolder(mContent.getLayoutInflater().inflate(R.layout.empty_note_page, parent, false));
     }
 
     @Override
@@ -128,10 +130,12 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
                 }
             }
         });
-        if(mList.get(position).getId().substring(0).equals("0")){
+        if(mList.get(position).getId().substring(0,1).equals("0")){
             holder.delete.setEnabled(false);
             holder.delete.setVisibility(View.INVISIBLE);
-            holder.delete.setTextColor(Color.TRANSPARENT);
+        }else{
+            holder.delete.setEnabled(true);
+            holder.delete.setVisibility(View.VISIBLE);
         }
         //删除点击事件
         holder.delete.setOnClickListener(new View.OnClickListener() {
@@ -163,8 +167,15 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
         return mList.size();
     }
 
+    final class EmptyViewHolder extends RecyclerView.ViewHolder {
+        public TextView text;
+        public ImageView image;
+        public EmptyViewHolder(View itemView) {
+            super(itemView);
+        }
+    }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    final class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView typename;
         public TextView content;
         public TextView delete;
@@ -226,6 +237,5 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
 
 
     }
-
 }
 
