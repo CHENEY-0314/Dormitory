@@ -58,11 +58,10 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType==TYPE_NOTEMPTY)
+        //if(viewType==TYPE_NOTEMPTY)
         return new MyViewHolder(mContent.getLayoutInflater().inflate(R.layout.item_note, parent, false));
-        else if(viewType==TYPE_EMPTY)
+        //else if(viewType==TYPE_EMPTY)
            // return new EmptyViewHolder(mContent.getLayoutInflater().inflate(R.layout.empty_note_page, parent, false));
-        return null;
     }
 
     @Override
