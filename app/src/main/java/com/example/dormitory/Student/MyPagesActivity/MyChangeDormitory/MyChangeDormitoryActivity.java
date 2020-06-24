@@ -102,7 +102,7 @@ public class MyChangeDormitoryActivity extends AppCompatActivity {
         //设置弹出位置
         window.setGravity(Gravity.BOTTOM);
         //设置弹出动画
-        window.setWindowAnimations(R.style.main_menu_animStyle);
+        window.setWindowAnimations(R.style.bottom_menu_animStyle);
         //设置对话框大小
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.show();
