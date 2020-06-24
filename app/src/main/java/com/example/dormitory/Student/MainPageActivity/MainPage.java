@@ -160,7 +160,7 @@ public class MainPage extends Fragment {
                         try {
                             //将从数据库获取到的消息保存在本地
                             JSONObject jsonObject = (JSONObject) new JSONObject(response);
-                            if(jsonObject.getString("result").equals("0")){  //成功切换状态
+                            if(jsonObject.getString("result").equals("0")||jsonObject.getString("result").equals("false")){  //成功切换状态
                                 mUserEditor.putString("firstopentime","");  //更新本地记录
                                 mUserEditor.apply();
                                 if(!ifhaveIntention){
