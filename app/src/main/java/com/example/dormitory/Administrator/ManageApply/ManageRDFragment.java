@@ -1,11 +1,11 @@
 package com.example.dormitory.Administrator.ManageApply;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dormitory.R;
+import com.example.dormitory.RefreshListView;
 import com.example.dormitory.Student.Adapters.ExpandFoldTextAdapter;
 import com.example.dormitory.Student.NotePageActivity.Note;
 
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -42,7 +44,7 @@ public class ManageRDFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    boolean finishrefresh=false;
     public ManageRDFragment() {
         // Required empty public constructor
     }
@@ -77,7 +79,7 @@ public class ManageRDFragment extends Fragment {
     //以上均使不需要理会
 
     //声明控件等
-    private ListView lvTrace;
+    private RefreshListView lvTrace;
     private List<RepairDorApply> applyList = new ArrayList<>(10);
     private MRDFAdapter adapter;
     private LinearLayout Noapply;
@@ -88,7 +90,26 @@ public class ManageRDFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_manage_r_d, container, false);
 
-        lvTrace = (ListView) view.findViewById(R.id.MRDF_Listview);  //有申请时显示
+        lvTrace = (RefreshListView) view.findViewById(R.id.MRDF_Listview);  //有申请时显示
+        lvTrace.setonRefreshListener(new RefreshListView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                applyList.clear();
+                adapter.notifyDataSetChanged();
+                initRepairApply("00001","123456");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(finishrefresh) {
+                            lvTrace.onRefreshComplete();
+                            finishrefresh=false;
+                            Toast.makeText(getActivity(),"刷新成功",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },2000);
+
+            }
+        });
         Noapply=view.findViewById(R.id.MRDF_NoApply);   //无申请时显示
 
         //判断当前是否有申请
@@ -132,7 +153,7 @@ public class ManageRDFragment extends Fragment {
                                 applyList.add(rapply);
                                 adapter = new MRDFAdapter(getActivity(), applyList);
                                 lvTrace.setAdapter(adapter);
-                                Toast.makeText(getActivity(), "已加载完成！", Toast.LENGTH_SHORT).show();
+                                finishrefresh=true;
                                }
                             }
                         } catch (JSONException e) {

@@ -9,7 +9,7 @@
     tools:context=".Administrator.ManageApply.admManageApply">
 
         <!--    接受到申请时显示-->
-        <ListView
+        <com.example.dormitory.RefreshListView
             android:id="@+id/MRDF_Listview"
             android:layout_width="match_parent"
             android:layout_marginTop="10dp"

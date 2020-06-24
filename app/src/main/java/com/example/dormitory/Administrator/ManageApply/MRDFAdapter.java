@@ -200,6 +200,44 @@ public class MRDFAdapter extends BaseAdapter {
             }
         });
     }
+    public void popDialog3(final int position){
+        final Dialog dlg = new Dialog(context);
+        dlg.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        dlg.show();
+        Window window = dlg.getWindow();
+        WindowManager windowManager = context.getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
+        WindowManager.LayoutParams lp = dlg.getWindow().getAttributes();
+        Point size =new Point();
+        display.getSize(size);
+        int width= size.x;
+        lp.width = (int) (width-200); // 设置宽度
+        dlg.getWindow().setAttributes(lp);
+        window.setContentView(R.layout.dialog_box_adm);
+        // 为确认按钮添加事件,执行退出应用操作
+        Button btnok=(Button)window.findViewById(R.id.btn_ok);
+        Button btncancel=(Button)window.findViewById(R.id.btn_cancel);
+        TextView text=(TextView)window.findViewById(R.id.dialog_box_text);
+        text.setText("确认完成？");
+        btnok.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finishApply(position);
+                ApplyList.remove(position);
+                notifyDataSetChanged();
+                if(ApplyList.isEmpty())
+                {
+                    lvTrace.setVisibility(View.GONE);
+                    Noapply.setVisibility(View.VISIBLE);
+                }
+                dlg.dismiss();
+            }
+        });
+        btncancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                dlg.cancel();
+            }
+        });
+    }
     void sendManageResult(final int position){
         String url="http://39.97.114.188/Dormitory/servlet/RefuseFixApplyServlet?fix_code="+ApplyList.get(position).getFixcode()+"&s_id="+ApplyList.get(position).getSid()+"&time="+getCurrentTime()+"&content="+refusecontent;
         String tag= "sendrefusetext";
@@ -263,15 +301,8 @@ public class MRDFAdapter extends BaseAdapter {
                                 holder.btn_Refuse.setVisibility(View.INVISIBLE);
                             holder.btn_Agree.setOnClickListener(new View.OnClickListener() {
                                 @Override
-                                public void onClick(View v) {
-                                    finishApply(position);
-                                    ApplyList.remove(position);
-                                    notifyDataSetChanged();
-                                    if(ApplyList.isEmpty())
-                                    {
-                                        lvTrace.setVisibility(View.GONE);
-                                        Noapply.setVisibility(View.VISIBLE);
-                                    }
+                                public void onClick(View v){
+                                    popDialog3(position);
                                 }
                             });}
                             else Toast.makeText(context,Result,Toast.LENGTH_SHORT).show();
