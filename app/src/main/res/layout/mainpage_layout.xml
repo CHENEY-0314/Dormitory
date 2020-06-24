@@ -7,105 +7,127 @@
     android:fitsSystemWindows="true"
     android:background="@drawable/background1"
     tools:context="com.example.dormitory.Student.MainPageActivity.MainPage">
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:gravity="start">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal"
-                android:layout_marginLeft="20dp">
-                <Switch
-                    android:id="@+id/switch_state"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:thumb="@drawable/switch_thumb"
-                    android:track="@drawable/switch_track_select"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="换宿意向"
-                    android:textSize="12sp"
-                    android:textColor="#fff"/>
-            </LinearLayout>
-
-        </LinearLayout>
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="50dp"-->
-<!--            android:gravity="start">-->
-<!--            <LinearLayout-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical">-->
-<!--                <CheckBox-->
-<!--                    android:id="@+id/main_cb_state"-->
-<!--                    android:layout_width="80dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="20dp"-->
-<!--                    android:paddingVertical="5dp"-->
-<!--                    android:layout_marginTop="7dp"-->
-<!--                    android:text="换宿意向"-->
-<!--                    android:textSize="14sp"-->
-<!--                    android:background="@drawable/checkbox"-->
-<!--                    android:button="@null"-->
-<!--                    android:checked="true"-->
-<!--                    android:gravity="center"-->
-<!--                    android:textColor="#fff"/>-->
-<!--                <TextView-->
-<!--                    android:id="@+id/main_tv_detail"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="20dp"-->
-<!--                    android:text="查看详情"-->
-<!--                    android:textSize="11sp"-->
-<!--                    android:gravity="center"-->
-<!--                    android:textColor="#fff"-->
-<!--                    android:textStyle="italic"/>-->
-<!--            </LinearLayout>-->
-
-<!--        </LinearLayout>-->
+            android:text="换宿意向"
+            android:textColor="#fff"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/MPL_changeIntention"
+            app:layout_constraintStart_toStartOf="@+id/MPL_changeIntention"
+            app:layout_constraintTop_toBottomOf="@+id/MPL_changeIntention" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/change"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="130dp"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="45dp"
+            android:backgroundTint="#D0EFEFEF"
+            android:padding="50dp"
             app:cardCornerRadius="20dp"
-            android:backgroundTint="#D0FFFFFF"
-            android:padding="50dp">
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/change">
-            </androidx.appcompat.widget.AppCompatImageView>
+            app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/change"/>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/repair"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="130dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginHorizontal="45dp"
+            android:backgroundTint="#D0EFEFEF"
+            android:padding="50dp"
             app:cardCornerRadius="20dp"
-            android:backgroundTint="#D0FFFFFF"
-            android:padding="50dp">
-            <androidx.appcompat.widget.AppCompatImageView
+            app:layout_constraintTop_toBottomOf="@+id/change">
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/repair">
-            </androidx.appcompat.widget.AppCompatImageView>
+                android:src="@drawable/repair" />
         </androidx.cardview.widget.CardView>
 
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="108dp"
+            android:text="What would"
+            android:textColor="#fff"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="you like to do ?"
+            android:textColor="#fff"
+            android:textSize="27sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+        <ImageView
+            android:id="@+id/MPL_changeIntention"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/nointentionimage"
+            app:layout_constraintStart_toStartOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <ImageView
+            android:id="@+id/image12"
+            android:layout_width="63dp"
+            android:layout_height="63dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="24dp"
+            android:src="@drawable/bollon"
+            app:layout_constraintBottom_toBottomOf="@+id/MPL_changeIntention"
+            app:layout_constraintStart_toEndOf="@+id/MPL_changeIntention"
+            app:layout_constraintTop_toTopOf="@+id/MPL_changeIntention"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/image13"
+            android:layout_width="63dp"
+            android:layout_height="63dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="24dp"
+            android:src="@drawable/lightt"
+            app:layout_constraintBottom_toBottomOf="@+id/image12"
+            app:layout_constraintStart_toEndOf="@+id/image12"
+            app:layout_constraintTop_toTopOf="@+id/image12"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:text="More Action"
+            android:textColor="#F4F4F4"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/MPL_changeIntention" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

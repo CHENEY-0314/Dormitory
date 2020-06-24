@@ -2,16 +2,17 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:padding="25dp"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingHorizontal="20dp">
+    android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="修改联系方式"
+        android:paddingStart="3dp"
+        android:textStyle="bold"
         android:textColor="@color/green"
-        android:textSize="20sp"/>
+        android:textSize="16sp"/>
     <EditText
         android:id="@+id/edit_phone"
         android:layout_width="match_parent"
@@ -20,7 +21,4 @@
         android:textSize="15sp"
         android:singleLine="true"
         android:inputType="phone"/>
-
-
-
 </LinearLayout>

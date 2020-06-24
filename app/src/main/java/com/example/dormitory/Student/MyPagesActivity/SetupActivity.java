@@ -48,8 +48,6 @@ public class SetupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //设置状态栏文字颜色及图标为深色，当状态栏为白色时候，改变其颜色为深色，简单粗暴直接完事
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
@@ -83,7 +81,7 @@ public class SetupActivity extends AppCompatActivity {
                 //绑定自定义布局里的EditText控件
                 final EditText editPhone=view.findViewById(R.id.edit_phone);
                 //将自定义布局布置到弹窗里，并设置弹窗外不可点击
-                builder.setView(view).setCancelable(false);
+                builder.setView(view);
                 //设置确认按钮
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
@@ -117,12 +115,12 @@ public class SetupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 System.out.println("点击账号注销");
                 final AlertDialog.Builder builder_loginOut=new AlertDialog.Builder(SetupActivity.this);
-                builder_loginOut.setTitle("是否注销账号").setMessage("退出登录后需重新登录并加载数据").setCancelable(false);
+                builder_loginOut.setTitle("是否注销账号").setMessage("退出登录后需重新登录并加载数据");
                 builder_loginOut.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mUserEditor.clear();
-                        mUserEditor.commit();
+                        mUserEditor.apply();
                         Intent intent = new Intent(SetupActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }

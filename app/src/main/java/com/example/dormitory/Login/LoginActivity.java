@@ -1,5 +1,7 @@
 package com.example.dormitory.Login;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,26 +22,29 @@ public class LoginActivity extends AppCompatActivity {
         //获得本地管理员的轻量数据库
         mData2=getSharedPreferences("admdata",0);
         autoLogin();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         // 学生登录 + 管理员登录
-        Button mBtnStuLog = findViewById(R.id.btn_stuLogin);
-        Button mBtnAdmLog = findViewById(R.id.btn_admLogin);
+        final Button mBtnStuLog = findViewById(R.id.btn_stuLogin);
+        final Button mBtnAdmLog = findViewById(R.id.btn_admLogin);
         // 学生登录按钮点击事件
         mBtnStuLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,StuLogActivity.class);
-                startActivity(intent);
+                mBtnStuLog.setEnabled(false);
+                startActivity(new Intent(LoginActivity.this,StuLogActivity.class), ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this).toBundle());
+                mBtnStuLog.setEnabled(true);
             }
         });
         // 管理员登录按钮点击事件
         mBtnAdmLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, AdmLogActivity.class);
-                startActivity(intent);
+                mBtnAdmLog.setEnabled(false);
+                startActivity(new Intent(LoginActivity.this,AdmLogActivity.class), ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this).toBundle());
+                mBtnAdmLog.setEnabled(true);
             }
         });
     }
