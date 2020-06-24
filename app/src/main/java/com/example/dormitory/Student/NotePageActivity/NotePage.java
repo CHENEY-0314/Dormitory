@@ -59,7 +59,6 @@ public class NotePage extends Fragment {
     Classify classify;
     ExpandFoldTextAdapter adapter;
     RefreshLayout mRefreshLayout;
-    NoteData noteData;
     private SharedPreferences mUser;
     private SharedPreferences.Editor mUserEditor;
     JSONObject jsonObject,jsonObject2;
