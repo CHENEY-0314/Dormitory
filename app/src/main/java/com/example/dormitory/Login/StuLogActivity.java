@@ -88,7 +88,7 @@ public class StuLogActivity extends AppCompatActivity {
                                 UpdateUserdate(s_id,password);
                             }
                             else{
-                                Toast.makeText(StuLogActivity.this,"账号或密码错误",Toast.LENGTH_SHORT);
+                                Toast.makeText(StuLogActivity.this,"账号或密码错误",Toast.LENGTH_SHORT).show();
                             }
 //                            if(jsonObject.getString("Result").toString().equals("success")){
 //                                System.out.println(jsonObject.getString("Result").toString());

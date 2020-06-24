@@ -43,7 +43,8 @@ public class repairDormitory extends AppCompatActivity {
     private Button mBtnSubmit;//声明提交按钮组件
     private Boolean[] submitOrNot;//用于判断能否提交
     private EditText editBuilding,editRoom,editStuNum;//楼号、宿舍号、学号的编辑框控件
-    private SharedPreferences mUser;
+    private SharedPreferences mUser;//获取本地数据库
+    private Boolean ifCanFixApply;//判断是否可以进行报修申请
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //设置状态栏文字颜色及图标为深色，当状态栏为白色时候，改变其颜色为深色，简单粗暴直接完事
@@ -153,6 +154,9 @@ public class repairDormitory extends AppCompatActivity {
         editBuilding.setHint(mUser.getString("building","未获取"));
         editRoom.setHint(mUser.getString("room_num","未获取"));
         editStuNum.setHint(mUser.getString("s_id","未获取"));
+
+        //判断能否进行报修申请，并对相应的布尔值ifCanFixApply赋值
+        whetherSubmit();
     }
 
     //监听6个CheckBox和提交按钮的点击事件
@@ -196,9 +200,8 @@ public class repairDormitory extends AppCompatActivity {
         }
     }
 
-    //首先进行判断能否提交申请
-    private boolean whetherSubmit(){
-        final boolean[] result = {false};
+    //进行判断当前是否有申请
+    private void whetherSubmit(){
         //获取本地轻量数据库
         mUser=getSharedPreferences("userdata",MODE_PRIVATE);
         //获得本地数据的账号、密码
@@ -222,10 +225,12 @@ public class repairDormitory extends AppCompatActivity {
                             System.out.println("输出result："+jsonObject.getString("result"));
                             if(jsonObject.getString("result").equals("true")){
                                 //返回值为true，代表有正在处理的申请，无法提交新的申请，result设为false
-                                result[0] =false;
+                                ifCanFixApply=false;
+                                System.out.println("ifCanFixApply已被设置为："+ifCanFixApply);
                             }
                             else{
-                                result[0]=true;
+                                ifCanFixApply=true;
+                                System.out.println("ifCanFixApply已被设置为："+ifCanFixApply);
                             }
                         } catch (JSONException e) {
                             //做自己的请求异常操作，如Toast提示（“无网络连接”等）
@@ -244,14 +249,11 @@ public class repairDormitory extends AppCompatActivity {
         whetherSubmitrequest.setTag(tag);
         //将请求添加到队列中
         whetherSubmit.add(whetherSubmitrequest);
-
-
-        return result[0];
     }
 
     //点击提交，将数据上传至接口
     private void submitApply(){
-        if(!whetherSubmit()){
+        if(!ifCanFixApply){
             Toast.makeText(this,"已有申请正在处理，无法再次提交",Toast.LENGTH_SHORT).show();
         }
         else{
@@ -324,8 +326,5 @@ public class repairDormitory extends AppCompatActivity {
             //将请求添加到队列中
             subRepairApply.add(subRepairApplyrequest);
         }
-
-
-
     }
 }

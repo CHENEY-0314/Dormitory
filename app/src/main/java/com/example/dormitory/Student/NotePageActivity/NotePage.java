@@ -54,7 +54,7 @@ public class NotePage extends Fragment {
         dropdownmenu=(LinearLayout) view.findViewById(R.id.drop_down_menu);
         dropdownmenu.setClickable(true);
         typeicon=(ImageView) view.findViewById(R.id.type_icon);
-        initData();
+//        initData();
         initView();
         initRefreshLayout(view);
         adapter=new ExpandFoldTextAdapter(mList, getActivity());

@@ -42,7 +42,8 @@
         <activity android:name=".Student.MyPagesActivity.AdviceActivity" />
         <activity android:name=".Student.MyPagesActivity.SetupActivity" />
         <activity android:name=".Student.Tabbar" />
-        <activity android:name=".Login.LoginActivity">
+        <activity android:name=".Login.LoginActivity"
+            android:theme="@style/splash_style">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

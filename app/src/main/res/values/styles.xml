@@ -36,6 +36,10 @@
         <item name="android:windowEnterAnimation">@anim/push_top_in</item>
         <item name="android:windowExitAnimation">@anim/push_top_out</item>
     </style>
+    <!--设置启动app的初始背景，以解决启动白屏问题-->
+    <style name="splash_style" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/mainbackground</item>
+    </style>
 
 
 
