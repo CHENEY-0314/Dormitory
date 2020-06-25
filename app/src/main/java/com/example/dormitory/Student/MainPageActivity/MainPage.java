@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import com.android.volley.toolbox.Volley;
 
 import com.example.dormitory.R;
 import com.example.dormitory.Student.NotePageActivity.TimeDifCalculater;
+import com.example.dormitory.Student.Tabbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,9 +41,11 @@ import java.util.TimeZone;
 
 public class MainPage extends Fragment {
 
+    private long exitTime=0;  //用于判断两次点击退出主页的事件间隔
+
     Boolean ifhaveIntention=false;  //用于标志是否有换宿意向
 
-    private ImageView changeIntention;
+    private ImageView changeIntention,back;
     private CardView toChange;//申请换宿舍
     private  CardView toRepair;//宿舍报修
 
@@ -58,7 +62,7 @@ public class MainPage extends Fragment {
         toChange=view.findViewById(R.id.change);
         toRepair=view.findViewById(R.id.repair);
         changeIntention=view.findViewById(R.id.MPL_changeIntention);
-
+        back=view.findViewById(R.id.mainback);
         mUser=getActivity().getSharedPreferences("userdata",MODE_PRIVATE);
         mUserEditor=mUser.edit();
 
@@ -66,6 +70,7 @@ public class MainPage extends Fragment {
         toChange.setOnClickListener(new ButtonListener());
         toRepair.setOnClickListener(new ButtonListener());
         changeIntention.setOnClickListener(new ButtonListener());
+        back.setOnClickListener(new ButtonListener());
 
         if(mUser.getBoolean("switch_state",false)){
             ifhaveIntention=true;
@@ -136,6 +141,17 @@ public class MainPage extends Fragment {
                         //切换状态，出现再次确认弹窗
                         popDetail();
                 }
+                case R.id.mainback:{  //退出程序
+                    if ((System.currentTimeMillis() - exitTime) > 2000) {
+                        Toast toast=Toast.makeText(getActivity(),null,Toast.LENGTH_SHORT);
+                        toast.setText("再按一次退出程序");
+                        toast.show();
+                        exitTime = System.currentTimeMillis();
+                    } else {
+                        getActivity().finish();
+                        getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);  //更改跳转动画
+                    }
+                    }
                 default:break;
             }
         }

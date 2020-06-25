@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +25,9 @@ import com.example.dormitory.Student.MyPagesActivity.MyChangeDormitory.MyChangeD
 import com.example.dormitory.Student.MyPagesActivity.MyFixDormitory.MyFixDormitoryActivity;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyPage extends Fragment {
@@ -32,6 +36,7 @@ public class MyPage extends Fragment {
     private TextView musername,mdormitory;
     private LinearLayout mChangeDormitory,mFixDormitory,mSetUp,mAdvice;
 
+    private FrameLayout mframeLayout;
     //以下用于手机存用户信息
     private SharedPreferences mUser;
 
@@ -42,7 +47,7 @@ public class MyPage extends Fragment {
         mView=inflater.inflate(R.layout.mypage_layout, container, false);
         init(); //声明控件，初始化控件
         updateInformation();
-
+        GetTime();
         return mView;
     }
 
@@ -63,7 +68,7 @@ public class MyPage extends Fragment {
         mFixDormitory= mView.findViewById(R.id.MyPage_btn_FixD);
         mSetUp= mView.findViewById(R.id.MyPage_btn_setup);
         mAdvice= mView.findViewById(R.id.MyPage_btn_advice);
-
+        mframeLayout=mView.findViewById(R.id.background3);
         //声明点击事件
         Userimage.setOnClickListener(new ButtonListener());
         mChangeDormitory.setOnClickListener(new ButtonListener());
@@ -111,5 +116,13 @@ public class MyPage extends Fragment {
         }
     }
 
+    private void GetTime(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH");//获取时间的小时数
+        //获取当前时间
+        Date date = new Date(System.currentTimeMillis());
+        if(simpleDateFormat.format(date).compareTo("18")>0||simpleDateFormat.format(date).compareTo("06")<0){
+            mframeLayout.setBackgroundResource(R.drawable.background3);
+        }
+    }
 
     }

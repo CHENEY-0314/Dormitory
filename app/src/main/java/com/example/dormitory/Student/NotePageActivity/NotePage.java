@@ -138,7 +138,7 @@ public class NotePage extends Fragment {
     public void closeMenu(PopupWindow popupWindow){
         popupWindow.dismiss();
         typeicon.setImageResource(R.drawable.drop_down_unselected_icon);
-        tabtext.setTextColor(getResources().getColor(R.color.drop_down_unselected));
+        tabtext.setTextColor(getResources().getColor(R.color.white));
         menustate=false;
     }
     private void initRefreshLayout(View view){

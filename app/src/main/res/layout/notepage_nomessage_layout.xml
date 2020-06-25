@@ -15,30 +15,28 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="20dp"
-                    android:background="#CBFFFFFF"
+                    android:paddingTop="40dp"
+                    android:paddingBottom="10dp"
                     app:layout_scrollFlags="scroll"
+                    android:gravity="center"
                     android:id="@+id/drop_down_menu"
                     >
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="通知类型"
-                        android:gravity="center"
-                        android:paddingStart="70dp"
-                        android:textSize="17sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
                         android:id="@+id/type_text"
-                        android:textColor="#000"
+                        android:textColor="#FFFFFF"
                         />
                     <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
+                        android:layout_width="35dp"
+                        android:layout_height="wrap_content"
                         android:src="@drawable/drop_down_unselected_icon"
                         android:id="@+id/type_icon"
                         android:layout_gravity="center"
+                        android:paddingStart="10dp"
                         />
                 </LinearLayout>
 

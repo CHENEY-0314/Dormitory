@@ -80,7 +80,7 @@ public class Tabbar extends AppCompatActivity{
                 .setBarBackgroundColor(R.color.loginback)//底部导航栏背景颜色
                 .setInActiveColor(R.color.white) //未选中状态颜色
                 .setActiveColor(R.color.colorAccent)  //选中状态颜色
-                .setMode(BottomNavigationBar.MODE_FIXED )
+                .setMode(BottomNavigationBar.MODE_FIXED_NO_TITLE )
                 .setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC) //导航栏背景模式（图标的动画样式和这个有关系 变大了）
                 .addItem(new BottomNavigationItem(R.drawable.mainpage_active_icon, "主页").setActiveColorResource(R.color.green)
                         .setInactiveIconResource(R.drawable.mainpage_nactive_icon).setInActiveColorResource(R.color.white))
