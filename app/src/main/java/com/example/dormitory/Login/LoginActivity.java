@@ -48,24 +48,19 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
+    //自动登录
     private void autoLogin(){
+        //判断本地数据库是否存在学生类别的账号密码，若存在，则直接进入学生端主页面
         if(!mData1.getString("s_id","").equals("")){
-//            Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
             startActivity(intent);
             LoginActivity.this.finish();
-//            startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
         }
         else if(!mData2.getString("a_id","").equals("")){
-//            Intent intent = new Intent(LoginActivity.this, AdmActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             Intent intent = new Intent(LoginActivity.this, AdmActivity.class);
             startActivity(intent);
             LoginActivity.this.finish();
-//            startActivity(new Intent(LoginActivity.this, AdmActivity.class));
         }
-        else{
-
-        }
+        else{ }
     }
 }

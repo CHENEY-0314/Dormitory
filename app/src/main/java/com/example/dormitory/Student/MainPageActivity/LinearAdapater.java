@@ -21,21 +21,24 @@ public class LinearAdapater extends RecyclerView.Adapter<LinearAdapater.LinearVi
     private Context mContext;
     //存放信息的二维字符串数组，用来显示在筛选结果列表
     private String[][] resultInformation;
+    //存放信息的字符串数组，每一条字符串里面用分号隔开楼栋、房间号等等
+    private String[] selectedResult;
 
-    public LinearAdapater(Context context){
+    public LinearAdapater(Context context,String[] selectedResult){
         this.mContext=context;
+        this.selectedResult=selectedResult;
         //信息初始化
-        resultInformation=new String[10][4];
-        String pre_building=new String("C");
-        String pre_dorNum=new String("");
-        String pre_stuNum=new String("20183066000");
-        String pre_bedNum=new String("");
-        for(int i=0;i<10;i++){
-            resultInformation[i][0]=pre_building+String.valueOf(i+1);
-            resultInformation[i][1]=pre_dorNum+String.valueOf(143+i);
-            resultInformation[i][2]=pre_stuNum+String.valueOf(i);
-            resultInformation[i][3]=pre_bedNum+String.valueOf(i%4+1);
-        }
+//        resultInformation=new String[10][4];
+//        String pre_building=new String("C");
+//        String pre_dorNum=new String("");
+//        String pre_stuNum=new String("20183066000");
+//        String pre_bedNum=new String("");
+//        for(int i=0;i<10;i++){
+//            resultInformation[i][0]=pre_building+String.valueOf(i+1);
+//            resultInformation[i][1]=pre_dorNum+String.valueOf(143+i);
+//            resultInformation[i][2]=pre_stuNum+String.valueOf(i);
+//            resultInformation[i][3]=pre_bedNum+String.valueOf(i%4+1);
+//        }
     }
     @Override
     public LinearAdapater.LinearViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -45,11 +48,17 @@ public class LinearAdapater extends RecyclerView.Adapter<LinearAdapater.LinearVi
 
     @Override
     public void onBindViewHolder(@NonNull final LinearAdapater.LinearViewHolder holder, final int position) {
+        String[] result=selectedResult[position].split(";");
         //给item里面的TextView赋text值
-        holder.tv_building.setText(resultInformation[position][0]);
-        holder.tv_roomNum.setText(resultInformation[position][1]);
-        holder.tv_stuNum.setText(resultInformation[position][2]);
-        holder.tv_bedNum.setText(resultInformation[position][3]);
+        holder.tv_building.setText(result[0]);
+        holder.tv_roomNum.setText(result[1]);
+        holder.tv_stuNum.setText("到时删掉");
+        holder.tv_bedNum.setText(result[2]);
+        //给item里面的TextView赋text值
+//        holder.tv_building.setText(resultInformation[position][0]);
+//        holder.tv_roomNum.setText(resultInformation[position][1]);
+//        holder.tv_stuNum.setText(resultInformation[position][2]);
+//        holder.tv_bedNum.setText(resultInformation[position][3]);
         //设置提交按钮点击事件
         holder.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +70,7 @@ public class LinearAdapater extends RecyclerView.Adapter<LinearAdapater.LinearVi
 
     @Override
     public int getItemCount() {
-        return resultInformation.length;
+        return selectedResult.length;
     }
 
     class LinearViewHolder extends RecyclerView.ViewHolder{

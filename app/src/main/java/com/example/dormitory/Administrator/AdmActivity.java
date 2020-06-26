@@ -78,7 +78,7 @@ public class AdmActivity extends AppCompatActivity {
             }
         }
     }
-
+    //管理员注销
     private void logOut(){
         System.out.println("点击账号注销");
         admData=getSharedPreferences("admdata",0);

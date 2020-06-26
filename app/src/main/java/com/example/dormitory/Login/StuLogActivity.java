@@ -124,6 +124,7 @@ public class StuLogActivity extends AppCompatActivity {
                             JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");
                             String tempResult=jsonObject.getString("Result").toString();
                             if(tempResult.equals("success")){
+                                //账号密码正确则执行登录与本地数据库信息更新操作
                                 UpdateUserdate(s_id,password);
                             }
                             else{
@@ -132,13 +133,6 @@ public class StuLogActivity extends AppCompatActivity {
                                 loading.setVisibility(View.GONE);
                                 btnlogin.setEnabled(true);
                             }
-//                            if(jsonObject.getString("Result").toString().equals("success")){
-//                                System.out.println(jsonObject.getString("Result").toString());
-//                                UpdateUserdate(s_id,password);
-//                            }
-//                            else{
-//                                Toast.makeText(StuLogActivity.this,"账号或密码错误",Toast.LENGTH_SHORT);
-//                            }
                         } catch (JSONException e) {
                             System.out.print(e);
                             Toast.makeText(StuLogActivity.this,"登录异常，请联系管理员！",Toast.LENGTH_SHORT).show();
