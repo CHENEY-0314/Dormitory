@@ -282,9 +282,6 @@ public class repairDormitory extends AppCompatActivity {
 
             //提交后直接退出页面，控制台输出提交信息
             System.out.println(s_id+"\n"+contact+"\n"+maintenance+"\n"+moreInformation+"\n"+time);
-//            Toast.makeText(repairDormitory.this,"提交成功",Toast.LENGTH_SHORT).show();
-//            repairDormitory.this.finish();
-
             //请求地址
             //http://39.97.114.188/Dormitory/servlet/MaintenanceApplyServlet?s_id=201830760178&maintenance=电器&remark=备注&contact=13000000&time=2018:06:12:12:30
             String url = "http://39.97.114.188/Dormitory/servlet/MaintenanceApplyServlet?s_id="+s_id+"&maintenance=="+maintenance+"&remark="+moreInformation+"&contact="+contact+"&time="+time;

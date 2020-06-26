@@ -142,7 +142,7 @@ public class SetupActivity extends AppCompatActivity {
         });
 
     }
-
+    //更改联系方式
     private void updatePhoneNum(final String phoneNum){
         //获取账号和密码
         String s_id=mUser.getString("s_id","");

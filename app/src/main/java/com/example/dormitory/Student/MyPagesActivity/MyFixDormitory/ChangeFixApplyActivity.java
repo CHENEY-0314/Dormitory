@@ -38,6 +38,7 @@ public class ChangeFixApplyActivity extends AppCompatActivity {
     private CheckBox mCheckBox1,mCheckBox2,mCheckBox3,mCheckBox4,mCheckBox5,mCheckBox6;//声明报修处6个组件
     private Button mBtnSubmit;//声明提交按钮组件
     private Boolean[] submitOrNot;//用于判断能否提交
+    private EditText editBuilding,editRoom,editStuNum;//楼号、宿舍号、学号的编辑框控件
     private SharedPreferences mUser;//获取本地数据库
 
     @Override
@@ -127,6 +128,9 @@ public class ChangeFixApplyActivity extends AppCompatActivity {
         mCheckBox6=findViewById(R.id.ACFA_cb_6);
         mBtnSubmit=findViewById(R.id.ACFA_submit);
         mEdtPhoneNum=findViewById(R.id.ACFA_edt_Number);
+        editBuilding=findViewById(R.id.ACFA_txt_building);
+        editRoom=findViewById(R.id.ACFA_txt_room);
+        editStuNum=findViewById(R.id.ACFA_txt_studentNum);
         //初始化手机号和备注，将原本提交的内容复制进来
         initEditText();
 
@@ -145,6 +149,12 @@ public class ChangeFixApplyActivity extends AppCompatActivity {
         mCheckBox5.setOnClickListener(new ChangeFixApplyActivity.ButtonListener());
         mCheckBox6.setOnClickListener(new ChangeFixApplyActivity.ButtonListener());
         mBtnSubmit.setOnClickListener(new ChangeFixApplyActivity.ButtonListener());
+
+        //给楼号、宿舍号、学号赋默认初值
+        mUser=getSharedPreferences("userdata",MODE_PRIVATE);
+        editBuilding.setHint(mUser.getString("building","未获取"));
+        editRoom.setHint(mUser.getString("room_num","未获取"));
+        editStuNum.setHint(mUser.getString("s_id","未获取"));
     }
     //监听6个CheckBox和提交按钮的点击事件
     private class ButtonListener implements View.OnClickListener{

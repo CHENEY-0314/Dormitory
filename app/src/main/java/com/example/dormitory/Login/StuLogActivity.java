@@ -83,20 +83,12 @@ public class StuLogActivity extends AppCompatActivity {
                             System.out.println(jsonObject.getString("Result").toString());
                             System.out.println("tempResult"+tempResult);
                             if(tempResult.equals("success")){
-//                                Intent intent = new Intent(StuLogActivity.this, WelcomeActivity.class);
-//                                startActivity(intent);
+                                //账号密码正确则执行登录与本地数据库信息更新操作
                                 UpdateUserdate(s_id,password);
                             }
                             else{
                                 Toast.makeText(StuLogActivity.this,"账号或密码错误",Toast.LENGTH_SHORT).show();
                             }
-//                            if(jsonObject.getString("Result").toString().equals("success")){
-//                                System.out.println(jsonObject.getString("Result").toString());
-//                                UpdateUserdate(s_id,password);
-//                            }
-//                            else{
-//                                Toast.makeText(StuLogActivity.this,"账号或密码错误",Toast.LENGTH_SHORT);
-//                            }
                         } catch (JSONException e) {
                             System.out.print(e);
                             //做自己的请求异常操作，如Toast提示（“无网络连接”等）
