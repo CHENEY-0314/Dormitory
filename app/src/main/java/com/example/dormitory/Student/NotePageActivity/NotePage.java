@@ -47,8 +47,11 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class NotePage extends Fragment {
     private RecyclerView mRecyclerView;
+    GetNote getnote1,getnote2,getnote3;
     List<Note> mList = new ArrayList<>();
-    List<Note> classifyList=new ArrayList<>();
+    List<Note> schoolnoteList=new ArrayList<>();
+    List<Note> changedornoteList = new ArrayList<>();
+    List<Note> repairapplynoteList=new ArrayList<>();
     private String types[] = {"学校通知", "换宿申请", "维修受理"};
     LinearLayout dropdownmenu;
     ImageView typeicon;
@@ -61,7 +64,6 @@ public class NotePage extends Fragment {
     RefreshLayout mRefreshLayout;
     private SharedPreferences mUser;
     private SharedPreferences.Editor mUserEditor;
-    JSONObject jsonObject,jsonObject2;
     String data;
     private LinearLayout Nonote;
     boolean  refresh=false,load=false,nomoredata=true;
@@ -74,11 +76,12 @@ public class NotePage extends Fragment {
         dropdownmenu.setClickable(true);
         Nonote=(LinearLayout)view.findViewById(R.id.NoNote);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
+        mRefreshLayout=(RefreshLayout)view.findViewById(R.id.refreshLayout);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
         typeicon=(ImageView) view.findViewById(R.id.type_icon);
-        initNote("201830660178","123456");
+        initNote("201830660178","123456",mList);
         initView();
-        initRefreshLayout(view);
+        initRefreshLayout(mList,"3");
         return view;
     }
 
@@ -96,15 +99,29 @@ public class NotePage extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(girdDropDownAdapter.getCheckItemPosition()==position)
                 { girdDropDownAdapter.setCheckItem(4);
-                tabtext.setText("通知类型");
-                adapter=new ExpandFoldTextAdapter(mList, getActivity());
+                    tabtext.setText("通知类型");
+                    adapter=new ExpandFoldTextAdapter(mList, getActivity());
+                    initRefreshLayout(mList,"3");
                     mRecyclerView.setAdapter(adapter);}else
                 {girdDropDownAdapter.setCheckItem(position);
-                tabtext.setText(types[position]); classify=new Classify(mList,types[position]);
-                classifyList.clear();
-                classifyList=classify.Select();
-                adapter=new ExpandFoldTextAdapter(classifyList, getActivity());
-                mRecyclerView.setAdapter(adapter);}
+                    switch (position){
+                        case 0:
+                            tabtext.setText(types[0]);
+                            adapter=new ExpandFoldTextAdapter(schoolnoteList, getActivity());
+                            initRefreshLayout(schoolnoteList,"0");
+                            break;
+                        case 1:
+                            tabtext.setText(types[1]);
+                            adapter=new ExpandFoldTextAdapter(changedornoteList, getActivity());
+                            initRefreshLayout(changedornoteList,"1");
+                            break;
+                        case 2:
+                            tabtext.setText(types[2]);
+                            adapter=new ExpandFoldTextAdapter(repairapplynoteList, getActivity());
+                            initRefreshLayout(repairapplynoteList,"2");
+                            break;
+                    }
+                    mRecyclerView.setAdapter(adapter);}
                 closeMenu(popupWindow);
             }
         });
@@ -141,16 +158,19 @@ public class NotePage extends Fragment {
         tabtext.setTextColor(getResources().getColor(R.color.white));
         menustate=false;
     }
-    private void initRefreshLayout(View view){
-
-        mRefreshLayout = view.findViewById(R.id.refreshLayout);
+    private void initRefreshLayout(final List<Note> List, final String type){
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() { //下拉刷新
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
+                getnote1.setLastread();
+                getnote1.setLastread();
+                getnote1.setLastread();
+                schoolnoteList.clear();
+                changedornoteList.clear();
+                repairapplynoteList.clear();
                 mList.clear();
-                i=1;
-                initNote("201830660178","123456");
-                refreshlayout.finishRefresh(2000,refresh);//传入false表示刷新失败
+                initNote("201830660178","123456",List);
+                refreshlayout.finishRefresh(1000,refresh);//传入false表示刷新失败
             }
         });
         mRefreshLayout.setScrollBoundaryDecider(new ScrollBoundaryDecider() {
@@ -193,18 +213,12 @@ public class NotePage extends Fragment {
         mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() { //上拉加载更多
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
-                try {
-                    LoadMoreData(data,i);
-                    Toast.makeText(getActivity(),"加载成功！",Toast.LENGTH_SHORT).show();
-                } catch (JSONException e) {
-                    load=false;
-                    Toast.makeText(getActivity(),"网络连！",Toast.LENGTH_SHORT).show();
-                }
-                refreshlayout.finishLoadMore(2000,load,nomoredata);//传入false表示加载失败
+                LoadMoreData(type);
+                refreshlayout.finishLoadMore(1000,load,nomoredata);//传入false表示加载失败
             }
         });
     }
-    void initNote(final String s_id, final String password){
+    void initNote(final String s_id, final String password, final List<Note> mList){
         mUser=getActivity().getSharedPreferences("userdata",MODE_PRIVATE);
         mUserEditor=mUser.edit();
         String url="http://39.97.114.188/Dormitory/servlet/GetNoteServlet?s_id="+s_id+"&password="+password;
@@ -218,46 +232,10 @@ public class NotePage extends Fragment {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        data = response;
                         try {
-                            JSONObject jsonObject=new JSONObject(response);
-                            if(jsonObject.length()==0){
-                                mRecyclerView.setVisibility(View.GONE);
-                                Nonote.setVisibility(View.VISIBLE);
-                            }else {
-                                JSONObject jsonObject2;
-                                data = response;
-                                int n;
-                                if (jsonObject.length() >= 10)
-                                    n = 10;
-                                else n = jsonObject.length();
-                                for (int j = 1; j <= n; j++) {
-                                    Note note = new Note();
-                                    System.out.println(response);
-                                    jsonObject2 = (JSONObject) new JSONObject(response).get(String.valueOf(j));
-                                    note.setId(jsonObject2.getString("code"));
-                                    note.setTopic(jsonObject2.getString("head"));
-                                    note.setContent(jsonObject2.getString("content"));
-                                    note.setPushtime(jsonObject2.getString("time"));
-                                    switch (note.getId().substring(0, 1)) {
-                                        case "0":
-                                            note.setImage(R.drawable.school_note_image);
-                                            note.setType(types[0]);
-                                            break;
-                                        case "1":
-                                            note.setImage(R.drawable.dorm_note_image);
-                                            note.setType(types[1]);
-                                            break;
-                                        case "2":
-                                            note.setImage(R.drawable.rep_note_image);
-                                            note.setType(types[2]);
-                                            break;
-                                    }
-                                    mList.add(note);
-                                }
-                                adapter = new ExpandFoldTextAdapter(mList, getActivity());
-                                mRecyclerView.setAdapter(adapter);
+                                initGetNote(mList);
                                 refresh = true;
-                            }
                         } catch (JSONException e) {
                             //做自己的请求异常操作，如Toast提示（“无网络连接”等）
                             refresh=false;
@@ -278,69 +256,73 @@ public class NotePage extends Fragment {
         getnote.add(getnoterequest);
 
     }
-void LoadMoreData(String response,int i) throws JSONException {
-    jsonObject = new JSONObject(response);
-    if (jsonObject.length() / 10 - 1 >= i) {
-        //System.out.println(jsonObject.length()+"+++++++++++++++++++++++");
-        for (int j = 1; j <= 10; j++) {
-            Note note = new Note();
-            jsonObject2 = (JSONObject) new JSONObject(response).get(String.valueOf(i*10+j));
-            note.setId(jsonObject2.getString("code"));
-            note.setTopic(jsonObject2.getString("head"));
-            note.setContent(jsonObject2.getString("content"));
-            note.setPushtime(jsonObject2.getString("time"));
-            switch (note.getId().substring(0, 1)) {
+    void LoadMoreData(String type) {
+        try {
+            switch (type) {
                 case "0":
-                    note.setImage(R.drawable.school_note_image);
-                    note.setType(types[0]);
+                    getnote1.reMoveLastGet();
+                    getnote1.getNoteList();
+                    schoolnoteList.addAll(getnote1.getmList());
+                    if(getnote1.getLastread()==getnote1.datasize)
+                        nomoredata=true;else nomoredata=false;
+                    load = true;
+                    adapter.notifyDataSetChanged();
                     break;
                 case "1":
-                    note.setImage(R.drawable.dorm_note_image);
-                    note.setType(types[1]);
+                    getnote2.reMoveLastGet();
+                    getnote2.getNoteList();
+                    changedornoteList.addAll(getnote2.getmList());
+                    if(getnote2.getLastread()==getnote2.datasize)
+                        nomoredata=true;else nomoredata=false;
+                    load = true;
+                    adapter.notifyDataSetChanged();
                     break;
                 case "2":
-                    note.setImage(R.drawable.rep_note_image);
-                    note.setType(types[2]);
+                    getnote3.reMoveLastGet();
+                    getnote3.getNoteList();
+                    repairapplynoteList.addAll(getnote3.getmList());
+                    if(getnote3.getLastread()==getnote3.datasize)
+                        nomoredata=true;else nomoredata=false;
+                    load = true;
+                    adapter.notifyDataSetChanged();
                     break;
+                case"3":
+                    getnote1.reMoveLastGet();
+                    getnote1.getNoteList();
+                    mList.addAll(getnote1.getmList());
+                    getnote2.reMoveLastGet();
+                    getnote2.getNoteList();
+                    mList.addAll(getnote2.getmList());
+                    getnote3.reMoveLastGet();
+                    getnote3.getNoteList();
+                    mList.addAll(getnote3.getmList());
+                    if(getnote1.getLastread()==getnote1.datasize&&
+                            getnote2.getLastread()==getnote2.datasize&&
+                            getnote3.getLastread()==getnote3.datasize)
+                        nomoredata=true;else nomoredata=false;
+                    load = true;
+                    adapter.notifyDataSetChanged();
             }
-            adapter.addItem(note);
+        } catch (JSONException e) {
+            load = false;
+            e.printStackTrace();
         }
-        i++;
-        nomoredata=false;
-
-        if(jsonObject.length()%10==0)
-            nomoredata=true;
     }
-    if (jsonObject.length()/10-1<i){
-    for (int j = 1; j < jsonObject.length() % 10; j++) {
-        Note note = new Note();
-        if(jsonObject.length()/10==0)
-            jsonObject2 = (JSONObject) new JSONObject(response).get(String.valueOf(j));
-        else jsonObject2 = (JSONObject) new JSONObject(response).get(String.valueOf(i*10+j));
-        note.setId(jsonObject2.getString("code"));
-        note.setTopic(jsonObject2.getString("head"));
-        note.setContent(jsonObject2.getString("content"));
-        note.setPushtime(jsonObject2.getString("time"));
-        switch (note.getId().substring(0, 1)) {
-            case "0":
-                note.setImage(R.drawable.school_note_image);
-                note.setType(types[0]);
-                break;
-            case "1":
-                note.setImage(R.drawable.dorm_note_image);
-                note.setType(types[1]);
-                break;
-            case "2":
-                note.setImage(R.drawable.rep_note_image);
-                note.setType(types[2]);
-                break;
-        }
-        adapter.addItem(note);
+    void initGetNote(List<Note> List) throws JSONException {
+        JSONObject jsonObject=new JSONObject(data);
+        getnote1=new GetNote(getActivity(),data,jsonObject.length(),"0");
+        getnote2=new GetNote(getActivity(),data,jsonObject.length(),"1");
+        getnote3=new GetNote(getActivity(),data,jsonObject.length(),"2");
+        getnote1.getNoteList();
+        getnote2.getNoteList();
+        getnote3.getNoteList();
+        schoolnoteList.addAll(getnote1.getmList());
+        changedornoteList.addAll(getnote2.getmList());
+        repairapplynoteList.addAll(getnote3.getmList());
+        mList.addAll(schoolnoteList);
+        mList.addAll(changedornoteList);
+        mList.addAll(repairapplynoteList);
+        adapter=new ExpandFoldTextAdapter(List,getActivity());
+        mRecyclerView.setAdapter(adapter);
     }
-    nomoredata=true;
-    }
-    load=true;
-    adapter.notifyDataSetChanged();
-    mRecyclerView.setAdapter(adapter);
-}
 }

@@ -149,15 +149,6 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
 
         holder.image.setImageResource(mList.get(position).getImage());
         holder.typename.setText(mList.get(position).getType());
-        holder.read.setOnClickListener(new View.OnClickListener() {
-                                           @Override
-                                           public void onClick(View v) {
-                                               if(!readstate)
-                                               {holder.read.setImageResource(R.drawable.read_note_icon);readstate=!readstate;}
-                                               else
-                                               {holder.read.setImageResource(R.drawable.unread_note_icon);readstate=!readstate;}
-                                           }
-                                       });
         timeDifCalculater=new TimeDifCalculater(mList.get(position).getPushtime());
         holder.time.setText(timeDifCalculater.getTimeDif());
     }
@@ -182,7 +173,6 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
         public TextView expandOrFold;
         public TextView time;
         public ImageView image;
-        public ImageButton read;
         public RefreshLayout mRefreshlayout;
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -192,7 +182,6 @@ public class ExpandFoldTextAdapter extends RecyclerView.Adapter<ExpandFoldTextAd
             expandOrFold = (TextView) itemView.findViewById(R.id.tv_expand_or_fold);
             time=(TextView)itemView.findViewById(R.id.time_text);
             image=(ImageView)itemView.findViewById(R.id.note_type_image);
-            read=(ImageButton) itemView.findViewById(R.id.read_note_btn);
         }
     }
     public void addItem(Note note){
