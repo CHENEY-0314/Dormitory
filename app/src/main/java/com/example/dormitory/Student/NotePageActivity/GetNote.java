@@ -62,6 +62,38 @@ public class GetNote {
         return mList;
     }
 
+    public void getAlltype() throws JSONException {
+        JSONObject jsonObject2;
+        int i = 0;
+        for (int j = lastread + 1; j <= datasize; j++) {
+            Note note = new Note();
+            System.out.println(data);
+            jsonObject2 = (JSONObject) new JSONObject(data).get(String.valueOf(j));
+                note.setId(jsonObject2.getString("code"));
+                note.setTopic(jsonObject2.getString("head"));
+                note.setContent(jsonObject2.getString("content"));
+                note.setPushtime(jsonObject2.getString("time"));
+                switch (note.getId().substring(0,1)) {
+                    case "0":
+                        note.setImage(R.drawable.school_note_image);
+                        note.setType(types[0]);
+                        break;
+                    case "1":
+                        note.setImage(R.drawable.dorm_note_image);
+                        note.setType(types[1]);
+                        break;
+                    case "2":
+                        note.setImage(R.drawable.rep_note_image);
+                        note.setType(types[2]);
+                        break;
+                }
+                mList.add(note);
+                i++;
+                lastread = j;
+                if (i == 10) break;
+            }
+    }
+
     public int getLastread() {
         return lastread;
     }
@@ -72,6 +104,10 @@ public class GetNote {
 
     public void reMoveLastGet(){
         mList.clear();
+    }
+
+    public void updateData(String data){
+        this.data=data;
     }
 }
 

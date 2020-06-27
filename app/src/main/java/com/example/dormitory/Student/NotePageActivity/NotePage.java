@@ -47,7 +47,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class NotePage extends Fragment {
     private RecyclerView mRecyclerView;
-    GetNote getnote1,getnote2,getnote3;
+    GetNote getnote1,getnote2,getnote3,getnote4;
     List<Note> mList = new ArrayList<>();
     List<Note> schoolnoteList=new ArrayList<>();
     List<Note> changedornoteList = new ArrayList<>();
@@ -74,7 +74,6 @@ public class NotePage extends Fragment {
         final View view = inflater.inflate(R.layout.notepage_nomessage_layout, container, false);
         dropdownmenu=(LinearLayout) view.findViewById(R.id.drop_down_menu);
         dropdownmenu.setClickable(true);
-        Nonote=(LinearLayout)view.findViewById(R.id.NoNote);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         mRefreshLayout=(RefreshLayout)view.findViewById(R.id.refreshLayout);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -213,14 +212,17 @@ public class NotePage extends Fragment {
         mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() { //上拉加载更多
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
+                updateData("201830660178","123456");
+                getnote1.updateData(data);
+                getnote2.updateData(data);
+                getnote3.updateData(data);
+                getnote4.updateData(data);
                 LoadMoreData(type);
                 refreshlayout.finishLoadMore(1000,load,nomoredata);//传入false表示加载失败
             }
         });
     }
     void initNote(final String s_id, final String password, final List<Note> mList){
-        mUser=getActivity().getSharedPreferences("userdata",MODE_PRIVATE);
-        mUserEditor=mUser.edit();
         String url="http://39.97.114.188/Dormitory/servlet/GetNoteServlet?s_id="+s_id+"&password="+password;
         String tag= "getnote";
         //取得请求队列
@@ -234,7 +236,7 @@ public class NotePage extends Fragment {
                     public void onResponse(String response) {
                         data = response;
                         try {
-                                initGetNote(mList);
+                                initGetNote(mList,response);
                                 refresh = true;
                         } catch (JSONException e) {
                             //做自己的请求异常操作，如Toast提示（“无网络连接”等）
@@ -287,42 +289,63 @@ public class NotePage extends Fragment {
                     adapter.notifyDataSetChanged();
                     break;
                 case"3":
-                    getnote1.reMoveLastGet();
-                    getnote1.getNoteList();
-                    mList.addAll(getnote1.getmList());
-                    getnote2.reMoveLastGet();
-                    getnote2.getNoteList();
-                    mList.addAll(getnote2.getmList());
-                    getnote3.reMoveLastGet();
-                    getnote3.getNoteList();
-                    mList.addAll(getnote3.getmList());
-                    if(getnote1.getLastread()==getnote1.datasize&&
-                            getnote2.getLastread()==getnote2.datasize&&
-                            getnote3.getLastread()==getnote3.datasize)
+                    getnote4.reMoveLastGet();
+                    getnote4.getAlltype();
+                    mList.addAll(getnote4.getmList());
+                    if(getnote4.getLastread()==getnote4.datasize)
                         nomoredata=true;else nomoredata=false;
                     load = true;
                     adapter.notifyDataSetChanged();
+                    break;
             }
         } catch (JSONException e) {
             load = false;
             e.printStackTrace();
         }
     }
-    void initGetNote(List<Note> List) throws JSONException {
+    void initGetNote(List<Note> List,String data) throws JSONException {
         JSONObject jsonObject=new JSONObject(data);
         getnote1=new GetNote(getActivity(),data,jsonObject.length(),"0");
         getnote2=new GetNote(getActivity(),data,jsonObject.length(),"1");
         getnote3=new GetNote(getActivity(),data,jsonObject.length(),"2");
+        getnote4=new GetNote(getActivity(),data,jsonObject.length(),"3");
         getnote1.getNoteList();
         getnote2.getNoteList();
         getnote3.getNoteList();
+        getnote4.getAlltype();
         schoolnoteList.addAll(getnote1.getmList());
         changedornoteList.addAll(getnote2.getmList());
         repairapplynoteList.addAll(getnote3.getmList());
-        mList.addAll(schoolnoteList);
-        mList.addAll(changedornoteList);
-        mList.addAll(repairapplynoteList);
+        mList.addAll(getnote4.getmList());
         adapter=new ExpandFoldTextAdapter(List,getActivity());
         mRecyclerView.setAdapter(adapter);
+    }
+    String updateData(final String s_id, final String password){
+        String url="http://39.97.114.188/Dormitory/servlet/GetNoteServlet?s_id="+s_id+"&password="+password;
+        String tag= "getnote";
+        //取得请求队列
+        RequestQueue getnote = Volley.newRequestQueue(getActivity());
+        //防止重复请求，所以先取消tag标识的请求队列
+        getnote.cancelAll(tag);
+        //创建StringRequest，定义字符串请求的请求方式为POST(省略第一个参数会默认为GET方式)
+        final StringRequest getnoterequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        data = response;
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
+                Toast.makeText(getActivity(),"请稍后重试！",Toast.LENGTH_SHORT).show();
+            }
+        }) {
+        };
+        //设置Tag标签
+        getnoterequest.setTag(tag);
+        //将请求添加到队列中
+        getnote.add(getnoterequest);
+        return data;
     }
 }

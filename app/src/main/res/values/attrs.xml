@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RefreshListView">
+        <attr name="TipColorBefore" format="color" />
+        <attr name="TipColorAfter" format="color" />
+        <attr name="TimeColor" format="color" />
+        <attr name="EmptyText" format="string"/>
+        <attr name="EmptyTextColor" format="color"/>
+        <attr name="EmptyImage" format="reference"/>
+        <attr name="EmptyImageColor" format="color"/>
+    </declare-styleable>
+</resources>

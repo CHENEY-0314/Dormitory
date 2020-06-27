@@ -17,6 +17,7 @@
         android:id="@+id/bottom_navigation_bar"
         android:layout_width="match_parent"
         app:itemBackground="@null"
-        android:layout_height="80dp" />
+        android:layout_height="80dp"
+        android:layout_marginBottom="-10dp"/>
 
 </LinearLayout>

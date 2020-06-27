@@ -25,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -80,9 +81,8 @@ public class ManageRDFragment extends Fragment {
 
     //声明控件等
     private RefreshListView lvTrace;
-    private List<RepairDorApply> applyList = new ArrayList<>(10);
+    private List<RepairDorApply> applyList = new ArrayList<>();
     private MRDFAdapter adapter;
-    private LinearLayout Noapply;
     View view;
 
     @Override
@@ -91,31 +91,28 @@ public class ManageRDFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_manage_r_d, container, false);
 
         lvTrace = (RefreshListView) view.findViewById(R.id.MRDF_Listview);  //有申请时显示
+        adapter = new MRDFAdapter(getActivity(), applyList);
+        lvTrace.setAdapter(adapter);
         lvTrace.setonRefreshListener(new RefreshListView.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 applyList.clear();
-                adapter.notifyDataSetChanged();
                 initRepairApply("00001","123456");
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         if(finishrefresh) {
                             lvTrace.onRefreshComplete();
-                            finishrefresh=false;
-                            Toast.makeText(getActivity(),"刷新成功",Toast.LENGTH_SHORT).show();
-                        }
+                            finishrefresh=false;}
                     }
-                },2000);
+                },500);
 
             }
         });
-        Noapply=view.findViewById(R.id.MRDF_NoApply);   //无申请时显示
 
         //判断当前是否有申请
         //-----------------------------若有则进行以下操作---------------------------------------------
         initRepairApply("00001","123456");
-
         return view;
     }
     void initRepairApply(final String a_id, final String password){
@@ -132,10 +129,6 @@ public class ManageRDFragment extends Fragment {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject=new JSONObject(response);
-                            if(jsonObject.length()==0){
-                                lvTrace.setVisibility(View.GONE);
-                                Noapply.setVisibility(View.VISIBLE);
-                            }else{
                             JSONObject jsonObject2;
                             for(int j=1;j<=jsonObject.length();j++) {
                                 RepairDorApply rapply = new RepairDorApply();
@@ -151,10 +144,8 @@ public class ManageRDFragment extends Fragment {
                                 rapply.setSid(jsonObject2.getString("s_id"));
                                 rapply.setState(jsonObject2.getString("state"));
                                 applyList.add(rapply);
-                                adapter = new MRDFAdapter(getActivity(), applyList);
-                                lvTrace.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
                                 finishrefresh=true;
-                               }
                             }
                         } catch (JSONException e) {
                             Toast.makeText(getActivity(),"无网络连接！",Toast.LENGTH_SHORT).show();

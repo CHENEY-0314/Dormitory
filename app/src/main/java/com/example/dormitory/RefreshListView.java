@@ -1,7 +1,10 @@
 package com.example.dormitory;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -139,9 +143,19 @@ public class RefreshListView extends ListView implements OnScrollListener {
     }
 
     public void onRefreshComplete() {
-        mState = DONE;
-        mLastUpdatedTextView.setText("最近更新：" + new Date().toLocaleString());
-        changeHeaderViewByState();
+        mArrowImageView.setImageResource(R.drawable.finish);
+        mArrowImageView.setVisibility(VISIBLE);
+        mProgressBar.setVisibility(INVISIBLE);
+        mTipsTextView.setText("刷新完成");
+        mTipsTextView.setTextColor(getResources().getColor(R.color.black));
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mState = DONE;
+                mLastUpdatedTextView.setText("最近更新：" + new Date().toLocaleString());
+                changeHeaderViewByState();
+            }
+        },1000);
     }
 
     public void setonRefreshListener(OnRefreshListener onRefreshListener) {
@@ -258,7 +272,7 @@ public class RefreshListView extends ListView implements OnScrollListener {
                 mArrowImageView.clearAnimation();
                 mArrowImageView.setVisibility(GONE);
                 mTipsTextView.setTextColor(getResources().getColor(R.color.blue));
-                mTipsTextView.setText("正在加载中");
+                mTipsTextView.setText("正在刷新中");
                 break;
 
             case RELEASE_TO_REFRESH:
@@ -280,4 +294,41 @@ public class RefreshListView extends ListView implements OnScrollListener {
         String CurrentTime = dff.format(new Date());
         return CurrentTime;
     }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        setEmptyViews();
+    }
+
+    /**
+     * 设置listview数据为空时的 提示,在onlayout方法中设置可以保证获取此listview 的父ViewGroup
+     */
+    private void setEmptyViews() {
+        ViewGroup viewParent = (ViewGroup) this.getParent();
+        if (getEmptyView() == null) {
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            LinearLayout Layout = new LinearLayout(getContext());
+            Layout.setOrientation(LinearLayout.VERTICAL);
+            Layout.setGravity(Gravity.CENTER);
+            Layout.setLayoutParams(params);
+            ImageView emptybox = new ImageView(getContext());
+            Layout.addView(emptybox);
+            emptybox.setImageResource(R.drawable.grey_bed);
+            emptybox.setColorFilter(R.color.normal);
+            LinearLayout.LayoutParams emptyboxlayoutParams = new LinearLayout.LayoutParams(250, 250);
+            emptybox.setLayoutParams(emptyboxlayoutParams);
+            TextView tv = new TextView(getContext());
+            tv.setText("暂时无新消息!");
+            tv.setTextColor(getResources().getColor(R.color.normal));
+            tv.setGravity(Gravity.CENTER);
+            Layout.addView(tv);
+            //LinearLayout.LayoutParams tvlayoutParams = (LinearLayout.LayoutParams) tv.getLayoutParams();
+            if (viewParent != null) {
+                viewParent.addView(Layout);
+            }
+            setEmptyView(Layout);
+        }
+    }
+
 }
