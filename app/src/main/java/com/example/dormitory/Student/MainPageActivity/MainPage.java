@@ -25,7 +25,6 @@ import com.android.volley.toolbox.Volley;
 
 import com.example.dormitory.R;
 import com.example.dormitory.Student.NotePageActivity.TimeDifCalculater;
-import com.example.dormitory.Student.Tabbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,17 +34,17 @@ import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
+import sakura.particle.Factory.ExplodeParticleFactory;
+import sakura.particle.Main.ExplosionSite;
 
 public class MainPage extends Fragment {
 
     private long exitTime=0;  //用于判断两次点击退出主页的事件间隔
 
     Boolean ifhaveIntention=false;  //用于标志是否有换宿意向
+    Boolean light=false;  //用于标志是否点灯
 
-    private ImageView changeIntention,back;
+    private ImageView changeIntention,back,mlight,qiqiu;
     private CardView toChange;//申请换宿舍
     private  CardView toRepair;//宿舍报修
 
@@ -53,6 +52,7 @@ public class MainPage extends Fragment {
     private SharedPreferences mUser;
     private SharedPreferences.Editor mUserEditor;
 
+    private ExplosionSite mexplosionSite;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,14 +63,21 @@ public class MainPage extends Fragment {
         toRepair=view.findViewById(R.id.repair);
         changeIntention=view.findViewById(R.id.MPL_changeIntention);
         back=view.findViewById(R.id.mainback);
+        mlight=view.findViewById(R.id.image13);
+        qiqiu=view.findViewById(R.id.image12);
+
         mUser=getActivity().getSharedPreferences("userdata",MODE_PRIVATE);
         mUserEditor=mUser.edit();
+
+        mexplosionSite  = new ExplosionSite(getActivity(), new ExplodeParticleFactory());
+        mexplosionSite.addListener(qiqiu);
 
         //声明点击事件
         toChange.setOnClickListener(new ButtonListener());
         toRepair.setOnClickListener(new ButtonListener());
         changeIntention.setOnClickListener(new ButtonListener());
         back.setOnClickListener(new ButtonListener());
+        mlight.setOnClickListener(new ButtonListener());
 
         if(mUser.getBoolean("switch_state",false)){
             ifhaveIntention=true;
@@ -140,6 +147,19 @@ public class MainPage extends Fragment {
                 case R.id.MPL_changeIntention:{
                         //切换状态，出现再次确认弹窗
                         popDetail();
+                        break;
+                }
+                case R.id.image13:{
+                    //点灯
+                    if(light){
+                        //关灯
+                        mlight.setImageDrawable(getResources().getDrawable((R.drawable.mainpage_nolight)));
+                        light=false;
+                    }else{
+                        mlight.setImageDrawable(getResources().getDrawable((R.drawable.mainpage_light)));
+                        light=true;
+                    }
+                    break;
                 }
                 case R.id.mainback:{  //退出程序
                     if ((System.currentTimeMillis() - exitTime) > 2000) {
@@ -151,7 +171,8 @@ public class MainPage extends Fragment {
                         getActivity().finish();
                         getActivity().overridePendingTransition(R.anim.fade_in,R.anim.fade_out);  //更改跳转动画
                     }
-                    }
+                    break;
+                }
                 default:break;
             }
         }

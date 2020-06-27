@@ -98,7 +98,7 @@ public class AdviceActivity extends AppCompatActivity {
                             JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");
                             System.out.println(jsonObject.getString("Result"));
                             System.out.println("success: "+content.length());
-                            if(jsonObject.getString("Result").equals("success: "+content.length())){
+                            if(jsonObject.getString("Result").equals("success")){
                                 //提交成功后直接退出页面
                                 Toast.makeText(AdviceActivity.this,"提交成功",Toast.LENGTH_SHORT).show();
                                 AdviceActivity.this.finish();
