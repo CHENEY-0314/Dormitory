@@ -91,6 +91,7 @@ public class ManageRDFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_manage_r_d, container, false);
 
         lvTrace = (RefreshListView) view.findViewById(R.id.MRDF_Listview);  //有申请时显示
+        lvTrace.setVerticalScrollBarEnabled(false);
         adapter = new MRDFAdapter(getActivity(), applyList);
         lvTrace.setAdapter(adapter);
         lvTrace.setonRefreshListener(new RefreshListView.OnRefreshListener() {

@@ -69,6 +69,7 @@ public class ManageCDFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_manage_r_d, container, false);
 
         lvTrace = (ListView) view.findViewById(R.id.MRDF_Listview);  //有申请时显示
+        lvTrace.setVerticalScrollBarEnabled(false);
         Noapply=view.findViewById(R.id.MRDF_NoApply);   //无申请时显示
 
         //判断当前是否有申请
