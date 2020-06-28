@@ -40,9 +40,10 @@
                         />
                 </LinearLayout>
 
-
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
                 <com.scwang.smartrefresh.layout.SmartRefreshLayout
-                    xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/refreshLayout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -61,6 +62,17 @@
                         android:layout_height="wrap_content"
                         app:srlAccentColor="@color/white"/>
                 </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:src="@drawable/totop"
+            app:backgroundTint="@color/white2"
+            app:rippleColor="@color/mask_color"
+            android:layout_marginBottom="20dp"
+             />
+</FrameLayout>
         <LinearLayout
             android:id="@+id/NoNote"
             android:layout_width="match_parent"

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -255,12 +256,7 @@ public class MRDFAdapter extends BaseAdapter {
                             String Result=jsonObject.getString("result").toString();
                             if(Result.equals("success"))
                             {ApplyList.remove(position);
-                                notifyDataSetChanged();
-                            if(ApplyList.isEmpty())
-                            {
-                                lvTrace.setVisibility(View.GONE);
-                                Noapply.setVisibility(View.VISIBLE);
-                            }
+                            notifyDataSetChanged();
                             }
                             Toast.makeText(context,Result,Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {

@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.dormitory.R;
 import com.example.dormitory.RefreshListView;
 import com.example.dormitory.Student.Adapters.ExpandFoldTextAdapter;
+import com.example.dormitory.Student.NotePageActivity.GetLocalUserData;
 import com.example.dormitory.Student.NotePageActivity.Note;
 
 import org.json.JSONException;
@@ -46,6 +47,8 @@ public class ManageRDFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     boolean finishrefresh=false;
+    GetLocalUserData getLocalUserData;
+
     public ManageRDFragment() {
         // Required empty public constructor
     }
@@ -93,14 +96,14 @@ public class ManageRDFragment extends Fragment {
 
         lvTrace = (RefreshListView) view.findViewById(R.id.MRDF_Listview);  //有申请时显示
         lvTrace.setVerticalScrollBarEnabled(false);
-
+        getLocalUserData=new GetLocalUserData(getActivity(),false);
         adapter = new MRDFAdapter(getActivity(), applyList);
         lvTrace.setAdapter(adapter);
         lvTrace.setonRefreshListener(new RefreshListView.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 applyList.clear();
-                initRepairApply("00001","123456");
+                initRepairApply(getLocalUserData.getId(),getLocalUserData.getPassword());
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -114,13 +117,11 @@ public class ManageRDFragment extends Fragment {
         });
         Noapply=view.findViewById(R.id.MRDF_NoApply);
         lvTrace.setEmptyView(Noapply);
-        //判断当前是否有申请
-        //-----------------------------若有则进行以下操作---------------------------------------------
-        initRepairApply("00001","123456");
+        initRepairApply(getLocalUserData.getId(),getLocalUserData.getPassword());
         return view;
     }
     void initRepairApply(final String a_id, final String password){
-        String url="http://39.97.114.188/Dormitory/servlet/AdmGetFixApplyServlet?a_id=000001&password=123456";
+        String url="http://39.97.114.188/Dormitory/servlet/AdmGetFixApplyServlet?a_id=0"+a_id+"&password="+password;
         String tag= "getrepaiapply";
         //取得请求队列
         RequestQueue getrepaiapply = Volley.newRequestQueue(getActivity());

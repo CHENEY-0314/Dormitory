@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.InputFilter;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,6 +82,8 @@ public class SetupActivity extends AppCompatActivity {
                 //绑定自定义布局里的EditText控件
                 final EditText editPhone=view.findViewById(R.id.edit_phone);
                 //将自定义布局布置到弹窗里，并设置弹窗外不可点击
+                InputFilter[] filters = {new InputFilter.LengthFilter(11)};
+                editPhone.setFilters(filters);
                 builder.setView(view);
                 //设置确认按钮
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {

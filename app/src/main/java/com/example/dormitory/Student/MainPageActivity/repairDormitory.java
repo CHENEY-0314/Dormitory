@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -53,6 +54,8 @@ public class repairDormitory extends AppCompatActivity {
         setContentView(R.layout.activity_repair_dormitory);
         //初始化函数包括绑定控件、声明监听事件、返回事件、初始化submitOrNot布尔数组、初始化楼号 宿舍号 学号这三个默认初值
         init();
+        InputFilter[] filters = {new InputFilter.LengthFilter(11)};
+        mEdtPhoneNum.setFilters(filters);
         //监听手机号框位数变化
         mEdtPhoneNum.addTextChangedListener(new TextWatcher() {
             @Override
@@ -87,7 +90,8 @@ public class repairDormitory extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
             @Override
             public void afterTextChanged(Editable s) {  //监听输入框字数变化
                 mOtherNum.setText(String.valueOf(s.length())+"/400");

@@ -3,6 +3,7 @@ package com.example.dormitory.Administrator.ManageApply;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dormitory.R;
+import com.example.dormitory.RefreshListView;
 import com.example.dormitory.Student.Adapters.TimeLineAdapter;
 import com.example.dormitory.Student.MyPagesActivity.Trace;
 
@@ -39,7 +41,7 @@ public class ManageCDFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    boolean finishrefresh=false;
     public ManageCDFragment() {
         // Required empty public constructor
     }
@@ -74,7 +76,7 @@ public class ManageCDFragment extends Fragment {
     //以上均使不需要理会
 
     //声明控件
-    private ListView lvTrace;
+    private RefreshListView lvTrace;
     private List<ChangeDorApply> applyList = new ArrayList<>(10);
     private MCDFAdapter adapter;
     private LinearLayout Noapply;
@@ -83,30 +85,29 @@ public class ManageCDFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.fragment_manage_r_d, container, false);
+        final View view = inflater.inflate(R.layout.fragment_manage_r_d, container, false);
 
-        lvTrace = (ListView) view.findViewById(R.id.MRDF_Listview);  //有申请时显示
+        lvTrace = (RefreshListView) view.findViewById(R.id.MRDF_Listview);  //有申请时显示
         lvTrace.setVerticalScrollBarEnabled(false);
         Noapply=view.findViewById(R.id.MRDF_NoApply);   //无申请时显示
+        lvTrace.setEmptyView(Noapply);
+        lvTrace.setonRefreshListener(new RefreshListView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                applyList.clear();
+                loadApply(view);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(finishrefresh) {
+                            lvTrace.onRefreshComplete();
+                            finishrefresh=false;}
+                    }
+                },500);
+
+            }
+        });
         loadApply(view);
-        //判断当前是否有申请
-        //-----------------------------若有则进行以下操作---------------------------------------------
-
-        //创建四个人的信息，两两一对进行换宿舍，内容包括姓名，性别，楼栋，房间号，床位号，学号
-//        String[] mess1_person1=new String[]{"张三","男","C10","234","4号","201812345678"};
-//        String[] mess1_person2=new String[]{"李四","男","C12","567","1号","201911112222"};
-//        String[] mess2_person1=new String[]{"王五","女","C5","666","2号","201933334444"};
-//        String[] mess2_person2=new String[]{"晓晓","女","C5","520","3号","201920131415"};
-//        //向list中添加两条换宿申请信息
-//        applyList.add(new ChangeDorApply(mess1_person1,mess1_person2,true));
-//        applyList.add(new ChangeDorApply(mess2_person1,mess2_person2,true));
-//        adapter = new MCDFAdapter(view.getContext(), applyList);
-//        lvTrace.setAdapter(adapter);
-
-
-        //--------------------------------若无申请，进行以下操作--------------------------------------
-//        lvTrace.setVisibility(View.GONE);
-//        Noapply.setVisibility(View.VISIBLE);
 
         return view;
     }
@@ -191,16 +192,9 @@ public class ManageCDFragment extends Fragment {
                                     }
                                 }
                             }
-                            if(apply_num==0){
-                                //长度为0，表示没有相应状态的申请，显示没有申请
-                                //--------------------------------若无申请，进行以下操作--------------------------------------
-                                lvTrace.setVisibility(View.GONE);
-                                Noapply.setVisibility(View.VISIBLE);
-                            }
-                            else{
                                 adapter = new MCDFAdapter(view.getContext(), applyList);
                                 lvTrace.setAdapter(adapter);
-                            }
+                                finishrefresh=true;
                         }catch (JSONException e){
                             System.out.println(e);
                             Toast.makeText(getContext(),"JSONException:请稍后重试！",Toast.LENGTH_SHORT).show();
