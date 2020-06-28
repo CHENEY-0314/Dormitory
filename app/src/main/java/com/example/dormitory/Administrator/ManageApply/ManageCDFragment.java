@@ -69,6 +69,7 @@ public class ManageCDFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_manage_r_d, container, false);
 
         lvTrace = (ListView) view.findViewById(R.id.MRDF_Listview);  //有申请时显示
+        lvTrace.setVerticalScrollBarEnabled(false);
         Noapply=view.findViewById(R.id.MRDF_NoApply);   //无申请时显示
 
         //判断当前是否有申请
@@ -84,12 +85,9 @@ public class ManageCDFragment extends Fragment {
         applyList.add(new ChangeDorApply(mess2_person1,mess2_person2));
         adapter = new MCDFAdapter(view.getContext(), applyList);
         lvTrace.setAdapter(adapter);
-
-
         //--------------------------------若无申请，进行以下操作--------------------------------------
 //        lvTrace.setVisibility(View.GONE);
 //        Noapply.setVisibility(View.VISIBLE);
-
         return view;
     }
 }

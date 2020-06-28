@@ -1,7 +1,12 @@
 package com.example.dormitory;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,6 +28,13 @@ import java.util.TimeZone;
 
 public class RefreshListView extends ListView implements OnScrollListener {
 
+    String beforecolor;
+    String aftercolor;
+    String timecolor;
+    String emptytext;
+    String emptytextcolor;
+    String emptyimagecolor;
+    Drawable emptyimage;
     //释放刷新
     private final static int RELEASE_TO_REFRESH = 0;
     //下拉刷新
@@ -57,6 +70,17 @@ public class RefreshListView extends ListView implements OnScrollListener {
 
     public RefreshListView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        // 读取到传入的attrs
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.RefreshListView);
+        timecolor = array.getString(R.styleable.RefreshListView_TimeColor);
+        beforecolor=array.getString(R.styleable.RefreshListView_TipColorBefore);
+        aftercolor=array.getString(R.styleable.RefreshListView_TipColorAfter);
+        emptytext=array.getString(R.styleable.RefreshListView_EmptyText);
+        emptytextcolor=array.getString(R.styleable.RefreshListView_EmptyTextColor);
+        emptyimage=array.getDrawable(R.styleable.RefreshListView_EmptyImage);
+        emptyimagecolor=array.getString(R.styleable.RefreshListView_EmptyImageColor);
+        array.recycle();
+
         init(context);
     }
 
@@ -139,9 +163,19 @@ public class RefreshListView extends ListView implements OnScrollListener {
     }
 
     public void onRefreshComplete() {
-        mState = DONE;
-        mLastUpdatedTextView.setText("最近更新：" + new Date().toLocaleString());
-        changeHeaderViewByState();
+        mArrowImageView.setImageResource(R.drawable.finish);
+        mArrowImageView.setVisibility(VISIBLE);
+        mProgressBar.setVisibility(INVISIBLE);
+        mTipsTextView.setText("刷新完成");
+        mTipsTextView.setTextColor(getResources().getColor(R.color.black));
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mState = DONE;
+                mLastUpdatedTextView.setText("最近更新：" + new Date().toLocaleString());
+                changeHeaderViewByState();
+            }
+        },1000);
     }
 
     public void setonRefreshListener(OnRefreshListener onRefreshListener) {
@@ -258,7 +292,7 @@ public class RefreshListView extends ListView implements OnScrollListener {
                 mArrowImageView.clearAnimation();
                 mArrowImageView.setVisibility(GONE);
                 mTipsTextView.setTextColor(getResources().getColor(R.color.blue));
-                mTipsTextView.setText("正在加载中");
+                mTipsTextView.setText("正在刷新中");
                 break;
 
             case RELEASE_TO_REFRESH:
@@ -280,4 +314,38 @@ public class RefreshListView extends ListView implements OnScrollListener {
         String CurrentTime = dff.format(new Date());
         return CurrentTime;
     }
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        setEmptyViews();
+    }
+    /**
+     * 设置listview数据为空时的 提示,在onlayout方法中设置可以保证获取此listview 的父ViewGroup
+     */
+    private void setEmptyViews() {
+        if (getEmptyView() == null) {
+            ViewGroup viewParent = (ViewGroup) this.getParent();
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            LinearLayout Layout = new LinearLayout(getContext());
+            Layout.setOrientation(LinearLayout.VERTICAL);
+            Layout.setGravity(Gravity.CENTER);
+            Layout.setLayoutParams(params);
+            ImageView emptybox = new ImageView(getContext());
+            Layout.addView(emptybox);
+            emptybox.setImageDrawable(emptyimage);
+            emptybox.setColorFilter(Color.parseColor(emptyimagecolor));
+            LinearLayout.LayoutParams emptyboxlayoutParams = new LinearLayout.LayoutParams(250, 250);
+            emptybox.setLayoutParams(emptyboxlayoutParams);
+            TextView tv = new TextView(getContext());
+            tv.setText(emptytext);
+            tv.setTextColor(Color.parseColor(emptytextcolor));
+            tv.setGravity(Gravity.CENTER);
+            Layout.addView(tv);
+            if (viewParent != null) {
+                viewParent.addView(Layout);
+            }
+            setEmptyView(Layout);
+        }
+    }
+
 }

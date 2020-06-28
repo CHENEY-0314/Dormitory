@@ -1,9 +1,15 @@
 package com.example.dormitory.Administrator.ReleaseNote;
 
+import android.app.Dialog;
+import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Display;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -72,10 +78,38 @@ public class ReleaseNoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //点击提交通知按钮
-                String headtext=head.getText().toString();
-                String content=note.getText().toString();
-                sendData(headtext,content);
-                mbtnsubmit.setText("发布中…");
+                final Dialog dlg = new Dialog(ReleaseNoteActivity.this);
+                dlg.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                dlg.show();
+                Window window = dlg.getWindow();
+                WindowManager windowManager = ReleaseNoteActivity.this.getWindowManager();
+                Display display = windowManager.getDefaultDisplay();
+                WindowManager.LayoutParams lp = dlg.getWindow().getAttributes();
+                Point size =new Point();
+                display.getSize(size);
+                int width= size.x;
+                lp.width = (int) (width-200); // 设置宽度
+                dlg.getWindow().setAttributes(lp);
+                window.setContentView(R.layout.dialog_box_adm);
+                // 为确认按钮添加事件,执行退出应用操作
+                Button btnok=(Button)window.findViewById(R.id.btn_ok);
+                Button btncancel=(Button)window.findViewById(R.id.btn_cancel);
+                TextView text=(TextView)window.findViewById(R.id.dialog_box_text);
+                text.setText("确认发布？");
+                btnok.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        String headtext=head.getText().toString();
+                        String content=note.getText().toString();
+                        sendData(headtext,content);
+                        mbtnsubmit.setText("发布中…");
+                        dlg.dismiss();
+                    }
+                });
+                btncancel.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        dlg.cancel();
+                    }
+                });
             }
         });
 
@@ -108,8 +142,8 @@ public class ReleaseNoteActivity extends AppCompatActivity {
                             if(Result.equals("Success")){
                                 System.out.println(Result);
                                 mbtnsubmit.setText("发布");
-                                //mbtnsubmit.setEnabled(false);
-                                //finish();
+                                mbtnsubmit.setEnabled(false);
+                                finish();
                                 Toast toast=Toast.makeText(ReleaseNoteActivity.this,null,Toast.LENGTH_SHORT);
                                 toast.setText("发布成功");
                                 toast.show();

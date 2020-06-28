@@ -29,10 +29,6 @@ public class Tabbar extends AppCompatActivity{
 
     private long exitTime=0;  //用于判断两次点击退出主页的事件间隔
 
-    private final String ONE = "one";
-    private final String TWO = "two";
-    private final String THREE = "three";
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
