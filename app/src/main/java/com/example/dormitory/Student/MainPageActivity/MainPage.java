@@ -29,8 +29,11 @@ import com.example.dormitory.Student.NotePageActivity.TimeDifCalculater;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -69,6 +72,7 @@ public class MainPage extends Fragment {
         mUser=getActivity().getSharedPreferences("userdata",MODE_PRIVATE);
         mUserEditor=mUser.edit();
 
+        System.out.println(mUser.getString("firstopentime","?????????????????????????"));
         mexplosionSite  = new ExplosionSite(getActivity(), new ExplodeParticleFactory());
         mexplosionSite.addListener(qiqiu);
 
@@ -103,8 +107,8 @@ public class MainPage extends Fragment {
                 if(mUser.getString("firstopentime","").equals("")){  //本地记录的上次切换时间不存在，则一定可以切换状态
                     setSwitch_state_enable();  //进行状态切换
                 }else{   //本地有记录上一次切换转换状态时间，要判断是否经过了一天
-                    timeDifCalculater=new TimeDifCalculater(mUser.getString("firstopentime",""));
-                    String dw=timeDifCalculater.getTimeDif().substring(timeDifCalculater.getTimeDif().length()-1);
+                    timeDifCalculater=new TimeDifCalculater(mUser.getString("firstopentime","2020:06:18:00:00"));
+                    String dw=timeDifCalculater.getTimeDif().substring(timeDifCalculater.getTimeDif().length()-2);
                     if(dw.equals("年")||dw.equals("月")||dw.equals("天")) {  //超过一天，进行状态切换
                         setSwitch_state_enable();
                     } else{   //未超过一天，不能切换
@@ -196,9 +200,9 @@ public class MainPage extends Fragment {
                     public void onResponse(String response) {
                         try {
                             //将从数据库获取到的消息保存在本地
-                            JSONObject jsonObject = (JSONObject) new JSONObject(response);
+                            JSONObject jsonObject = new JSONObject(response);
                             if(jsonObject.getString("result").equals("0")||jsonObject.getString("result").equals("false")){  //成功切换状态
-                                mUserEditor.putString("firstopentime","");  //更新本地记录
+                                mUserEditor.putString("firstopentime",getCurrentTime());  //更新本地记录
                                 mUserEditor.apply();
                                 if(!ifhaveIntention){
                                     //打开换宿意向
@@ -246,6 +250,12 @@ public class MainPage extends Fragment {
         //将请求添加到队列中
         changeintention.add(changeintentionrequest);
 
+    }
+    private String getCurrentTime() {
+        SimpleDateFormat dff = new SimpleDateFormat("yyyy:MM:dd:HH:mm");
+        dff.setTimeZone(TimeZone.getTimeZone("GMT+08"));
+        String CurrentTime = dff.format(new Date());
+        return CurrentTime;
     }
 
 }
