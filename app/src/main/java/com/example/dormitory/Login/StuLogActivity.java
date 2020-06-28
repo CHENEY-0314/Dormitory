@@ -202,6 +202,8 @@ public class StuLogActivity extends AppCompatActivity {
                             },800);
                         } catch (JSONException e) {
                             //做自己的请求异常操作，如Toast提示（“无网络连接”等）
+                            System.out.println(e);
+                            System.out.println("JSONException，请联系管理员！");
                             Toast.makeText(StuLogActivity.this,"登录异常，请联系管理员！",Toast.LENGTH_SHORT).show();
                             btnlogin.setVisibility(View.VISIBLE);
                             loading.setVisibility(View.GONE);
@@ -212,6 +214,8 @@ public class StuLogActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
+                System.out.println(error);
+                System.out.println("VolleyError，请联系管理员！");
                 Toast.makeText(StuLogActivity.this,"无网络连接,请稍后重试！",Toast.LENGTH_SHORT).show();
                 btnlogin.setVisibility(View.VISIBLE);
                 loading.setVisibility(View.GONE);
@@ -272,6 +276,8 @@ public class StuLogActivity extends AppCompatActivity {
                             },1800);
                         } catch (JSONException e) {
                             //做自己的请求异常操作，如Toast提示（“无网络连接”等）
+                            System.out.println(e);
+                            System.out.println("登录异常，请联系管理员！");
                             Toast.makeText(StuLogActivity.this,"登录异常，请联系管理员！",Toast.LENGTH_SHORT).show();
                             btnlogin.setVisibility(View.VISIBLE);
                             loading.setVisibility(View.GONE);

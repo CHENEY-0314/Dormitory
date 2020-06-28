@@ -52,6 +52,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
         <LinearLayout
+            android:id="@+id/MyCDF_alterApply"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/white"
@@ -77,6 +78,24 @@
                 android:textSize="14sp"
                 android:textColor="#333333"
                 android:text="撤销申请"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/MyCDF_verifyApply"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/white"
+            android:layout_marginTop="10dp"
+            android:visibility="visible"
+            android:gravity="center">
+            <Button
+                android:id="@+id/MyCDF_btn_verify"
+                android:layout_width="150dp"
+                android:layout_height="38dp"
+                android:background="@drawable/green_btn"
+                android:enabled="false"
+                android:text="确认完成"
+                android:textColor="@color/white"
+                android:textSize="15sp"/>
         </LinearLayout>
 
         <ListView
