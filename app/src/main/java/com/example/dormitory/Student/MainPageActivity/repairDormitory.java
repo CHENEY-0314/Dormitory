@@ -284,7 +284,7 @@ public class repairDormitory extends AppCompatActivity {
             System.out.println(s_id+"\n"+contact+"\n"+maintenance+"\n"+moreInformation+"\n"+time);
             //请求地址
             //http://39.97.114.188/Dormitory/servlet/MaintenanceApplyServlet?s_id=201830760178&maintenance=电器&remark=备注&contact=13000000&time=2018:06:12:12:30
-            String url = "http://39.97.114.188/Dormitory/servlet/MaintenanceApplyServlet?s_id="+s_id+"&maintenance=="+maintenance+"&remark="+moreInformation+"&contact="+contact+"&time="+time;
+            String url = "http://39.97.114.188/Dormitory/servlet/MaintenanceApplyServlet?s_id="+s_id+"&maintenance="+maintenance+"&remark="+moreInformation+"&contact="+contact+"&time="+time;
             String tag = "subRepairApply";
             //取得请求队列
             RequestQueue subRepairApply = Volley.newRequestQueue(this);
