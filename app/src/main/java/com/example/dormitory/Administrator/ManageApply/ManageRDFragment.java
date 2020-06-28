@@ -83,6 +83,7 @@ public class ManageRDFragment extends Fragment {
     private RefreshListView lvTrace;
     private List<RepairDorApply> applyList = new ArrayList<>();
     private MRDFAdapter adapter;
+    private LinearLayout Noapply;
     View view;
 
     @Override
@@ -92,6 +93,7 @@ public class ManageRDFragment extends Fragment {
 
         lvTrace = (RefreshListView) view.findViewById(R.id.MRDF_Listview);  //有申请时显示
         lvTrace.setVerticalScrollBarEnabled(false);
+
         adapter = new MRDFAdapter(getActivity(), applyList);
         lvTrace.setAdapter(adapter);
         lvTrace.setonRefreshListener(new RefreshListView.OnRefreshListener() {
@@ -110,7 +112,8 @@ public class ManageRDFragment extends Fragment {
 
             }
         });
-
+        Noapply=view.findViewById(R.id.MRDF_NoApply);
+        lvTrace.setEmptyView(Noapply);
         //判断当前是否有申请
         //-----------------------------若有则进行以下操作---------------------------------------------
         initRepairApply("00001","123456");

@@ -85,12 +85,9 @@ public class ManageCDFragment extends Fragment {
         applyList.add(new ChangeDorApply(mess2_person1,mess2_person2));
         adapter = new MCDFAdapter(view.getContext(), applyList);
         lvTrace.setAdapter(adapter);
-
-
         //--------------------------------若无申请，进行以下操作--------------------------------------
 //        lvTrace.setVisibility(View.GONE);
 //        Noapply.setVisibility(View.VISIBLE);
-
         return view;
     }
 }
