@@ -5,6 +5,7 @@
     android:background="@color/colorPrimary">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/AIRD_wholeItem"
         android:layout_width="match_parent"
         android:layout_marginTop="20dp"
         android:layout_height="wrap_content">
@@ -86,6 +87,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/AIRD_notYetAgree"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -111,6 +113,25 @@
                     android:textSize="13sp"
                     android:background="@drawable/green_btn"/>
 
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/AIRD_allreadyAgree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="35dp"
+                    android:text="已同意，正在处理"
+                    android:layout_marginStart="10dp"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:enabled="false"
+                    android:background="@drawable/green_btn"/>
             </LinearLayout>
 
         </LinearLayout>

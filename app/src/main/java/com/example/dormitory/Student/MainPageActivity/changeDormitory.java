@@ -132,7 +132,57 @@ public class changeDormitory extends AppCompatActivity {
         editRoom.setHint(mUser.getString("room_num","未获取"));
     }
 
-    //点击查看筛选结果
+    //点击查看筛选结果，进行能否查看的判断，能则加载，不能则弹出提示
+    private void ifCanChange(){
+        //获取本地数据库中的账号密码
+        mUser=getSharedPreferences("userdata",MODE_PRIVATE);
+        String s_id=mUser.getString("s_id","");
+        String password=mUser.getString("password","");
+        //请求地址
+        //http://39.97.114.188/Dormitory/servlet/ExchangingServlet?s_id=201830660178&password=123456
+        String url = "http://39.97.114.188/Dormitory/servlet/ExchangingServlet?s_id="+s_id+"&password="+password;
+        String tag = "ifCanChange";
+        //取得请求队列
+        RequestQueue ifCanChange = Volley.newRequestQueue(this);
+        //防止重复请求，所以先取消tag标识的请求队列
+        ifCanChange.cancelAll(tag);
+        //创建StringRequest，定义字符串请求的请求方式为POST(省略第一个参数会默认为GET方式)
+        final StringRequest ifCanChangerequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");
+                            System.out.println("输出JSONObject："+jsonObject);
+                            if(jsonObject.getString("result").equals("success")){
+                                AlertDialog.Builder builder=new AlertDialog.Builder(changeDormitory.this);
+                                builder.setMessage("您有申请正在处理中，无法进行查看!").setCancelable(false).setPositiveButton("我知道了",null).show();
+                            }
+                            else{
+                                lookSelectedResult();
+                            }
+
+                        } catch (JSONException e) {
+                            System.out.println(e);
+                            //做自己的请求异常操作，如Toast提示（“无网络连接”等）
+                            Toast.makeText(changeDormitory.this,"错误：JSONException",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+                //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
+                Toast.makeText(changeDormitory.this,"error",Toast.LENGTH_SHORT).show();
+            }
+        }) {
+        };
+        //设置Tag标签
+        ifCanChangerequest.setTag(tag);
+        //将请求添加到队列中
+        ifCanChange.add(ifCanChangerequest);
+    }
+    //加载筛选结果
     private void lookSelectedResult(){
         //获取选中的楼栋、楼层、床位号
         //直接获取楼栋
@@ -163,8 +213,8 @@ public class changeDormitory extends AppCompatActivity {
             if(CheBox_bed_4.isChecked()) Bed_num+=(Bed_num.length()==0?"4":";4");
         }
         //请求地址
-        //http://39.97.114.188/Dormitory/servlet/ChangeScreenServlet?building=C10&floor=1;2&bed_num=0
-        String url = "http://39.97.114.188/Dormitory/servlet/ChangeScreenServlet?building="+Building+"&floor="+Floor+"&bed_num="+Bed_num;
+        //http://39.97.114.188/Dormitory/servlet/ExchangeScreenServlet?building=C10&floor=1;2&bed_num=0
+        String url = "http://39.97.114.188/Dormitory/servlet/ExchangeScreenServlet?building="+Building+"&floor="+Floor+"&bed_num="+Bed_num;
         String tag = "SelectedResult";
         //取得请求队列
         RequestQueue SelectedResult = Volley.newRequestQueue(this);
@@ -190,6 +240,14 @@ public class changeDormitory extends AppCompatActivity {
                                     selectedResult[i-1]+=jsonObject1.getString("room_num");
                                     selectedResult[i-1]+=";";
                                     selectedResult[i-1]+=jsonObject1.getString("bed_num");
+                                    selectedResult[i-1]+=";";
+                                    selectedResult[i-1]+=jsonObject1.getString("contact");
+                                    selectedResult[i-1]+=";";
+                                    selectedResult[i-1]+=jsonObject1.getString("target_id");
+                                    selectedResult[i-1]+=";";
+                                    selectedResult[i-1]+=jsonObject1.getString("name");
+                                    selectedResult[i-1]+=";";
+                                    selectedResult[i-1]+=jsonObject1.getString("sex");
                                 }
 //                                System.out.println(selectedResult[0]);
                                 //跳转到筛选结果页面，将selectedResult传参过去
@@ -301,8 +359,9 @@ public class changeDormitory extends AppCompatActivity {
                     break;
                 }
                 case R.id.changeDor_submit:{
-                    //跳转到筛选结果页面
-                    lookSelectedResult();
+                    //进行判断，根据结果出现弹窗或者跳转到筛选结果页面
+                    ifCanChange();
+//                    lookSelectedResult();
 //                    Intent intent=new Intent(changeDormitory.this,selectResult.class);
 //                    startActivity(intent);
                     break;

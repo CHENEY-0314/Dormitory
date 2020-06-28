@@ -9,11 +9,14 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.dormitory.R;
+import com.example.dormitory.Student.Tabbar;
 
-public class selectResult extends AppCompatActivity {
+public class selectResult extends AppCompatActivity implements itemOnClickListener {
     //声明RecyclerView组件 返回按钮组件
     private RecyclerView mRvSelect;
     private ImageView mBack;
@@ -36,7 +39,10 @@ public class selectResult extends AppCompatActivity {
         //设置分割线
         mRvSelect.addItemDecoration(new MyDecoration());
         //将适配器布置到组件上，适配器为自定义，见LinearAdapater.java文件
-        mRvSelect.setAdapter(new LinearAdapater(selectResult.this,selectedResult));
+        LinearAdapater myAdapter=new LinearAdapater(selectResult.this,selectedResult);
+        myAdapter.setBTListener(this);
+        mRvSelect.setAdapter(myAdapter);
+//        mRvSelect.setAdapter(new LinearAdapater(selectResult.this,selectedResult));
         mBack=findViewById(R.id.selectRes_back);
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +50,14 @@ public class selectResult extends AppCompatActivity {
                 selectResult.this.finish();
             }
         });
+    }
+
+    @Override
+    public void on(int status, int position) {
+//            Toast.makeText(selectResult.this,"点到了",Toast.LENGTH_SHORT).show();
+//            selectResult.this.finish();
+            startActivity(new Intent(selectResult.this, Tabbar.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+
     }
 
     //实现下分割线效果，因颜色和背景一样所以看不出来

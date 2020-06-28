@@ -5,12 +5,22 @@ public class ChangeDorApply {
     private String[] person_1;
     //被申请人信息，长度为6的字符串数组，顺序依次是姓名、性别、楼栋、房间号、床位号、学号
     private String[] person_2;
+    //布尔类型表示类别，处于状态2和4的换宿申请样式不一样，布尔类型用于显示不同的样式
+    private boolean flag;
+    //change_code临时传一下，用于同意或者拒绝
+    private String change_code;
     public ChangeDorApply(){}
-    public ChangeDorApply(String[] person_1,String[] person_2){
+    public ChangeDorApply(String[] person_1,String[] person_2,boolean flag,String code){
         this.person_1=person_1;
         this.person_2=person_2;
+        this.flag=flag;
+        this.change_code=code;
     }
     //以下为对申请人信息进行操作的函数
+    public boolean getFlag(){return this.flag;}
+
+    public String getChange_code(){return this.change_code;}
+
     public String getName1(){return person_1[0];}
 
     public void setName1(String name1){this.person_1[0]=name1;}
