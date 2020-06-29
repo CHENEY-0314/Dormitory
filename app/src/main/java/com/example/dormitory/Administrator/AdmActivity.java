@@ -54,7 +54,7 @@ public class AdmActivity extends AppCompatActivity {
         admQuery.setOnClickListener(new clickListener());
         admNoteRe.setOnClickListener(new clickListener());
         admLogout.setOnClickListener(new clickListener());
-       id.setText("工号："+admData.getString("a_id","工号").toString());
+        id.setText("工号："+admData.getString("a_id","工号").toString());
     }
 
     // 点击事件
