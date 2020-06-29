@@ -12,13 +12,13 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_marginTop="144dp"
-       android:layout_marginEnd="104dp"
        android:gravity="center"
        android:text="Welcome"
        android:textColor="#fff"
        android:textSize="30sp"
        android:textStyle="bold"
        app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toTopOf="parent" />
 
    <TextView
@@ -26,16 +26,17 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:gravity="center"
-       android:text="To My Home"
+       android:text="to my home"
        android:textColor="#fff"
        android:textSize="30sp"
        android:textStyle="bold"
-       app:layout_constraintEnd_toEndOf="@+id/textView7"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
    <ImageView
        android:layout_width="wrap_content"
-       android:layout_height="60dp"
+       android:layout_height="50dp"
        android:layout_marginBottom="4dp"
        android:src="@drawable/full_logo"
        app:layout_constraintBottom_toBottomOf="parent"

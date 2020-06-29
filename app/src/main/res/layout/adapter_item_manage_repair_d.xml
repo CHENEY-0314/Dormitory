@@ -55,10 +55,11 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="0.55"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
                     <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_marginRight="10dp"
                         android:src="@drawable/adm_item_call"/>
                     <TextView
@@ -78,9 +79,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp">
                 <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="7dp"
                     android:src="@drawable/adm_item_types"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -126,39 +127,46 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="end">
-
+                android:layout_marginTop="20dp">
+                
                 <TextView
                     android:id="@+id/time_apply_repair"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="60dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
                     android:text="2020-6-18 11:11"
                     android:textColor="@color/cardview_shadow_start_color" />
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end">
+                    <Button
+                        android:id="@+id/item_manage_btn_refuse"
+                        android:layout_width="60dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/grey_btn"
+                        android:text="拒受理"
+                        android:textColor="#fff"
+                        android:layout_gravity="end"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/item_manage_btn_refuse"
-                    android:layout_width="60dp"
-                    android:layout_height="35dp"
-                    android:background="@drawable/grey_btn"
-                    android:text="拒受理"
-                    android:textColor="#fff"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/item_manage_btn_agree"
-                    android:layout_width="60dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="10dp"
-                    android:background="@drawable/blue_btn"
-                    android:text="受理"
-                    android:textColor="#fff"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-
+                    <Button
+                        android:id="@+id/item_manage_btn_agree"
+                        android:layout_width="60dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/blue_btn"
+                        android:text="受理"
+                        android:textColor="#fff"
+                        android:layout_gravity="end"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                
             </LinearLayout>
 
         </LinearLayout>
