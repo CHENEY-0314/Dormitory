@@ -43,6 +43,7 @@ public class MyFixDormitoryActivity extends AppCompatActivity {
     private List<Trace> traceList = new ArrayList<>(10);
     private TimeLineAdapter adapter;
     private LinearLayout WithApply,NoApply;//整体界面的有无申请显示
+    private LinearLayout Loading;//整体界面的加载显示
     private TextView txt_dormitory,txt_state,txt_ChangeApply,txt_DeleteApply;
     private SharedPreferences mUser;//用于获取本地数据库
     private SharedPreferences.Editor mUserEditor;//用于向本地数据库添加当前申请的fix_code
@@ -117,6 +118,8 @@ public class MyFixDormitoryActivity extends AppCompatActivity {
 
         WithApply=findViewById(R.id.AMFD_withapply);  //有申请时显示
         NoApply=findViewById(R.id.AMFD_NoApply);   //无申请时显示
+        Loading=findViewById(R.id.gif_loading);//加载时显示
+
         lvTrace = (ListView)findViewById(R.id.AMFD_lvTrace);
         alterApply=findViewById(R.id.AMFD_alterApply);//有申请时并且处于状态1时显示
         verifyApply=findViewById(R.id.AMFD_verifyApply);//有申请时并且非处于状态1时显示
@@ -170,7 +173,7 @@ public class MyFixDormitoryActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 System.out.println(error);
                 //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
-                Toast.makeText(MyFixDormitoryActivity.this,"error:请稍后重试！",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyFixDormitoryActivity.this,"error:无网络连接！",Toast.LENGTH_SHORT).show();
             }
         });
         //设置Tag标签
@@ -183,6 +186,9 @@ public class MyFixDormitoryActivity extends AppCompatActivity {
     private void setListView(){
         //存在申请，则访问接口以获得相应数据
         if(existApply){
+//            Loading.setVisibility(View.GONE);
+//            WithApply.setVisibility(View.VISIBLE);
+//            NoApply.setVisibility(View.GONE);
             //获取本地数据库
             mUser=getSharedPreferences("userdata",MODE_PRIVATE);
             mUserEditor=mUser.edit();
@@ -254,12 +260,16 @@ public class MyFixDormitoryActivity extends AppCompatActivity {
                                     switch (n){
                                         case 1:{
                                             txt_state.setText("处理中");//处于状态1时修改上方状态，显示为“处理中”
+                                            Loading.setVisibility(View.GONE);
+                                            WithApply.setVisibility(View.VISIBLE);
                                             verifyApply.setVisibility(View.GONE);
                                             alterApply.setVisibility(View.VISIBLE);
                                             break;
                                         }
                                         case 2:{
                                             txt_state.setText("处理中");//处于状态2时修改上方状态，显示为“处理中”
+                                            Loading.setVisibility(View.GONE);
+                                            WithApply.setVisibility(View.VISIBLE);
                                             verifyApply.setVisibility(View.VISIBLE);
                                             alterApply.setVisibility(View.GONE);
                                             Button btn_verify=findViewById(R.id.AMFD_btn_verify);
@@ -269,6 +279,8 @@ public class MyFixDormitoryActivity extends AppCompatActivity {
                                         }
                                         case 3:{
                                             txt_state.setText("待验收");//处于状态3时修改上方状态，显示为“待验收”
+                                            Loading.setVisibility(View.GONE);
+                                            WithApply.setVisibility(View.VISIBLE);
                                             verifyApply.setVisibility(View.VISIBLE);
                                             alterApply.setVisibility(View.GONE);
                                             Button btn_verify=findViewById(R.id.AMFD_btn_verify);
@@ -279,6 +291,8 @@ public class MyFixDormitoryActivity extends AppCompatActivity {
                                         case 4:
                                         case 5:{
                                             txt_state.setText("已完成");//维修完成时修改上方状态，显示为“已完成”
+                                            Loading.setVisibility(View.GONE);
+                                            WithApply.setVisibility(View.VISIBLE);
                                             verifyApply.setVisibility(View.VISIBLE);
                                             alterApply.setVisibility(View.GONE);
                                             Button btn_verify=findViewById(R.id.AMFD_btn_verify);
@@ -304,7 +318,7 @@ public class MyFixDormitoryActivity extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
                     System.out.println(error);
                     //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
-                    Toast.makeText(MyFixDormitoryActivity.this,"error:请稍后重试！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyFixDormitoryActivity.this,"error:无网络连接！",Toast.LENGTH_SHORT).show();
                 }
             });
             //设置Tag标签
@@ -316,6 +330,7 @@ public class MyFixDormitoryActivity extends AppCompatActivity {
         }
         else {
             //--------------------------------若无申请，进行以下操作--------------------------------------
+            Loading.setVisibility(View.GONE);
             WithApply.setVisibility(View.GONE);
             NoApply.setVisibility(View.VISIBLE);
         }
@@ -370,7 +385,7 @@ public class MyFixDormitoryActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 System.out.println(error);
                 //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
-                Toast.makeText(MyFixDormitoryActivity.this,"error:请稍后重试！",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyFixDormitoryActivity.this,"error:无网络连接！",Toast.LENGTH_SHORT).show();
             }
         });
         //设置Tag标签

@@ -3,6 +3,7 @@ package com.example.dormitory.Student.MainPageActivity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +15,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +44,9 @@ public class changeDormitory extends AppCompatActivity {
     private CheckBox CheBox_bed_1,CheBox_bed_2,CheBox_bed_3,CheBox_bed_4,CheBox_bed_5;
     private Button BtnSubmit;
     private EditText editBuilding,editRoom;
+    private LinearLayout Loading;//加载时显示
+    private LinearLayout tabHead;//顶部导航栏和滚动式列表在加载时隐藏
+    private ScrollView scrollArea;
     //本地数据库
     private SharedPreferences mUser;
     //定义二维字符串数组，用于选择楼栋随学院的动态变化
@@ -108,6 +114,9 @@ public class changeDormitory extends AppCompatActivity {
         BtnSubmit=findViewById(R.id.changeDor_submit);
         editBuilding=findViewById(R.id.changeDor_txt_building);
         editRoom=findViewById(R.id.changeDor_txt_room);
+        Loading=findViewById(R.id.gif_loading);
+        tabHead=findViewById(R.id.changeDor_tab_head);
+        scrollArea=findViewById(R.id.changeDor_scroll);
         //设置组件监听事件
         mBack.setOnClickListener(new ButtonListener());
         CheBox_floor_1.setOnClickListener(new ButtonListener());
@@ -157,6 +166,7 @@ public class changeDormitory extends AppCompatActivity {
                             if(jsonObject.getString("result").equals("success")){
                                 AlertDialog.Builder builder=new AlertDialog.Builder(changeDormitory.this);
                                 builder.setMessage("您有申请正在处理中，无法进行查看!").setCancelable(false).setPositiveButton("我知道了",null).show();
+
                             }
                             else{
                                 lookSelectedResult();
@@ -184,6 +194,12 @@ public class changeDormitory extends AppCompatActivity {
     }
     //加载筛选结果
     private void lookSelectedResult(){
+        Loading.setVisibility(View.VISIBLE);
+        tabHead.setVisibility(View.GONE);
+        scrollArea.setVisibility(View.GONE);
+        //获取本人性别
+        mUser=getSharedPreferences("userdata",MODE_PRIVATE);
+        String sex=mUser.getString("sex","");
         //获取选中的楼栋、楼层、床位号
         //直接获取楼栋
         String Building=building.getSelectedItem().toString();
@@ -213,8 +229,8 @@ public class changeDormitory extends AppCompatActivity {
             if(CheBox_bed_4.isChecked()) Bed_num+=(Bed_num.length()==0?"4":";4");
         }
         //请求地址
-        //http://39.97.114.188/Dormitory/servlet/ExchangeScreenServlet?building=C10&floor=1;2&bed_num=0
-        String url = "http://39.97.114.188/Dormitory/servlet/ExchangeScreenServlet?building="+Building+"&floor="+Floor+"&bed_num="+Bed_num;
+        //
+        String url = "http://39.97.114.188/Dormitory/servlet/ExchangeScreenServlet?sex="+sex+"&building="+Building+"&floor="+Floor+"&bed_num="+Bed_num;
         String tag = "SelectedResult";
         //取得请求队列
         RequestQueue SelectedResult = Volley.newRequestQueue(this);
@@ -254,14 +270,24 @@ public class changeDormitory extends AppCompatActivity {
                                 Intent intent=new Intent(changeDormitory.this,selectResult.class);
                                 intent.putExtra("selectedResult",selectedResult);
                                 startActivity(intent);
+
+                                Loading.setVisibility(View.GONE);
+                                tabHead.setVisibility(View.VISIBLE);
+                                scrollArea.setVisibility(View.VISIBLE);
                             }
                             else{
                                 Toast.makeText(changeDormitory.this,"无筛选结果",Toast.LENGTH_SHORT).show();
+                                Loading.setVisibility(View.GONE);
+                                tabHead.setVisibility(View.VISIBLE);
+                                scrollArea.setVisibility(View.VISIBLE);
                             }
                         } catch (JSONException e) {
                             System.out.println(e);
                             //做自己的请求异常操作，如Toast提示（“无网络连接”等）
                             Toast.makeText(changeDormitory.this,"错误：JSONException",Toast.LENGTH_SHORT).show();
+                            Loading.setVisibility(View.GONE);
+                            tabHead.setVisibility(View.VISIBLE);
+                            scrollArea.setVisibility(View.VISIBLE);
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -270,6 +296,9 @@ public class changeDormitory extends AppCompatActivity {
                 System.out.println(error);
                 //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
                 Toast.makeText(changeDormitory.this,"error",Toast.LENGTH_SHORT).show();
+//                Loading.setVisibility(View.GONE);
+//                tabHead.setVisibility(View.VISIBLE);
+//                scrollArea.setVisibility(View.VISIBLE);
             }
         }) {
         };
