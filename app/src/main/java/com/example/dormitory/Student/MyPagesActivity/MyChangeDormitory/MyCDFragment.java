@@ -83,7 +83,7 @@ public class MyCDFragment extends Fragment {
     private ListView lvTrace;
     private List<Trace> traceList = new ArrayList<>(10);
     private TimeLineAdapter adapter;
-    private LinearLayout WithApply,NoApply;
+    private LinearLayout WithApply,NoApply,Loading;//有申请时显示、无申请时显示、加载时显示
     private TextView txt_ChangeApply,txt_DeleteApply,txt_Dormitory,txt_state;
     private LinearLayout alterApply,verifyApply;//中间白色的“修改申请”栏和“确认换宿”栏
     private Button btn_verify;//确认验收按钮
@@ -149,6 +149,7 @@ public class MyCDFragment extends Fragment {
 
         WithApply=view.findViewById(R.id.MyCDF_HaveApply);  //有申请时显示
         NoApply=view.findViewById(R.id.MyCDF_NoApply);   //无申请时显示
+        Loading=view.findViewById(R.id.gif_loading);//加载时显示
 
         lvTrace = (ListView)view.findViewById(R.id.MyCDF_lvTrace);//时间轴
     }
@@ -178,6 +179,7 @@ public class MyCDFragment extends Fragment {
                             if(jsonObject.length()==0){
                                 //长度为0，表示没有“我的申请”，显示没有申请
                                 //--------------------------------若无申请，进行以下操作--------------------------------------
+                                Loading.setVisibility(View.GONE);
                                 WithApply.setVisibility(View.GONE);
                                 NoApply.setVisibility(View.VISIBLE);
                             }
@@ -249,12 +251,16 @@ public class MyCDFragment extends Fragment {
                                 switch (n){
                                     case 1:{
                                         txt_state.setText("处理中");//处于状态1时修改上方状态，显示为“处理中”
+                                        Loading.setVisibility(View.GONE);
+                                        WithApply.setVisibility(View.VISIBLE);
                                         verifyApply.setVisibility(View.GONE);
                                         alterApply.setVisibility(View.VISIBLE);
                                         break;
                                     }
                                     case 2:{
                                         txt_state.setText("处理中");//处于状态2时修改上方状态，显示为“处理中”
+                                        Loading.setVisibility(View.GONE);
+                                        WithApply.setVisibility(View.VISIBLE);
                                         verifyApply.setVisibility(View.VISIBLE);
                                         alterApply.setVisibility(View.GONE);
 //                                        Button btn_verify=view.findViewById(R.id.MyCDF_btn_verify);
@@ -264,6 +270,8 @@ public class MyCDFragment extends Fragment {
                                     }
                                     case 3:{
                                         txt_state.setText("待确认");//处于状态3时修改上方状态，显示为“待确认”
+                                        Loading.setVisibility(View.GONE);
+                                        WithApply.setVisibility(View.VISIBLE);
                                         verifyApply.setVisibility(View.VISIBLE);
                                         alterApply.setVisibility(View.GONE);
 //                                        Button btn_verify=view.findViewById(R.id.MyCDF_btn_verify);
@@ -274,6 +282,8 @@ public class MyCDFragment extends Fragment {
                                     case 4:
                                     case 5:{
                                         txt_state.setText("已完成");//维修完成时修改上方状态，显示为“已完成”
+                                        Loading.setVisibility(View.GONE);
+                                        WithApply.setVisibility(View.VISIBLE);
                                         verifyApply.setVisibility(View.VISIBLE);
                                         alterApply.setVisibility(View.GONE);
 //                                        Button btn_verify=view.findViewById(R.id.MyCDF_btn_verify);
@@ -296,7 +306,7 @@ public class MyCDFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 System.out.println(error);
                 //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
-                Toast.makeText(getContext(),"error:请稍后重试！",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"error:无网络连接！",Toast.LENGTH_SHORT).show();
             }
         });
         //设置Tag标签
@@ -357,7 +367,7 @@ public class MyCDFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 System.out.println(error);
                 //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
-                Toast.makeText(getContext(),"error:请稍后重试！",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"error:无网络连接！",Toast.LENGTH_SHORT).show();
             }
         });
         //设置Tag标签

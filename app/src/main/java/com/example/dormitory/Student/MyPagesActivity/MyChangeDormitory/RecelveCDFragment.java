@@ -167,13 +167,13 @@ public class RecelveCDFragment extends Fragment {
                             else{
                                 String[] change_target_s=new String[3];//存放change_code target_id s_id，便于同意或拒绝时传参
                                 JSONObject jsonObject2=(JSONObject) new JSONObject(response).get("1");
-//                                    String name=jsonObject2.getString("name");
+                                String name=jsonObject2.getString("name");
                                 String contact=jsonObject2.getString("contact");
                                 String temp_time=jsonObject2.getString("time").substring(0,10);
                                 StringBuilder time=new StringBuilder(temp_time);
                                 time.replace(4,5,"-");
                                 time.replace(7,8,"-");
-                                applyList.add(new RecelveApply(time.toString(),"无名",contact));
+                                applyList.add(new RecelveApply(time.toString(),name,contact));
                                 //为change_target_s赋值
                                 change_target_s[0]=jsonObject2.getString("change_code");
                                 change_target_s[1]=jsonObject2.getString("target_id");

@@ -26,7 +26,7 @@ import com.example.dormitory.Administrator.ManageApply.admManageApply;
 public class AdmActivity extends AppCompatActivity {
 
     // 声明所有控件
-    private LinearLayout admApplyMan, admQuery, admNoteRe;
+    private LinearLayout admApplyMan, admNoteRe;
     private TextView admLogout,id;
     private SharedPreferences admData;
     private SharedPreferences.Editor admDataEditor;
@@ -46,12 +46,10 @@ public class AdmActivity extends AppCompatActivity {
         // 初始化控件
         id=findViewById(R.id.admNumb);
         admApplyMan = findViewById(R.id.admApplyMan);
-        admQuery = findViewById(R.id.admQuery);
         admNoteRe = findViewById(R.id.admNoteRe);
         admLogout=findViewById(R.id.adm_loginOut);
         // 绑定点击事件
         admApplyMan.setOnClickListener(new clickListener());
-        admQuery.setOnClickListener(new clickListener());
         admNoteRe.setOnClickListener(new clickListener());
         admLogout.setOnClickListener(new clickListener());
         id.setText("工号："+admData.getString("a_id","工号").toString());
@@ -65,9 +63,6 @@ public class AdmActivity extends AppCompatActivity {
                 case R.id.admApplyMan:// 申请管理点击事件
                     Intent intent2=new Intent(AdmActivity.this,admManageApply.class);
                     startActivity(intent2);
-                    break;
-                case R.id.admQuery:// 查询点击事件
-
                     break;
                 case R.id.admNoteRe:// 发布通知点击事件
                     // 跳转到发布通知页面

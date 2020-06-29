@@ -49,7 +49,6 @@
                 android:background="@drawable/advice_card"
                 android:focusableInTouchMode="true"
                 android:padding="20dp"
-                android:backgroundTint="@color/loginback"
                 android:orientation="vertical">
                 <EditText
                     android:id="@+id/Advice_edt"

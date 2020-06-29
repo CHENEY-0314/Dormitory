@@ -98,7 +98,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="120dp"
                     android:layout_marginTop="12dp"
                     app:cardElevation="0dp"
                     android:backgroundTint="#D0FFFFFF"
@@ -140,36 +140,7 @@
                             android:layout_height="1dp"
                             android:background="#C3C3C3" />
 
-                        <LinearLayout
-                            android:id="@+id/admQuery"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.25"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:layout_marginStart="23dp"
-                                android:background="@drawable/admquery"
-                                android:textAlignment="center" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="18dp"
-                                android:text="信息查询"
-                                android:textColor="#454545"
-                                android:textSize="18sp" />
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_marginHorizontal="23dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="#C3C3C3" />
 
                         <LinearLayout
                             android:id="@+id/admNoteRe"
