@@ -198,6 +198,11 @@ public class NotePage extends Fragment {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() { //下拉刷新
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
+                updateData(getLocalUserData.getId(),getLocalUserData.getPassword());
+                getnote1.updateData(data);
+                getnote2.updateData(data);
+                getnote3.updateData(data);
+                getnote4.updateData(data);
                 getnote1.setLastread();
                 getnote1.setLastread();
                 getnote1.setLastread();
