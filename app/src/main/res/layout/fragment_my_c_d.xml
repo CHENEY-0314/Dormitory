@@ -12,6 +12,7 @@
         android:id="@+id/MyCDF_HaveApply"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
@@ -130,5 +131,19 @@
             android:textSize="15sp"
             android:text="没有申请哦 !"/>
     </LinearLayout>
+    <!--        加载时显示-->
+    <LinearLayout
+        android:id="@+id/gif_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="visible">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/loading_circle" />
+    </LinearLayout>
+
 
 </FrameLayout>

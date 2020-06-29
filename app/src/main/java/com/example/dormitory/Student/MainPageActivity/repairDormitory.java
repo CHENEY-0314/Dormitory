@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +48,9 @@ public class repairDormitory extends AppCompatActivity {
     private EditText editBuilding,editRoom,editStuNum;//楼号、宿舍号、学号的编辑框控件
     private SharedPreferences mUser;//获取本地数据库
     private Boolean ifCanFixApply;//判断是否可以进行报修申请
+    private LinearLayout Loading;//加载时显示
+    private LinearLayout tabHead;//顶部导航栏和滚动式列表在加载时隐藏
+    private ScrollView scrollArea;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //设置状态栏文字颜色及图标为深色，当状态栏为白色时候，改变其颜色为深色，简单粗暴直接完事
@@ -136,6 +141,9 @@ public class repairDormitory extends AppCompatActivity {
         editBuilding=findViewById(R.id.repairDor_txt_building);
         editRoom=findViewById(R.id.repairDor_txt_room);
         editStuNum=findViewById(R.id.repairDor_txt_studentNum);
+        Loading=findViewById(R.id.gif_loading);
+        tabHead=findViewById(R.id.repairDor_tab_head);
+        scrollArea=findViewById(R.id.repairDor_scroll);
 
         //mBack设置点击返回事件
         mBack.setOnClickListener(new View.OnClickListener() {
@@ -257,8 +265,14 @@ public class repairDormitory extends AppCompatActivity {
 
     //点击提交，将数据上传至接口
     private void submitApply(){
+        Loading.setVisibility(View.VISIBLE);
+        tabHead.setVisibility(View.GONE);
+        scrollArea.setVisibility(View.GONE);
         if(!ifCanFixApply){
             Toast.makeText(this,"已有申请正在处理，无法再次提交",Toast.LENGTH_SHORT).show();
+            Loading.setVisibility(View.GONE);
+            tabHead.setVisibility(View.VISIBLE);
+            scrollArea.setVisibility(View.VISIBLE);
         }
         else{
             //学号

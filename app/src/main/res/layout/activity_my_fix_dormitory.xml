@@ -49,87 +49,100 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_weight="0.92"
         android:orientation="vertical"
-        android:padding="20dp"
-        android:layout_weight="0.92">
+        android:padding="20dp">
 
         <!--    有维修申请时显示-->
         <LinearLayout
             android:id="@+id/AMFD_withapply"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="130dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/fixdormory"
                     android:gravity="center">
+
                     <ImageView
                         android:layout_width="65dp"
                         android:layout_height="60dp"
-                        android:src="@drawable/myfix"/>
+                        android:src="@drawable/myfix" />
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="14dp"
                         android:layout_marginEnd="50dp"
                         android:orientation="vertical">
+
                         <TextView
                             android:id="@+id/AMFD_Dormitory"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="C10-145 的维修单"
-                            android:textSize="16sp"
-                            android:textColor="#000000"/>
+                            android:textColor="#000000"
+                            android:textSize="16sp" />
+
                         <TextView
                             android:id="@+id/AMFD_state"
-                            android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:text="处理中"
-                            android:textColor="#636262"/>
+                            android:textColor="#636262" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
             <LinearLayout
                 android:id="@+id/AMFD_alterApply"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="@drawable/white"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/white"
                 android:gravity="center">
+
                 <TextView
                     android:id="@+id/AMFD_changeApply"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="修改申请"
-                    android:textSize="14sp"
-                    android:textColor="@color/colorAccent"/>
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp" />
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="55dp"
                     android:layout_marginVertical="15dp"
-                    android:background="#A1A1A1"/>
+                    android:background="#A1A1A1" />
+
                 <TextView
                     android:id="@+id/AMFD_deleteApply"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:text="撤销申请"
                     android:textColor="#333333"
-                    android:text="撤销申请"/>
+                    android:textSize="14sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/AMFD_verifyApply"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="@drawable/white"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"
-                android:gravity="center">
+                android:background="@drawable/white"
+                android:gravity="center"
+                android:visibility="gone">
+
                 <Button
                     android:id="@+id/AMFD_btn_verify"
                     android:layout_width="150dp"
@@ -138,39 +151,54 @@
                     android:enabled="false"
                     android:text="确认验收"
                     android:textColor="@color/white"
-                    android:textSize="15sp"/>
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <ListView
                 android:id="@+id/AMFD_lvTrace"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:divider="@null"
                 android:clickable="false"
-                android:listSelector="@android:color/transparent"
+                android:divider="@null"
                 android:dividerHeight="0dp"
-                android:layout_height="wrap_content" />
+                android:listSelector="@android:color/transparent" />
         </LinearLayout>
 
         <!--    没有申请时显示-->
         <LinearLayout
             android:id="@+id/AMFD_NoApply"
             android:layout_width="match_parent"
-            android:orientation="vertical"
             android:layout_height="wrap_content"
             android:layout_marginTop="130dp"
-            android:visibility="gone"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
             <ImageView
                 android:layout_width="130dp"
                 android:layout_height="150dp"
-                android:src="@drawable/light"/>
+                android:src="@drawable/light" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
-                android:textSize="15sp"
-                android:text="没有提交申请哦 !"/>
+                android:text="没有提交申请哦 !"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <!--        加载时显示-->
+        <LinearLayout
+            android:id="@+id/gif_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="visible">
+
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/loading_circle" />
         </LinearLayout>
 
     </LinearLayout>

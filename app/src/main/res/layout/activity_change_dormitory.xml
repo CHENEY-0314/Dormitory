@@ -9,6 +9,7 @@
     android:orientation="vertical"
     tools:context=".Student.MainPageActivity.changeDormitory">
     <LinearLayout
+        android:id="@+id/changeDor_tab_head"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
@@ -31,6 +32,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/changeDor_scroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.92">
@@ -510,5 +512,18 @@
 
             </LinearLayout>
     </ScrollView>
+    <!--        加载时显示-->
+    <LinearLayout
+        android:id="@+id/gif_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/loading_circle" />
+    </LinearLayout>
 
 </LinearLayout>
