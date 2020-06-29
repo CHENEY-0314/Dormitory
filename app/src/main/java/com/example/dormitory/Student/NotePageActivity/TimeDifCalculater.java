@@ -39,6 +39,8 @@ public class TimeDifCalculater {
             timedif=String.valueOf(currenthour-pushhour)+"小时前";
         }else if(pushminute!=currentminute){
             timedif=String.valueOf(currentminute-pushminute)+"分钟前";
+        }else{
+            timedif="刚刚";
         }
         return timedif;
     }

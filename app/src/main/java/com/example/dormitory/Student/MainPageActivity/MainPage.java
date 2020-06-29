@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -120,6 +121,8 @@ public class MainPage extends Fragment {
                             Toast.makeText(getActivity(),"今天已无关闭次数",Toast.LENGTH_SHORT).show();
                         }
                     }
+
+
                 }
             }
         });
