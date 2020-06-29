@@ -314,38 +314,4 @@ public class RefreshListView extends ListView implements OnScrollListener {
         String CurrentTime = dff.format(new Date());
         return CurrentTime;
     }
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-        setEmptyViews();
-    }
-    /**
-     * 设置listview数据为空时的 提示,在onlayout方法中设置可以保证获取此listview 的父ViewGroup
-     */
-    private void setEmptyViews() {
-        if (getEmptyView() == null) {
-            ViewGroup viewParent = (ViewGroup) this.getParent();
-            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            LinearLayout Layout = new LinearLayout(getContext());
-            Layout.setOrientation(LinearLayout.VERTICAL);
-            Layout.setGravity(Gravity.CENTER);
-            Layout.setLayoutParams(params);
-            ImageView emptybox = new ImageView(getContext());
-            Layout.addView(emptybox);
-            emptybox.setImageDrawable(emptyimage);
-            emptybox.setColorFilter(Color.parseColor(emptyimagecolor));
-            LinearLayout.LayoutParams emptyboxlayoutParams = new LinearLayout.LayoutParams(250, 250);
-            emptybox.setLayoutParams(emptyboxlayoutParams);
-            TextView tv = new TextView(getContext());
-            tv.setText(emptytext);
-            tv.setTextColor(Color.parseColor(emptytextcolor));
-            tv.setGravity(Gravity.CENTER);
-            Layout.addView(tv);
-            if (viewParent != null) {
-                viewParent.addView(Layout);
-            }
-            setEmptyView(Layout);
-        }
-    }
-
 }

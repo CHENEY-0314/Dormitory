@@ -27,10 +27,9 @@ public class AdmActivity extends AppCompatActivity {
 
     // 声明所有控件
     private LinearLayout admApplyMan, admQuery, admNoteRe;
-    private TextView admLogout,name,id;
+    private TextView admLogout,id;
     private SharedPreferences admData;
     private SharedPreferences.Editor admDataEditor;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //设置状态栏文字颜色及图标为深色，当状态栏为白色时候，改变其颜色为深色，简单粗暴直接完事
@@ -43,9 +42,9 @@ public class AdmActivity extends AppCompatActivity {
 
     // 初始化所有控件，并绑定点击事件
     void init(){
+        admData=getSharedPreferences("admdata",MODE_PRIVATE);
         // 初始化控件
-        id=findViewById(R.id.MyPage_txt_home);
-        name=findViewById(R.id.MyPage_txt_username);
+        id=findViewById(R.id.admNumb);
         admApplyMan = findViewById(R.id.admApplyMan);
         admQuery = findViewById(R.id.admQuery);
         admNoteRe = findViewById(R.id.admNoteRe);
@@ -55,9 +54,7 @@ public class AdmActivity extends AppCompatActivity {
         admQuery.setOnClickListener(new clickListener());
         admNoteRe.setOnClickListener(new clickListener());
         admLogout.setOnClickListener(new clickListener());
-
-       //id.setText(admData.getString("a_id","工号"));
-       //name.setText(admData.getString("name","管理员"));
+       id.setText("工号："+admData.getString("a_id","工号").toString());
     }
 
     // 点击事件

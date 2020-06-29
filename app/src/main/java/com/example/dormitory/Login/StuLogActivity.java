@@ -192,6 +192,7 @@ public class StuLogActivity extends AppCompatActivity {
                             mUserEditor.putString("phone_num",jsonObject.getString("contact"));
                             mUserEditor.putString("department",jsonObject.getString("college"));
                             mUserEditor.putString("password",password);
+                            mUserEditor.putString("firstopentime","2020:06:18:00:00");
                             mUserEditor.apply();
                             Handler mHandler = new Handler();
                             mHandler.postDelayed(new Runnable() {

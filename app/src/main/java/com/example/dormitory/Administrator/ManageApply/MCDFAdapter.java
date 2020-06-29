@@ -130,7 +130,6 @@ public class MCDFAdapter extends BaseAdapter {
                 finallyVerify(apply.getChange_code(),apply.getStuNum1(),apply.getName1(),apply.getStuNum2(),apply.getName2(),holder);
             }
         });
-
         return convertView;
     }
 

@@ -17,6 +17,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,6 +32,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.dormitory.R;
 import com.example.dormitory.Student.Adapters.ExpandFoldTextAdapter;
 import com.example.dormitory.Student.Adapters.GirdDropDownAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.api.ScrollBoundaryDecider;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -67,7 +69,8 @@ public class NotePage extends Fragment {
     String data;
     private LinearLayout Nonote;
     boolean  refresh=false,load=false,nomoredata=true;
-    int i=1;
+    GetLocalUserData getLocalUserData;
+    FloatingActionButton fab;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -76,14 +79,48 @@ public class NotePage extends Fragment {
         dropdownmenu.setClickable(true);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         mRefreshLayout=(RefreshLayout)view.findViewById(R.id.refreshLayout);
+        fab=(FloatingActionButton)view.findViewById(R.id.fab);
+        fab.hide();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.addOnScrollListener(
+                new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(@NonNull final RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
+                        //获得recyclerView的线性布局管理器
+                        LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                        //获取到第一个item的显示的下标  不等于0表示第一个item处于不可见状态 说明列表没有滑动到顶部 显示回到顶部按钮
+                        int firstVisibleItemPosition = manager.findFirstVisibleItemPosition();
+                        // 当不滚动时
+                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                            // 判断是否滚动超过一屏
+                            if (firstVisibleItemPosition == 0) {
+                                fab.hide();
+                            } else {
+                                //显示回到顶部按钮
+                                fab.show();
+                                fab.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        mRecyclerView.smoothScrollToPosition(0);
+                                    }
+                                });
+
+                            }//获取RecyclerView滑动时候的状态
+                        } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {//拖动中
+                            fab.hide();
+                        }
+                    }
+                }
+        );
         typeicon=(ImageView) view.findViewById(R.id.type_icon);
-        initNote("201830660178","123456",mList);
+        getLocalUserData=new GetLocalUserData(getActivity(),true);
+        initNote(getLocalUserData.getId(),getLocalUserData.getPassword(),mList);
         initView();
+
         initRefreshLayout(mList,"3");
         return view;
     }
-
     private void initView() {
         tabtext=dropdownmenu.findViewById(R.id.type_text);
         typeicon=dropdownmenu.findViewById(R.id.type_icon);
@@ -161,6 +198,11 @@ public class NotePage extends Fragment {
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() { //下拉刷新
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
+                updateData(getLocalUserData.getId(),getLocalUserData.getPassword());
+                getnote1.updateData(data);
+                getnote2.updateData(data);
+                getnote3.updateData(data);
+                getnote4.updateData(data);
                 getnote1.setLastread();
                 getnote1.setLastread();
                 getnote1.setLastread();
@@ -168,8 +210,8 @@ public class NotePage extends Fragment {
                 changedornoteList.clear();
                 repairapplynoteList.clear();
                 mList.clear();
-                initNote("201830660178","123456",List);
-                refreshlayout.finishRefresh(1000,refresh);//传入false表示刷新失败
+                initNote(getLocalUserData.getId(),getLocalUserData.getPassword(),List);
+                refreshlayout.finishRefresh(500,refresh);//传入false表示刷新失败
             }
         });
         mRefreshLayout.setScrollBoundaryDecider(new ScrollBoundaryDecider() {
@@ -212,7 +254,7 @@ public class NotePage extends Fragment {
         mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() { //上拉加载更多
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
-                updateData("201830660178","123456");
+                updateData(getLocalUserData.getId(),getLocalUserData.getPassword());
                 getnote1.updateData(data);
                 getnote2.updateData(data);
                 getnote3.updateData(data);
