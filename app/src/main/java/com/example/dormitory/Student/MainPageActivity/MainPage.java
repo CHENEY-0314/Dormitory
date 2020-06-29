@@ -103,11 +103,13 @@ public class MainPage extends Fragment {
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(mUser.getString("firstopentime",null).equals("null")){  //本地记录的上次切换时间不存在，则一定可以切换状态
+                if(mUser.getString("firstopentime","").equals("")){  //本地记录的上次切换时间不存在，则一定可以切换状态
                     setSwitch_state_enable();  //进行状态切换
                 }else{   //本地有记录上一次切换转换状态时间，要判断是否经过了一天
                     timeDifCalculater=new TimeDifCalculater(mUser.getString("firstopentime","2020:06:18:00:00"));
-                    String dw=timeDifCalculater.getTimeDif().substring(timeDifCalculater.getTimeDif().length()-2);
+                    int size=timeDifCalculater.getTimeDif().length();
+                    String dw=timeDifCalculater.getTimeDif().substring(size-2,size-1);
+                    System.out.println(dw+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     if(dw.equals("年")||dw.equals("月")||dw.equals("天")) {  //超过一天，进行状态切换
                         setSwitch_state_enable();
                     } else{   //未超过一天，不能切换
