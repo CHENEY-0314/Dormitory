@@ -72,7 +72,6 @@ public class MainPage extends Fragment {
         mUser=getActivity().getSharedPreferences("userdata",MODE_PRIVATE);
         mUserEditor=mUser.edit();
 
-        System.out.println(mUser.getString("firstopentime","?????????????????????????"));
         mexplosionSite  = new ExplosionSite(getActivity(), new ExplodeParticleFactory());
         mexplosionSite.addListener(qiqiu);
 
@@ -108,7 +107,9 @@ public class MainPage extends Fragment {
                     setSwitch_state_enable();  //进行状态切换
                 }else{   //本地有记录上一次切换转换状态时间，要判断是否经过了一天
                     timeDifCalculater=new TimeDifCalculater(mUser.getString("firstopentime","2020:06:18:00:00"));
-                    String dw=timeDifCalculater.getTimeDif().substring(timeDifCalculater.getTimeDif().length()-2);
+                    int size=timeDifCalculater.getTimeDif().length();
+                    String dw=timeDifCalculater.getTimeDif().substring(size-2,size-1);
+                    System.out.println(dw+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                     if(dw.equals("年")||dw.equals("月")||dw.equals("天")) {  //超过一天，进行状态切换
                         setSwitch_state_enable();
                     } else{   //未超过一天，不能切换

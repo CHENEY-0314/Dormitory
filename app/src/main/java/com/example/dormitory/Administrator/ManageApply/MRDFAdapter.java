@@ -225,11 +225,6 @@ public class MRDFAdapter extends BaseAdapter {
                 finishApply(position);
                 ApplyList.remove(position);
                 notifyDataSetChanged();
-                if(ApplyList.isEmpty())
-                {
-                    lvTrace.setVisibility(View.GONE);
-                    Noapply.setVisibility(View.VISIBLE);
-                }
                 dlg.dismiss();
             }
         });
