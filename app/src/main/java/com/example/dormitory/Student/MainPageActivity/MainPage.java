@@ -72,7 +72,6 @@ public class MainPage extends Fragment {
         mUser=getActivity().getSharedPreferences("userdata",MODE_PRIVATE);
         mUserEditor=mUser.edit();
 
-        System.out.println(mUser.getString("firstopentime","?????????????????????????"));
         mexplosionSite  = new ExplosionSite(getActivity(), new ExplodeParticleFactory());
         mexplosionSite.addListener(qiqiu);
 
@@ -104,7 +103,7 @@ public class MainPage extends Fragment {
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(mUser.getString("firstopentime","").equals("")){  //本地记录的上次切换时间不存在，则一定可以切换状态
+                if(mUser.getString("firstopentime",null).equals("null")){  //本地记录的上次切换时间不存在，则一定可以切换状态
                     setSwitch_state_enable();  //进行状态切换
                 }else{   //本地有记录上一次切换转换状态时间，要判断是否经过了一天
                     timeDifCalculater=new TimeDifCalculater(mUser.getString("firstopentime","2020:06:18:00:00"));
