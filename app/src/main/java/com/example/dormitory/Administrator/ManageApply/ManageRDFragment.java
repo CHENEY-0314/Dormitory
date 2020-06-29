@@ -121,7 +121,7 @@ public class ManageRDFragment extends Fragment {
         return view;
     }
     void initRepairApply(final String a_id, final String password){
-        String url="http://39.97.114.188/Dormitory/servlet/AdmGetFixApplyServlet?a_id=0"+a_id+"&password="+password;
+        String url="http://39.97.114.188/Dormitory/servlet/AdmGetFixApplyServlet?a_id="+a_id+"&password="+password;
         String tag= "getrepaiapply";
         //取得请求队列
         RequestQueue getrepaiapply = Volley.newRequestQueue(getActivity());

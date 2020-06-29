@@ -61,7 +61,7 @@
                     android:inputType="textMultiLine"
                     android:lineSpacingExtra="3dp"
                     android:maxLength="600"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#000000"
                     android:textSize="13sp" />
                 <TextView
                     android:id="@+id/Advice_num"
