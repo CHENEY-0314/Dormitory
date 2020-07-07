@@ -29,17 +29,7 @@
             android:layout_marginStart="10dp"
             android:text="换宿申请"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:layout_marginEnd="21dp">
-            <ImageView
-                android:id="@+id/MCD_more"
-                android:layout_width="20dp"
-                android:layout_height="25dp"
-                android:src="@drawable/more1"/>
-        </LinearLayout>
+
 
     </LinearLayout>
 

@@ -3,19 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
     android:paddingHorizontal="20dp"
     tools:context=".Administrator.ManageApply.admManageApply">
 
-    <!--    接受到申请时显示-->
-    <ListView
-        android:id="@+id/MRDF_Listview"
-        android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:divider="@null"
-        android:listSelector="@android:color/transparent"
-        android:dividerHeight="0dp"
-        android:layout_height="wrap_content" />
+        <!--    接受到申请时显示-->
+        <com.example.dormitory.RefreshListView
+            android:id="@+id/MRDF_Listview"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:divider="@null"
+            android:listSelector="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:layout_height="match_parent"
+            app:EmptyTextColor="@color/mask_color"
+            app:EmptyImageColor="@color/mask_color"
+            app:EmptyText="暂无新消息！"
+            app:EmptyImage="@drawable/grey_bed"
+            />
 
     <!--    没有接收到申请时显示-->
     <LinearLayout

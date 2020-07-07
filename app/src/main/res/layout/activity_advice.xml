@@ -39,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingTop="10dp"
             android:focusableInTouchMode="true"
             android:paddingHorizontal="30dp">
             <LinearLayout
@@ -60,7 +61,7 @@
                     android:inputType="textMultiLine"
                     android:lineSpacingExtra="3dp"
                     android:maxLength="600"
-                    android:textColor="#000"
+                    android:textColor="#000000"
                     android:textSize="13sp" />
                 <TextView
                     android:id="@+id/Advice_num"
@@ -77,16 +78,16 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:textColor="#C3C0C0"
                 android:textSize="13sp"
-                android:text="为防止恶意提交，每次提交不少于30字"/>
+                android:text="为防止恶意提交，每次提交不少于10字"/>
 
             <Button
                 android:id="@+id/Advice_btn"
                 android:layout_width="match_parent"
                 android:layout_marginHorizontal="40dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:layout_height="wrap_content"
                 android:enabled="false"
                 android:background="@drawable/advice_btn"

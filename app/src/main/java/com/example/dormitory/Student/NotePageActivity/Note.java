@@ -7,7 +7,11 @@ public class Note {
 
     private String content;//内容
 
-    private int id;//该条数据的id
+    private String id;//该条数据的id
+
+    private String pushtime;
+
+    private String topic;
 
     public int getImage(){
         return image;
@@ -33,12 +37,28 @@ public class Note {
         this.content = content;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public void setPushtime(String pushtime) {
+        this.pushtime = pushtime;
+    }
+
+    public String getPushtime() {
+        return pushtime;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 }
 

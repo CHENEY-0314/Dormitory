@@ -15,4 +15,7 @@
     <color name="un_press_color">#60C664</color>
     <color name="black">#000</color>
     <color name="blue">#6B8BFF</color>
+    <color name="loginback">#2a4a55</color>
+    <color name="white2">#B3FFFFFF</color>
+    <color name="white3">#65FFFFFF</color>
 </resources>

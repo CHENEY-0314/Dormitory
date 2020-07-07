@@ -16,21 +16,24 @@
 
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
+
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Administrator.ManageApply.admManageApply"></activity>
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+        <activity android:name=".Administrator.ManageApply.admManageApply"/>
         <activity android:name=".Student.MyPagesActivity.MyChangeDormitory.ChangeChangeApplyActivity" />
         <activity android:name=".Student.MyPagesActivity.MyFixDormitory.ChangeFixApplyActivity" />
         <activity android:name=".Administrator.ReleaseNote.ReleaseNoteActivity" />
         <activity android:name=".Administrator.AdmActivity" />
         <activity android:name=".Student.MainPageActivity.selectResult" />
-        <activity android:name=".Login.AdmLogActivity" />
+        <activity android:name=".Login.AdmLogActivity" android:theme="@style/splash_style"/>
         <activity android:name=".Student.MyPagesActivity.MyFixDormitory.MyFixDormitoryActivity" />
         <activity android:name=".Student.MyPagesActivity.MyChangeDormitory.MyChangeDormitoryActivity" />
-        <activity android:name=".Login.StuLogActivity" />
+        <activity android:name=".Login.StuLogActivity" android:theme="@style/splash_style"/>
         <activity android:name=".Student.MyPagesActivity.ChangeUserImgActivity" />
         <activity
             android:name=".Student.MainPageActivity.repairDormitory"
@@ -39,7 +42,8 @@
         <activity android:name=".Student.MyPagesActivity.AdviceActivity" />
         <activity android:name=".Student.MyPagesActivity.SetupActivity" />
         <activity android:name=".Student.Tabbar" />
-        <activity android:name=".Login.LoginActivity">
+        <activity android:name=".Login.LoginActivity"
+            android:theme="@style/start_style">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

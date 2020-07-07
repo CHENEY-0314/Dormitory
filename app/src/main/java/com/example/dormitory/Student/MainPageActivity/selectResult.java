@@ -5,23 +5,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.dormitory.R;
+import com.example.dormitory.Student.Tabbar;
 
-public class selectResult extends AppCompatActivity {
+public class selectResult extends AppCompatActivity implements itemOnClickListener {
     //声明RecyclerView组件 返回按钮组件
     private RecyclerView mRvSelect;
     private ImageView mBack;
+    //获取传参
+    public String[] selectedResult;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //设置状态栏文字颜色及图标为深色，当状态栏为白色时候，改变其颜色为深色，简单粗暴直接完事
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_result);
+        //获取页面传参
+        Intent getintent=getIntent();
+        selectedResult=getintent.getStringArrayExtra("selectedResult");
         //绑定列表组件
         mRvSelect=findViewById(R.id.select_recyclerview);
         //设置线性布局管理器
@@ -29,7 +39,10 @@ public class selectResult extends AppCompatActivity {
         //设置分割线
         mRvSelect.addItemDecoration(new MyDecoration());
         //将适配器布置到组件上，适配器为自定义，见LinearAdapater.java文件
-        mRvSelect.setAdapter(new LinearAdapater(selectResult.this));
+        LinearAdapater myAdapter=new LinearAdapater(selectResult.this,selectedResult);
+        myAdapter.setBTListener(this);
+        mRvSelect.setAdapter(myAdapter);
+//        mRvSelect.setAdapter(new LinearAdapater(selectResult.this,selectedResult));
         mBack=findViewById(R.id.selectRes_back);
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +50,14 @@ public class selectResult extends AppCompatActivity {
                 selectResult.this.finish();
             }
         });
+    }
+
+    @Override
+    public void on(int status, int position) {
+//            Toast.makeText(selectResult.this,"点到了",Toast.LENGTH_SHORT).show();
+//            selectResult.this.finish();
+            startActivity(new Intent(selectResult.this, Tabbar.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+
     }
 
     //实现下分割线效果，因颜色和背景一样所以看不出来

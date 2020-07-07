@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
+
     <style name="AnimTop" parent="@android:style/Animation">
         <item name="android:windowEnterAnimation">@anim/push_top_in</item>
         <item name="android:windowExitAnimation">@anim/push_top_out</item>
@@ -37,6 +38,29 @@
         <item name="android:windowExitAnimation">@anim/push_top_out</item>
     </style>
 
+    <!--设置启动app的初始背景，以解决启动白屏问题-->
+    <style name="splash_style" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowBackground">@color/loginback</item>
+    </style>
+
+    <!--设置启动app的初始背景，以解决启动白屏问题-->
+    <style name="start_style" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowBackground">@drawable/mainbackground</item>
+    </style>
+
+    <!-- 底部dialog的动画 -->
+    <style name="bottom_menu_animStyle">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
 
 
 </resources>
